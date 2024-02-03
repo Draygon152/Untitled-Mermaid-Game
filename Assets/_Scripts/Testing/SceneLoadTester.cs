@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadTester : MonoBehaviour
 {
-    private void Start()
+    public void LoadSettingsMenu()
     {
-        StartCoroutine(MenuManager.instance.LoadSceneAsync((int)MenuManager.SceneIndices.SettingsMenu, LoadSceneMode.Additive));
+        StartCoroutine(MenuManager.instance.LoadSceneAsync((int)MenuManager.SceneIndices.SettingsMenuScene, LoadSceneMode.Additive, () => { SettingsMenu.instance.Init(); } ));
     }
 }
