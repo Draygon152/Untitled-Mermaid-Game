@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Contains static management functions for cursor visibility and lockState
+// Contains static functions for managing cursor visibility and lockState
 public static class CursorUtility
 {
     private static CursorLockMode _defaultLockMode = CursorLockMode.Confined;
@@ -24,6 +24,11 @@ public static class CursorUtility
         {
             Cursor.lockState = (CursorLockMode)SaveDataUtility.LoadInt(SaveDataUtility.CURSOR_LOCK_MODE);
         }
+    }
+
+    public static void ApplyCursorLockState(CursorLockMode newLockMode)
+    {
+        Cursor.lockState = newLockMode;
     }
 #endregion
 }
