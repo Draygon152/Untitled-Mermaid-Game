@@ -4,9 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : LLPersistentSingleton<MenuManager>
 {
-    public IEnumerator LoadSceneAsync(Scene scene)
+    public enum SceneIndices
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.buildIndex);
+        MainScene,
+        SettingsMenu
+    }
+
+    public IEnumerator LoadSceneAsync(int sceneIndex, LoadSceneMode mode = LoadSceneMode.Single)
+    {
+        if (sceneIndex < 0 || sceneIndex > SceneManager.sceneCountInBuildSettings - 1)
+        {
+            Debug.LogError($"[MenuManager Error]: Provided scene index '{sceneIndex}' is not a valid scene index");
+        }
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex, mode);
 
         while (!asyncLoad.isDone)
         {
