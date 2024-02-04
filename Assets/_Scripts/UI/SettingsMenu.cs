@@ -12,7 +12,7 @@ public class SettingsMenu : MenuBase
 
 
 
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
         _returnButton.onClick.AddListener(delegate { StartCoroutine(MenuManager.instance.UnloadSceneAsync((int)MenuManager.SceneIndices.SettingsMenuScene)); } );

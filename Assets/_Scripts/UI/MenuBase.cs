@@ -16,7 +16,7 @@ public class MenuBase : SceneSingleton<MenuBase>
 
 
 
-    protected virtual void Init()
+    public virtual void Init()
     {
         if (isInitialized)
         {
