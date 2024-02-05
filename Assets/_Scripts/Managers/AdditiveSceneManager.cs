@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // Responsible for handling async loading/unloading of scenes
-public class MenuManager : LLPersistentSingleton<MenuManager>
+public class AdditiveSceneManager : LLPersistentSingleton<AdditiveSceneManager>
 {
     // Scene order should match build order in Build Settings
     public enum SceneIndices

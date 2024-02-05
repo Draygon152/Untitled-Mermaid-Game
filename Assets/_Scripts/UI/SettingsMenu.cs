@@ -15,7 +15,7 @@ public class SettingsMenu : MenuBase
     public override void Init()
     {
         base.Init();
-        _returnButton.onClick.AddListener(delegate { StartCoroutine(MenuManager.instance.UnloadSceneAsync((int)MenuManager.SceneIndices.SettingsMenuScene)); } );
+        _returnButton.onClick.AddListener(delegate { StartCoroutine(AdditiveSceneManager.instance.UnloadSceneAsync((int)AdditiveSceneManager.SceneIndices.SettingsMenuScene)); } );
     }
 
     protected override void OnDestroy()
