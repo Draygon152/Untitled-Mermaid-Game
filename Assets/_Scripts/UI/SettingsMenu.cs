@@ -4,22 +4,59 @@ using UnityEngine.UI;
 // Singleton responsible for handling SettingsMenu functionality
 //
 // SHOULD NOT BE INSTANTIATED IN CODE, PREFAB FOR SETTINGS MENU SHOULD ONLY LIVE WITHIN ITS OWN SCENE
-public class SettingsMenu : SceneSingleton<SettingsMenu>
+public class SettingsMenu : MenuBase
 {
-    [SerializeField] private Button _videoButton = null;
-    [SerializeField] private Button _audioButton = null;
-    [SerializeField] private Button _returnButton = null;
+    [SerializeField] private Button videoButton = null;
+    [SerializeField] private Button audioButton = null;
+
+    [SerializeField] private CanvasGroup videoSubMenuCG = null;
+    [SerializeField] private CanvasGroup audioSubMenuCG = null;
+
+    private bool videoSubMenuOpen = false;
+    private bool audioSubMenuOpen = false;
 
 
 
-    public void Init()
+    // Add return button listeners here
+    public override void Init()
     {
-        _returnButton.onClick.AddListener(delegate { StartCoroutine(MenuManager.instance.UnloadSceneAsync((int)MenuManager.SceneIndices.SettingsMenuScene)); } );
+        base.Init();
+
+        videoSubMenuCG.alpha = 0f;
+        audioSubMenuCG.alpha = 0f;
+
+        audioButton.onClick.AddListener(() => { OpenAudioSubMenu(); });
+
+        returnButton.onClick.AddListener( () =>
+        {
+            // If audio submenu is open when return button is pressed, fade it out
+            if (audioSubMenuCG.alpha > 0f)
+            {
+                FadeOut(audioSubMenuCG, fadeDuration, fadeStartDelay, EaseType.linear, () => { audioSubMenuOpen = false; });
+            }
+
+            FadeOut(mainCG, fadeDuration, fadeStartDelay, EaseType.linear, () =>
+            {
+                StartCoroutine(AdditiveSceneManager.instance.UnloadSceneAsync((int)AdditiveSceneManager.SceneIndices.SettingsMenuScene));
+            } );
+        } );
+    }
+
+    public void OpenAudioSubMenu()
+    {
+        if (audioSubMenuOpen)
+        {
+            Debug.Log($"[SettingsMenu Error]: Audio SubMenu is already opened");
+            return;
+        }
+        audioSubMenuOpen = true;
+
+        FadeIn(audioSubMenuCG, fadeDuration, fadeStartDelay, EaseType.linear);
     }
 
     protected override void OnDestroy()
     {
-        _returnButton.onClick.RemoveAllListeners();
+        audioButton.onClick.RemoveAllListeners();
         base.OnDestroy();
     }
 }

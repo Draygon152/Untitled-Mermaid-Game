@@ -5,6 +5,6 @@ public class SceneLoadTester : MonoBehaviour
 {
     public void LoadSettingsMenu()
     {
-        StartCoroutine(MenuManager.instance.LoadSceneAsync((int)MenuManager.SceneIndices.SettingsMenuScene, LoadSceneMode.Additive, () => { SettingsMenu.instance.Init(); } ));
+        StartCoroutine(AdditiveSceneManager.instance.LoadSceneAsync((int)AdditiveSceneManager.SceneIndices.SettingsMenuScene, LoadSceneMode.Additive, () => { SettingsMenu.instance.Init(); } ));
     }
 }
