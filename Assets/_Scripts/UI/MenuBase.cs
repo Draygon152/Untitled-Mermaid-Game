@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MenuBase : SceneSingleton<MenuBase>
+public class MenuBase<T> : SceneSingleton<MenuBase<T>> where T : MonoBehaviour
 {
     [Header("Canvas Groups")]
     [SerializeField] protected CanvasGroup mainCG = null;
@@ -10,8 +9,6 @@ public class MenuBase : SceneSingleton<MenuBase>
     [Header("Fade Tween Delays")]
     [SerializeField] protected float fadeStartDelay = 0f;
     [SerializeField] protected float fadeDuration = 0.4f;
-
-    [SerializeField] protected Button returnButton = null;
 
     // Flag for if the screen is occupied with a fade, prevent input conflicts
     protected bool isScreenBusy = false;
@@ -40,7 +37,7 @@ public class MenuBase : SceneSingleton<MenuBase>
         Action onCompleteCallback = () =>
         {
             argOnComplete.InvokeNullCheck();
-            ToggleScreenInteraction(cg, true);
+            ToggleMenuInteraction(cg, true);
             OnTransitionFinished();
         };
 
@@ -55,7 +52,7 @@ public class MenuBase : SceneSingleton<MenuBase>
         Action onCompleteCallback = () =>
         {
             argOnComplete.InvokeNullCheck();
-            ToggleScreenInteraction(cg, true);
+            ToggleMenuInteraction(cg, true);
             OnTransitionFinished();
         };
 
@@ -65,23 +62,22 @@ public class MenuBase : SceneSingleton<MenuBase>
     protected virtual void OnTransitionStarted()
     {
         isScreenBusy = true;
-        ToggleScreenInteraction(mainCG, false);
+        ToggleMenuInteraction(mainCG, false);
     }
 
     protected virtual void OnTransitionFinished()
     {
         isScreenBusy = false;
-        ToggleScreenInteraction(mainCG, true);
+        ToggleMenuInteraction(mainCG, true);
     }
 
-    protected void ToggleScreenInteraction(CanvasGroup cg, bool isInteractible)
+    protected void ToggleMenuInteraction(CanvasGroup cg, bool isInteractible)
     {
         cg.interactable = isInteractible;
     }
 
     protected override void OnDestroy()
     {
-        returnButton.onClick.RemoveAllListeners();
         base.OnDestroy();
     }
 }

@@ -266,10 +266,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCG: {fileID: 2299263905548725740}
   fadeStartDelay: 0
-  fadeDuration: 0.4
-  returnButton: {fileID: 3268152996257741670}
+  fadeDuration: 0.2
   videoButton: {fileID: 5569751476906156753}
   audioButton: {fileID: 4019012160887499796}
+  returnButton: {fileID: 3268152996257741670}
   videoSubMenuCG: {fileID: 6619547739503521597}
   audioSubMenuCG: {fileID: 1612226125401755334}
 --- !u!223 &4351251000593777514
