@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class MenuBase : SceneSingleton<MenuBase>
 {
     [Header("Canvas Groups")]
-    [SerializeField] protected CanvasGroup mainCanvasGroup = null;
+    [SerializeField] protected CanvasGroup mainCG = null;
 
     [Header("Fade Tween Delays")]
     [SerializeField] protected float fadeStartDelay = 0f;
@@ -28,19 +28,19 @@ public class MenuBase : SceneSingleton<MenuBase>
             return;
         }
         isInitialized = true;
-        FadeIn(mainCanvasGroup, fadeDuration, fadeStartDelay, EaseType.linear);
+        FadeIn(mainCG, fadeDuration, fadeStartDelay, EaseType.linear);
     }
 
     public virtual Coroutine FadeIn(CanvasGroup cg, float duration, float delay, EaseType easing, Action argOnComplete = null)
     {
         OnTransitionStarted();
-        mainCanvasGroup.alpha = 0f;
+        cg.alpha = 0f;
 
-        Action<float> tweenAction = lerp => { mainCanvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
+        Action<float> tweenAction = lerp => { cg.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
             argOnComplete.InvokeNullCheck();
-            ToggleScreenInteraction(mainCanvasGroup, true);
+            ToggleScreenInteraction(cg, true);
             OnTransitionFinished();
         };
 
@@ -51,11 +51,11 @@ public class MenuBase : SceneSingleton<MenuBase>
     {
         OnTransitionStarted();
 
-        Action<float> tweenAction = lerp => { mainCanvasGroup.alpha = Mathf.Lerp(1f, 0f, lerp); };
+        Action<float> tweenAction = lerp => { cg.alpha = Mathf.Lerp(1f, 0f, lerp); };
         Action onCompleteCallback = () =>
         {
             argOnComplete.InvokeNullCheck();
-            ToggleScreenInteraction(mainCanvasGroup, true);
+            ToggleScreenInteraction(cg, true);
             OnTransitionFinished();
         };
 
@@ -65,13 +65,13 @@ public class MenuBase : SceneSingleton<MenuBase>
     protected virtual void OnTransitionStarted()
     {
         isScreenBusy = true;
-        ToggleScreenInteraction(mainCanvasGroup, false);
+        ToggleScreenInteraction(mainCG, false);
     }
 
     protected virtual void OnTransitionFinished()
     {
         isScreenBusy = false;
-        ToggleScreenInteraction(mainCanvasGroup, true);
+        ToggleScreenInteraction(mainCG, true);
     }
 
     protected void ToggleScreenInteraction(CanvasGroup cg, bool isInteractible)
