@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuBase : SceneSingleton<MenuBase>
 {
@@ -10,12 +11,15 @@ public class MenuBase : SceneSingleton<MenuBase>
     [SerializeField] protected float fadeStartDelay = 0f;
     [SerializeField] protected float fadeDuration = 0.4f;
 
+    [SerializeField] protected Button returnButton = null;
+
     // Flag for if the screen is occupied with a fade, prevent input conflicts
     protected bool isScreenBusy = false;
     protected bool isInitialized = false;
 
 
 
+    // Add return button listeners here in inherited classes
     public virtual void Init()
     {
         if (isInitialized)
@@ -24,9 +28,10 @@ public class MenuBase : SceneSingleton<MenuBase>
             return;
         }
         isInitialized = true;
+        FadeIn(mainCanvasGroup, fadeDuration, fadeStartDelay, EaseType.linear);
     }
 
-    public virtual Coroutine FadeIn(float duration, float delay, EaseType easing, Action argOnComplete = null)
+    public virtual Coroutine FadeIn(CanvasGroup cg, float duration, float delay, EaseType easing, Action argOnComplete = null)
     {
         OnTransitionStarted();
         mainCanvasGroup.alpha = 0f;
@@ -42,7 +47,7 @@ public class MenuBase : SceneSingleton<MenuBase>
         return this.DoTween(tweenAction, onCompleteCallback, duration, delay, easing, true);
     }
 
-    public virtual Coroutine FadeOut(float duration, float delay, EaseType easing, Action argOnComplete = null)
+    public virtual Coroutine FadeOut(CanvasGroup cg, float duration, float delay, EaseType easing, Action argOnComplete = null)
     {
         OnTransitionStarted();
 
@@ -72,5 +77,11 @@ public class MenuBase : SceneSingleton<MenuBase>
     protected void ToggleScreenInteraction(CanvasGroup cg, bool isInteractible)
     {
         cg.interactable = isInteractible;
+    }
+
+    protected override void OnDestroy()
+    {
+        returnButton.onClick.RemoveAllListeners();
+        base.OnDestroy();
     }
 }

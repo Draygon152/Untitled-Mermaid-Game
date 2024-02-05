@@ -6,21 +6,21 @@ using UnityEngine.UI;
 // SHOULD NOT BE INSTANTIATED IN CODE, PREFAB FOR SETTINGS MENU SHOULD ONLY LIVE WITHIN ITS OWN SCENE
 public class SettingsMenu : MenuBase
 {
-    [SerializeField] private Button _videoButton = null;
-    [SerializeField] private Button _audioButton = null;
-    [SerializeField] private Button _returnButton = null;
+    [SerializeField] private Button videoButton = null;
+    [SerializeField] private Button audioButton = null;
 
 
 
+    // Add return button listeners here
     public override void Init()
     {
         base.Init();
-        _returnButton.onClick.AddListener(delegate { StartCoroutine(AdditiveSceneManager.instance.UnloadSceneAsync((int)AdditiveSceneManager.SceneIndices.SettingsMenuScene)); } );
-    }
-
-    protected override void OnDestroy()
-    {
-        _returnButton.onClick.RemoveAllListeners();
-        base.OnDestroy();
+        returnButton.onClick.AddListener( () =>
+        {
+            FadeOut(mainCanvasGroup, fadeDuration, fadeStartDelay, EaseType.linear, () =>
+            {
+                StartCoroutine(AdditiveSceneManager.instance.UnloadSceneAsync((int)AdditiveSceneManager.SceneIndices.SettingsMenuScene));
+            } );
+        } );
     }
 }
