@@ -1,0 +1,34 @@
+{
+    "name": "PlayerInputControl",
+    "maps": [
+        {
+            "name": "playerMouseControl",
+            "id": "94ea6fab-84d5-4458-9fa0-a34260753e1c",
+            "actions": [
+                {
+                    "name": "MouseAxis",
+                    "type": "Value",
+                    "id": "aaf6c8d3-262a-4460-b953-3f69dbfd8de7",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5569d600-599a-4fee-bef5-958857baa1dd",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
