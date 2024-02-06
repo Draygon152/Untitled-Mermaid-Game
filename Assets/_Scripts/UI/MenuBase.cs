@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class MenuBase<T> : SceneSingleton<MenuBase<T>> where T : MonoBehaviour
+public class MenuBase : MonoBehaviour
 {
     [Header("Canvas Groups")]
     [SerializeField] protected CanvasGroup mainCG = null;
@@ -21,7 +21,7 @@ public class MenuBase<T> : SceneSingleton<MenuBase<T>> where T : MonoBehaviour
     {
         if (isInitialized)
         {
-            Debug.Log($"[{instance.name} Error]: Already initialized");
+            Debug.Log($"[{gameObject.name} Error]: Already initialized");
             return;
         }
         isInitialized = true;
@@ -74,10 +74,5 @@ public class MenuBase<T> : SceneSingleton<MenuBase<T>> where T : MonoBehaviour
     protected void ToggleMenuInteraction(CanvasGroup cg, bool isInteractible)
     {
         cg.interactable = isInteractible;
-    }
-
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
     }
 }

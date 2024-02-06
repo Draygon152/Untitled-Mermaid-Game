@@ -4,7 +4,7 @@ using UnityEngine.UI;
 // Singleton responsible for handling SettingsMenu functionality
 //
 // SHOULD NOT BE INSTANTIATED IN CODE, PREFAB FOR SETTINGS MENU SHOULD ONLY LIVE WITHIN ITS OWN SCENE
-public class SettingsMenu : MenuBase<SettingsMenu>
+public class SettingsMenu : MenuBase
 {
     [SerializeField] private Button videoButton = null;
     [SerializeField] private Button audioButton = null;
@@ -17,6 +17,11 @@ public class SettingsMenu : MenuBase<SettingsMenu>
     private bool audioSubMenuOpen = false;
 
 
+
+    private void Start()
+    {
+        Init();
+    }
 
     // Add return button listeners here
     public override void Init()
@@ -55,10 +60,9 @@ public class SettingsMenu : MenuBase<SettingsMenu>
         FadeIn(audioSubMenuCG, fadeDuration, fadeStartDelay, EaseType.linear);
     }
 
-    protected override void OnDestroy()
+    private void OnDestroy()
     {
         audioButton.onClick.RemoveAllListeners();
         returnButton.onClick.RemoveAllListeners();
-        base.OnDestroy();
     }
 }
