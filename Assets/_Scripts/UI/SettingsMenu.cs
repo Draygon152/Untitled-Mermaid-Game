@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// Singleton responsible for handling SettingsMenu functionality
-//
-// SHOULD NOT BE INSTANTIATED IN CODE, PREFAB FOR SETTINGS MENU SHOULD ONLY LIVE WITHIN ITS OWN SCENE
+/// <summary>
+///     <para>
+///         Menu controller for the Settings Menu
+///     </para>
+///     
+///     SHOULD NOT BE INSTANTIATED VIA CODE, PREFAB FOR SETTINGS MENU SHOULD ONLY LIVE WITHIN ITS OWN SCENE
+/// </summary>
 public class SettingsMenu : MenuBase
 {
     [SerializeField] private Button videoButton = null;
@@ -18,12 +22,6 @@ public class SettingsMenu : MenuBase
 
 
 
-    private void Start()
-    {
-        Init();
-    }
-
-    // Add return button listeners here
     public override void Init()
     {
         base.Init();

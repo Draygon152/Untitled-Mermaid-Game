@@ -2,17 +2,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+///     <para>
+///         Menu controller for the Main Menu
+///     </para>
+///     
+///     SHOULD NOT BE INSTANTIATED VIA CODE, PREFAB FOR SETTINGS MENU SHOULD ONLY LIVE WITHIN ITS OWN SCENE
+/// </summary>
 public class MainMenu : MenuBase
 {
     [SerializeField] private Button playButton = null;
     [SerializeField] private Button settingsButton = null;
 
 
-
-    private void Start()
-    {
-        Init();
-    }
 
     public override void Init()
     {
