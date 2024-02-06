@@ -1,7 +1,10 @@
 using System;
 using UnityEngine;
 
-public class MenuBase<T> : SceneSingleton<MenuBase<T>> where T : MonoBehaviour
+/// <summary>
+///     Base class for management of all Menu objects that will live in their own scenes
+/// </summary>
+public class MenuBase : MonoBehaviour
 {
     [Header("Canvas Groups")]
     [SerializeField] protected CanvasGroup mainCG = null;
@@ -10,18 +13,29 @@ public class MenuBase<T> : SceneSingleton<MenuBase<T>> where T : MonoBehaviour
     [SerializeField] protected float fadeStartDelay = 0f;
     [SerializeField] protected float fadeDuration = 0.4f;
 
-    // Flag for if the screen is occupied with a fade, prevent input conflicts
+    // Flag for if the screen is occupied with a fade, prevents input conflicts
     protected bool isScreenBusy = false;
     protected bool isInitialized = false;
 
 
 
-    // Add return button listeners here in inherited classes
+    protected virtual void Start()
+    {
+        Init();
+    }
+
+    /// <summary>
+    ///     <para>
+    ///         Handles Menu initialization upon scene loads and performs initial fade-in
+    ///     </para>
+    ///     
+    ///     Add button listeners here
+    /// </summary>
     public virtual void Init()
     {
         if (isInitialized)
         {
-            Debug.Log($"[{instance.name} Error]: Already initialized");
+            Debug.Log($"[{gameObject.name} Error]: Already initialized");
             return;
         }
         isInitialized = true;
@@ -74,10 +88,5 @@ public class MenuBase<T> : SceneSingleton<MenuBase<T>> where T : MonoBehaviour
     protected void ToggleMenuInteraction(CanvasGroup cg, bool isInteractible)
     {
         cg.interactable = isInteractible;
-    }
-
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
     }
 }

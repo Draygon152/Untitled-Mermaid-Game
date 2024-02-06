@@ -1,8 +1,13 @@
 using UnityEngine;
 
-// Maintains Singleton property of child classes
-//
-// SHOULD NOT BE INSTANTIATED ON ITS OWN, PRIMARILY A BASE CLASS
+/// <summary>
+///     <para>
+///         Maintains Singleton property of child classes.
+///     </para>
+///     
+///     SHOULD NOT BE INSTANTIATED ON ITS OWN, PRIMARILY A BASE CLASS
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class SceneSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T instance { get; protected set; }
@@ -13,7 +18,7 @@ public class SceneSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Debug.LogError($"[Duplicate SceneSingleton Error]: Duplicate SceneSingleton {typeof(T).Name} found in scene.");
+            Debug.LogError($"[SceneSingleton Error]: Duplicate SceneSingleton {typeof(T).Name} found in scene.");
             return;
         }
 

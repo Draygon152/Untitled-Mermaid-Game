@@ -3,7 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Responsible for handling async loading/unloading of scenes
+/// <summary>
+///     Responsible for handling async loading/unloading of scenes
+/// </summary>
 public class AdditiveSceneManager : LLPersistentSingleton<AdditiveSceneManager>
 {
     // Scene order should match build order in Build Settings
@@ -19,7 +21,7 @@ public class AdditiveSceneManager : LLPersistentSingleton<AdditiveSceneManager>
     {
         if (sceneIndex < 0 || sceneIndex > SceneManager.sceneCountInBuildSettings - 1)
         {
-            Debug.LogError($"[MenuManager Error]: Provided scene index '{sceneIndex}' is not a valid scene index, is the scene in the build order?");
+            Debug.LogError($"[AdditiveSceneManager Error]: Provided scene index '{sceneIndex}' is not a valid scene index, is the scene in the build order?");
         }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex, mode);
@@ -36,12 +38,12 @@ public class AdditiveSceneManager : LLPersistentSingleton<AdditiveSceneManager>
     {
         if (!SceneIsLoaded(sceneIndex))
         {
-            Debug.LogError($"[MenuManager Error]: Provided scene '{Enum.GetName(typeof(SceneIndices), sceneIndex)}' is not currently loaded");
+            Debug.LogError($"[AdditiveSceneManager Error]: Provided scene '{Enum.GetName(typeof(SceneIndices), sceneIndex)}' is not currently loaded");
         }
 
         if (sceneIndex < 0 || sceneIndex > SceneManager.sceneCountInBuildSettings - 1)
         {
-            Debug.LogError($"[MenuManager Error]: Provided scene index '{sceneIndex}' is not a valid scene index, is the scene in the build order?");
+            Debug.LogError($"[AdditiveSceneManager Error]: Provided scene index '{sceneIndex}' is not a valid scene index, is the scene in the build order?");
         }
 
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneIndex);
@@ -50,6 +52,8 @@ public class AdditiveSceneManager : LLPersistentSingleton<AdditiveSceneManager>
         {
             yield return null;
         }
+
+        ActionExtensions.InvokeNullCheck(action);
     }
 
     public bool SceneIsLoaded(int sceneIndex)

@@ -2,22 +2,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MenuBase<MainMenu>
+/// <summary>
+///     <para>
+///         Menu controller for the Main Menu
+///     </para>
+///     
+///     SHOULD NOT BE INSTANTIATED VIA CODE, PREFAB FOR SETTINGS MENU SHOULD ONLY LIVE WITHIN ITS OWN SCENE
+/// </summary>
+public class MainMenu : MenuBase
 {
     [SerializeField] private Button playButton = null;
     [SerializeField] private Button settingsButton = null;
 
 
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    private void Start()
-    {
-        Init();
-    }
 
     public override void Init()
     {
@@ -26,17 +23,12 @@ public class MainMenu : MenuBase<MainMenu>
         settingsButton.onClick.AddListener( () =>
         {
             StartCoroutine(AdditiveSceneManager.instance.LoadSceneAsync( (int)AdditiveSceneManager.SceneIndices.SettingsMenuScene,
-                                                                         LoadSceneMode.Additive,
-                                                                         () =>
-                                                                         {
-                                                                             SettingsMenu.instance.Init();
-                                                                         }));
+                                                                         LoadSceneMode.Additive));
         } );
     }
 
-    protected override void OnDestroy()
+    private void OnDestroy()
     {
         settingsButton.onClick.RemoveAllListeners();
-        base.OnDestroy();
     }
 }
