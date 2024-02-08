@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 ///     Control class for an on-screen timer.
 /// </summary>
+[DisallowMultipleComponent]
 public class Timer : MonoBehaviour
 {
     [SerializeField] private TMP_Text timerText = null;
