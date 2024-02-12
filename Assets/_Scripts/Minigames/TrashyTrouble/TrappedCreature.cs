@@ -39,6 +39,22 @@ public class TrappedCreature : MonoBehaviour
             trapSR.color = new Color(1, 1, 1, Mathf.Lerp(1f, 0f, lerp));
         };
 
-        return this.DoTween(tweenAction, () => { gameObject.SetActive(false); }, fadeDuration, fadeStartDelay, EaseType.linear, true);
+        return this.DoTween(tweenAction,
+                            () =>
+                            {
+                                gameObject.SetActive(false);
+                                EventManager.instance.Notify(EventManager.EventTypes.CreatureFreed);
+                            },
+                            fadeDuration,
+                            fadeStartDelay,
+                            EaseType.linear,
+                            true);
+    }
+
+    public void ResetCreature()
+    {
+        creature.spriteRenderer.color = new Color(1, 1, 1, 1);
+        trapSR.color = new Color(1, 1, 1, 1);
+        gameObject.SetActive(true);
     }
 }
