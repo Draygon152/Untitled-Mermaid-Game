@@ -21,21 +21,10 @@ public class Timer : MonoBehaviour
     [SerializeField] private bool useMinutes = false;
     private bool isRunning = false;
 
+    // Action to be invoked upon timer reaching 0
     private Action timerEndAction = null;
 
 
-
-    // TODO: Move to minigame controller
-    //private void Start()
-    //{
-    //    Init();
-    //    SetTimerActive(true);
-    //}
-
-    //private void FixedUpdate()
-    //{
-    //    Tick();
-    //}
 
     public void Init(Action argOnComplete = null)
     {
@@ -67,6 +56,12 @@ public class Timer : MonoBehaviour
     {
         timerText.color = argValue ? timerActiveColor : timerNotActiveColor;
         isRunning = argValue;
+    }
+
+    public void ResetTimer()
+    {
+        timeLeft = timeAmount;
+        SetTimerActive(false);
     }
 
     private void UpdateDisplayedTime()
