@@ -13,6 +13,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] AudioMixer music = null;
     [SerializeField] AudioMixer sfx = null;
 
+    [Header("Audio Clips")]
     [SerializeField] public AudioClip planktonMusic;
 
     [Space]
