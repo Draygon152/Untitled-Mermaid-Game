@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ObjectDetection : MonoBehaviour
 {
+
+    [Header ("Detection logic")]
     [Tooltip("The objects that we are searching for")]
     public GameObject[] targetObject;
     [Tooltip("The field of view angle of player (in degrees)")]
@@ -17,7 +19,7 @@ public class ObjectDetection : MonoBehaviour
     public Transform detectionStartLocation;
 
     [Tooltip("Attaching speed /Vacuunm power")]
-    public float AttachingSpeed;
+    public float AttachingPower;
 
     // Start is called before the first frame update
     void Start()
@@ -41,23 +43,33 @@ public class ObjectDetection : MonoBehaviour
                 WithinInSight(enemyCheck);
             }
         }
-        
-
+    
     }
 
     void WithinInSight(IEnemy target){
         Vector2 direction = target.currentGameObject.transform.position - detectionStartLocation.position;
         float angle = Vector2.Angle(direction, detectionStartLocation.transform.forward);
 
-        if(direction.magnitude < viewDistance && angle < fieldOfViewAngle * 0.5f){
-            // Check if the enemy is within the field of view cone
-            float dot = Vector2.Dot(direction.normalized, detectionStartLocation.transform.right);
-            if(dot > Mathf.Cos(fieldOfViewAngle * 0.5f * Mathf.Deg2Rad)){
-                target.hasDetectedByPlayer = true;
-                Vector2 towardPlayerDirection = (detectionStartLocation.transform.position - target.currentGameObject.transform.position).normalized;
-                target.currentRigidbody2D.AddForce(towardPlayerDirection * AttachingSpeed, ForceMode2D.Force);
-            }
+
+        if(!(direction.magnitude < viewDistance && angle < fieldOfViewAngle * 0.5f)){
+            target.hasDetectedByPlayer = false;
+            return;
         }
+
+        // Check if the enemy is within the field of view cone
+        float dot = Vector2.Dot(direction.normalized, detectionStartLocation.transform.right);
+
+        if(!(dot > Mathf.Cos(fieldOfViewAngle * 0.5f * Mathf.Deg2Rad))){
+            target.hasDetectedByPlayer = false;
+            return;
+        }
+
+        target.hasDetectedByPlayer = true;
+        Vector2 towardPlayerDirection = (detectionStartLocation.transform.position - target.currentGameObject.transform.position).normalized;
+
+        if(!target.currentRigidbody2D) return;
+        target.currentRigidbody2D.AddForce(towardPlayerDirection * AttachingPower, ForceMode2D.Force);
+        
     }
 
     public void OnDrawGizmos()
