@@ -16,11 +16,12 @@ public class PlayerMouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(playerInput.GetMouseAxisVector());
         mousePosition.x = transform.position.x; // Restrict movement along the x-axis
         mousePosition.z = 0f;
 
-        // Move the object towards the mouse position
-        transform.position = Vector3.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
+        Vector3 movementDirection = (mousePosition - transform.position).normalized;
+        transform.position += movementDirection * moveSpeed * Time.deltaTime;
     }
 }
