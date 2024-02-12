@@ -135,18 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planton
       objectReference: {fileID: 0}
-    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
-      propertyPath: floatingSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
-      propertyPath: switchStatusCounterMaxTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
-      propertyPath: switchStatusCounterMinTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8687502614418297253, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6579323
