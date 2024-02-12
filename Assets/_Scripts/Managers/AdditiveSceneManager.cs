@@ -11,8 +11,9 @@ public class AdditiveSceneManager : LLPersistentSingleton<AdditiveSceneManager>
     // Scene order should match build order in Build Settings
     public enum SceneIndices
     {
-        MainScene,
-        SettingsMenuScene
+        MainMenuScene,
+        SettingsMenuScene,
+        GameScene
     }
 
 

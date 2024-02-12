@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,6 +8,7 @@ using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(AudioSource))]
 [DisallowMultipleComponent]
 public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -16,6 +18,7 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     [SerializeField] private SpriteRenderer _spriteRenderer = null;
     public SpriteRenderer spriteRenderer => _spriteRenderer;
 
+    [Space]
     [SerializeField] private Vector2 movementDir = new Vector2(1, 0);
     private Vector2 startingPos = new Vector2(0, 0);
 
@@ -23,6 +26,10 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private bool isDraggable = true;
     private bool isBeingDragged = false;
     private bool isFocused = true;
+
+    [Space]
+    [SerializeField] AudioSource audioSource = null;
+    [SerializeField] List<AudioClip> audioClips = null;
 
 
 

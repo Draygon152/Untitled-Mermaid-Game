@@ -2,28 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class AudioManager : LLPersistentSingleton<AudioManager>  
+/// <summary>
+///     Handles Music & SFX
+/// </summary>
+public class AudioManager : PersistentSingleton<AudioManager>
 {
-    // Handles Music & SFX
+    [SerializeField] public AudioClip planktonMusic;
 
-    
-    //Singleton
 
-    void Start()
+
+    public void PlaySFX(AudioSource audioSource, AudioClip audioClip)
     {
-        
+
     }
 
-    void Update()
+    public void PlayRandomPitchSFX(AudioSource audioSource, AudioClip audioClip, float low = 0.75f, float high = 1.25f)
     {
-        
+
     }
 
     public void StartMusic(AudioSource audioSource, AudioClip audioClip)
     {
-        AudioClip.Play;
-        audioSource.loop = true
-        Loop = true; 
+         
     }
 }

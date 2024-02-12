@@ -20,6 +20,14 @@ public class MainMenu : MenuBase
     {
         base.Init();
 
+        playButton.onClick.AddListener(() =>
+        {
+            // Load into main game scene
+            StartCoroutine(AdditiveSceneManager.instance.LoadSceneAsync((int)AdditiveSceneManager.SceneIndices.GameScene,
+                                                                         LoadSceneMode.Single,
+                                                                         () => { AudioManager.instance.StartMusic(null, AudioManager.instance.planktonMusic); } ));
+        } );
+
         settingsButton.onClick.AddListener( () =>
         {
             StartCoroutine(AdditiveSceneManager.instance.LoadSceneAsync( (int)AdditiveSceneManager.SceneIndices.SettingsMenuScene,
