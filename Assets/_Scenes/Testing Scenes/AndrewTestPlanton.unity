@@ -135,18 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planton
       objectReference: {fileID: 0}
-    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
-      propertyPath: floatingSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
-      propertyPath: switchStatusCounterMaxTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
-      propertyPath: switchStatusCounterMinTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8687502614418297253, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6579323
@@ -919,7 +907,10 @@ MonoBehaviour:
     the Pool in editor.\n2. decide how many perfabs will be spawned to the pool.\n3.
     ObjectPool.Instance.SpawnFromPool(string target_tag, Vector3 position, Quaternion
     rotation).\n4. CreateNewObjectToPool(string tag, int size, GameObject prefab)\n"
-  Pools: []
+  Pools:
+  - new_tag: planton1
+    prefab: {fileID: 5672322231071385229, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
+    size: 5
 --- !u!4 &1626293948
 Transform:
   m_ObjectHideFlags: 0
