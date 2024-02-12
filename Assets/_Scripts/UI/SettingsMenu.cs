@@ -21,7 +21,6 @@ public class SettingsMenu : MenuBase
     private bool audioSubMenuOpen = false;
 
 
-
     public override void Init()
     {
         base.Init();
@@ -29,10 +28,17 @@ public class SettingsMenu : MenuBase
         videoSubMenuCG.alpha = 0f;
         audioSubMenuCG.alpha = 0f;
 
-        audioButton.onClick.AddListener(() => { OpenAudioSubMenu(); });
+        audioButton.onClick.AddListener(() =>
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button1);
+            OpenAudioSubMenu();
+
+        });
 
         returnButton.onClick.AddListener( () =>
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button2);
+
             // If audio submenu is open when return button is pressed, fade it out
             if (audioSubMenuCG.alpha > 0f)
             {

@@ -15,6 +15,12 @@ public class MainMenu : MenuBase
     [SerializeField] private Button settingsButton = null;
 
 
+    protected override void Start()
+    {
+        base.Start();
+
+        AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.storyMusic);
+    }
 
     public override void Init()
     {
@@ -22,14 +28,18 @@ public class MainMenu : MenuBase
 
         playButton.onClick.AddListener(() =>
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button1);
+
             // Load into main game scene
             StartCoroutine(AdditiveSceneManager.instance.LoadSceneAsync((int)AdditiveSceneManager.SceneIndices.GameScene,
                                                                          LoadSceneMode.Single,
-                                                                         () => { AudioManager.instance.StartMusic(null, AudioManager.instance.planktonMusic); } ));
+                                                                         () => { AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.planktonMusic); } ));
         } );
 
         settingsButton.onClick.AddListener( () =>
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button2);
+
             StartCoroutine(AdditiveSceneManager.instance.LoadSceneAsync( (int)AdditiveSceneManager.SceneIndices.SettingsMenuScene,
                                                                          LoadSceneMode.Additive));
         } );
