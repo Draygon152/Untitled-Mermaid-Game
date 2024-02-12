@@ -109,27 +109,31 @@ public class ObjectPool : MonoBehaviour
 
         //not active
         if(!spawnObj.gameObject.activeSelf){
+            spawnObj.transform.position = position;
+            spawnObj.transform.rotation = rotation;
             spawnObj.SetActive(true);
         }
         
 
         //Instantiate a new prefab if not enough size
         else{
-            PoolDictionary[target_tag].Enqueue(spawnObj);
+            
             foreach (Pool pool in Pools)
             {
                 if(pool.new_tag == target_tag){
                     Transform objectTagFolder = transform.Find(target_tag + " group");
-                    spawnObj = Instantiate(pool.prefab, transform, true);
-                    spawnObj.SetActive(true);
-                    spawnObj.transform.SetParent(objectTagFolder);
+                    GameObject newSpawnObj = Instantiate(pool.prefab, transform, true);
+                    newSpawnObj.transform.position = position;
+                    newSpawnObj.transform.rotation = rotation;
+                    newSpawnObj.SetActive(true);
+                    newSpawnObj.transform.SetParent(objectTagFolder);
+                    PoolDictionary[target_tag].Enqueue(newSpawnObj);
                 }
             }
         }
 
-        spawnObj.transform.position = position;
-        spawnObj.transform.rotation = rotation;
         PoolDictionary[target_tag].Enqueue(spawnObj);
+        
         return spawnObj;
     }
 }

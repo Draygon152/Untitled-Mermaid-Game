@@ -37,7 +37,6 @@ public class plantonBehavior : MonoBehaviour, IEnemy
         if(!rigidbody2D){
             rigidbody2D = transform.GetComponent<Rigidbody2D>();
         }
-        Debug.Log("yes");
 
         Invoke("DeactivateSelf", AliveTime);
     }
