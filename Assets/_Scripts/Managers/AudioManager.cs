@@ -10,18 +10,11 @@ using UnityEngine.Audio;
 ///
 
 public class AudioManager : PersistentSingleton<AudioManager>
-{
-    [Header("Audio Mixers")]
-    [SerializeField] AudioMixer master = null;
-    [SerializeField] AudioMixerGroup music = null;
-    [SerializeField] AudioMixerGroup sfx = null;
-
-    [Space]
+{    
     [Header("AudioSource")]
     [SerializeField] public AudioSource _source;
     [SerializeField] public AudioSource _sourceMusic;
     [SerializeField] public AudioSource _sourceSFX;
-
 
     [Header("Music Audio Clips")]
     // One time
