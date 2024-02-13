@@ -31,7 +31,7 @@ public class MainMenu : MenuBase
             AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button1);
 
             // Load into main game scene
-            StartCoroutine(AdditiveSceneManager.instance.LoadSceneAsync((int)AdditiveSceneManager.SceneIndices.GameScene,
+            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync((int)PersistentSceneManager.SceneIndices.GameScene,
                                                                          LoadSceneMode.Single,
                                                                          () => { AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.planktonMusic); } ));
         } );
@@ -40,8 +40,8 @@ public class MainMenu : MenuBase
         {
             AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button2);
 
-            StartCoroutine(AdditiveSceneManager.instance.LoadSceneAsync( (int)AdditiveSceneManager.SceneIndices.SettingsMenuScene,
-                                                                         LoadSceneMode.Additive));
+            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync( (int)PersistentSceneManager.SceneIndices.SettingsMenuScene,
+                                                                           LoadSceneMode.Additive));
         } );
     }
 

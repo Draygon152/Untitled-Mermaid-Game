@@ -8,9 +8,11 @@ using UnityEngine;
 /// </summary>
 public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
 {
-    [SerializeField] private List<TrappedCreature> trappedCreatures = null;
+    [SerializeField] private Canvas canvas = null;
     [SerializeField] private Timer timer = null;
-
+    [Space]
+    [SerializeField] private List<TrappedCreature> trappedCreatures = null;
+    
     private int creaturesFreed = 0;
 
 
@@ -42,8 +44,9 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
     private void EndMinigame()
     {
         Debug.Log("MINIGAME ENDED");
+        timer.SetTimerActive(false);
         EventManager.instance.Unsubscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
-        AdditiveSceneManager.instance.UnloadSceneAsync( (int)AdditiveSceneManager.SceneIndices.GameScene );
+        PersistentSceneManager.instance.UnloadSceneAsync( 3 ); // TODO: REPLACE WITH SCENE INDEX
     }
 
     private void OnCreatureFreed()

@@ -35,7 +35,7 @@ public class SettingsMenu : MenuBase
 
         });
 
-        returnButton.onClick.AddListener( () =>
+        returnButton.onClick.AddListener(() =>
         {
             AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button2);
 
@@ -47,21 +47,37 @@ public class SettingsMenu : MenuBase
 
             FadeOut(mainCG, fadeDuration, fadeStartDelay, EaseType.linear, () =>
             {
-                StartCoroutine(AdditiveSceneManager.instance.UnloadSceneAsync((int)AdditiveSceneManager.SceneIndices.SettingsMenuScene));
-            } );
-        } );
+                StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync((int)PersistentSceneManager.SceneIndices.SettingsMenuScene));
+            });
+        });
     }
 
     public void OpenAudioSubMenu()
     {
         if (audioSubMenuOpen)
         {
-            Debug.Log($"[SettingsMenu Error]: Audio SubMenu is already opened");
+            CloseAudioSubMenu();
             return;
         }
         audioSubMenuOpen = true;
 
         FadeIn(audioSubMenuCG, fadeDuration, fadeStartDelay, EaseType.linear);
+    }
+
+    public void CloseAudioSubMenu()
+    {
+        if (audioSubMenuOpen)
+        {
+            FadeOut(audioSubMenuCG, fadeDuration, fadeStartDelay, EaseType.linear);
+ 
+            audioSubMenuOpen = false;
+        }
+
+        else
+        {
+            Debug.Log($"[SettingsMenu Error]: Audio SubMenu is not opened");
+            return;
+        }
     }
 
     private void OnDestroy()

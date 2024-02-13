@@ -426,8 +426,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 281125294}
   movementDir: {x: 0, y: 1}
   enforceDirection: 1
-  audioSource: {fileID: 281125292}
-  audioClips: []
+  dragSpeedModifier: 1
 --- !u!1 &857410346
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,8 +534,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 857410348}
   movementDir: {x: -1, y: 0}
   enforceDirection: 1
-  audioSource: {fileID: 857410351}
-  audioClips: []
+  dragSpeedModifier: 1
 --- !u!61 &857410350
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1163,11 +1161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad27317316ba914f950de4a6c12a029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1077857317}
+  timer: {fileID: 2022502876}
   trappedCreatures:
   - {fileID: 1213186894}
   - {fileID: 1314388643}
   - {fileID: 211128105}
-  timer: {fileID: 2022502876}
 --- !u!1 &1201444449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,8 +1415,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1201444453}
   movementDir: {x: 1, y: 0.5}
   enforceDirection: 1
-  audioSource: {fileID: 1201444451}
-  audioClips: []
+  dragSpeedModifier: 1
 --- !u!1 &1213186892
 GameObject:
   m_ObjectHideFlags: 0
