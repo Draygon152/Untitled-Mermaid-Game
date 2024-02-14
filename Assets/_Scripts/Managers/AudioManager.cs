@@ -7,7 +7,6 @@ using UnityEngine.Audio;
 ///     Handles Music & SFX
 ///     Centralized clips 
 /// </summary>
-///
 
 public class AudioManager : PersistentSingleton<AudioManager>
 {
@@ -22,7 +21,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] public AudioSource _sourceMusic;
     [SerializeField] public AudioSource _sourceSFX;
 
-
+    [Space]
     [Header("Music Audio Clips")]
     // One time
     [SerializeField] public AudioClip storyMusic;

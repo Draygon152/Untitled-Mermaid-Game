@@ -15,6 +15,7 @@ public class MainMenu : MenuBase
     [SerializeField] private Button settingsButton = null;
 
 
+
     protected override void Start()
     {
         base.Start();
@@ -32,8 +33,7 @@ public class MainMenu : MenuBase
 
             // Load into main game scene
             StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync((int)PersistentSceneManager.SceneIndices.GameScene,
-                                                                         LoadSceneMode.Single,
-                                                                         () => { AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.planktonMusic); } ));
+                                                                         LoadSceneMode.Single));
         } );
 
         settingsButton.onClick.AddListener( () =>

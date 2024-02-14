@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -135,17 +134,17 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         isFocused = argValue;
     }
 
-    public void DisableDrag()
+    public void ToggleDrag(bool argValue)
     {
-        isDraggable = false;
+        isDraggable = argValue;
     }
 
     public void ResetObject()
     {
         isDraggable = true;
         isBeingDragged = false;
-        isFocused = false;
+        isFocused = true; // TODO: SET FALSE
 
         _rect.position = startingPos;
-}
+    }
 }

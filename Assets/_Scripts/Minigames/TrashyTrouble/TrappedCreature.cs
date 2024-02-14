@@ -16,13 +16,14 @@ public class TrappedCreature : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.4f;
 
     private bool creatureFreed = false;
+    private bool isBeingReset = false;
 
 
 
     private void FixedUpdate()
     {
         // When draggable creature is freed
-        if (!creatureFreed && !creature.rect.Overlaps(trapRect))
+        if (!isBeingReset && !creatureFreed && !creature.rect.Overlaps(trapRect))
         {
             creatureFreed = true;
             FreeCreature();
@@ -31,7 +32,7 @@ public class TrappedCreature : MonoBehaviour
 
     private Coroutine FreeCreature()
     {
-        creature.DisableDrag();
+        creature.ToggleDrag(false);
 
         Action<float> tweenAction = lerp =>
         {
@@ -55,6 +56,11 @@ public class TrappedCreature : MonoBehaviour
     {
         creature.spriteRenderer.color = new Color(1, 1, 1, 1);
         trapSR.color = new Color(1, 1, 1, 1);
+
+        creatureFreed = false;
+        isBeingReset = true;
+        creature.ResetObject();
         gameObject.SetActive(true);
+        isBeingReset = false;
     }
 }

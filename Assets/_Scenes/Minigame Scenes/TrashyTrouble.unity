@@ -695,7 +695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &874869704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1112,7 +1112,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 874869706}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.3
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1163,6 +1163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1077857317}
   timer: {fileID: 2022502876}
+  timeToWait: 5
   trappedCreatures:
   - {fileID: 1213186894}
   - {fileID: 1314388643}
@@ -1921,7 +1922,7 @@ MonoBehaviour:
   timerText: {fileID: 1280431683}
   timerActiveColor: {r: 1, g: 1, b: 1, a: 1}
   timerNotActiveColor: {r: 1, g: 0.3529412, b: 0.3529412, a: 1}
-  timeAmount: 150
+  timeAmount: 5
   useMinutes: 0
 --- !u!1 &2146729737
 GameObject:

@@ -10,6 +10,7 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
 {
     [SerializeField] private Canvas canvas = null;
     [SerializeField] private Timer timer = null;
+    [SerializeField] private float timeToWait = 5f; // Amount of time to wait after minigame fail before restarting
     [Space]
     [SerializeField] private List<TrappedCreature> trappedCreatures = null;
     
@@ -19,9 +20,11 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
 
     private void Start()
     {
+        canvas.worldCamera = GameCameraManager.instance.gameCamera;
+
         EventManager.instance.Subscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
 
-        timer.Init(RestartMinigame);
+        timer.Init(() => { StartCoroutine(RestartMinigame()); });
         timer.SetTimerActive(true);
     }
 
@@ -30,12 +33,16 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
         timer.Tick();
     }
 
-    private void RestartMinigame()
+    private IEnumerator RestartMinigame()
     {
         foreach (TrappedCreature creature in trappedCreatures)
         {
             creature.ResetCreature();
         }
+
+        creaturesFreed = 0;
+
+        yield return new WaitForSeconds(timeToWait);
 
         timer.ResetTimer();
         timer.SetTimerActive(true);
@@ -45,6 +52,7 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
     {
         Debug.Log("MINIGAME ENDED");
         timer.SetTimerActive(false);
+
         EventManager.instance.Unsubscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
         PersistentSceneManager.instance.UnloadSceneAsync( 3 ); // TODO: REPLACE WITH SCENE INDEX
     }
