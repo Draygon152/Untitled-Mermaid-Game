@@ -8,6 +8,7 @@ TagManager:
   - Bound
   - Hook
   - Fish
+  - Trash
   layers:
   - Default
   - TransparentFX
