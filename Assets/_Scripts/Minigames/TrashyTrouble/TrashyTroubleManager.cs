@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 ///     Management class responsible for handling minigame logic
@@ -24,7 +25,7 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
 
         EventManager.instance.Subscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
 
-        timer.Init(() => { StartCoroutine(RestartMinigame()); });
+        timer.Init(RestartMinigame);
         timer.SetTimerActive(true);
     }
 
@@ -33,19 +34,13 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
         timer.Tick();
     }
 
-    private IEnumerator RestartMinigame()
+    private void RestartMinigame()
     {
-        foreach (TrappedCreature creature in trappedCreatures)
-        {
-            creature.ResetCreature();
-        }
-
-        creaturesFreed = 0;
-
-        yield return new WaitForSeconds(timeToWait);
-
-        timer.ResetTimer();
-        timer.SetTimerActive(true);
+        StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.TrashyTrouble,
+                                                                         () =>
+                                                                         {
+                                                                             GameManager.instance.StartMinigame(PersistentSceneManager.SceneIndices.TrashyTrouble);
+                                                                         } ));
     }
 
     private void EndMinigame()
@@ -54,7 +49,7 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
         timer.SetTimerActive(false);
 
         EventManager.instance.Unsubscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
-        PersistentSceneManager.instance.UnloadSceneAsync( 3 ); // TODO: REPLACE WITH SCENE INDEX
+        StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync((int)PersistentSceneManager.SceneIndices.TrashyTrouble));
     }
 
     private void OnCreatureFreed()

@@ -30,13 +30,12 @@ public class PersistentSceneManager : LLPersistentSingleton<PersistentSceneManag
         }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex, mode);
+        asyncLoad.completed += (a) => { ActionExtensions.InvokeNullCheck(action); };
 
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
-
-        ActionExtensions.InvokeNullCheck(action);
     }
 
     public IEnumerator UnloadSceneAsync(int sceneIndex, Action action = null)
@@ -52,13 +51,12 @@ public class PersistentSceneManager : LLPersistentSingleton<PersistentSceneManag
         }
 
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneIndex);
+        asyncUnload.completed += (a) => { ActionExtensions.InvokeNullCheck(action); };
 
         while (!asyncUnload.isDone)
         {
             yield return null;
         }
-
-        ActionExtensions.InvokeNullCheck(action);
     }
 
     public bool SceneIsLoaded(int sceneIndex)
