@@ -1054,6 +1054,7 @@ GameObject:
   - component: {fileID: 1077857319}
   - component: {fileID: 1077857317}
   - component: {fileID: 1077857316}
+  - component: {fileID: 1077857320}
   - component: {fileID: 1077857315}
   m_Layer: 5
   m_Name: TrashyTrouble
@@ -1162,12 +1163,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1077857317}
+  canvasGroup: {fileID: 1077857320}
   timer: {fileID: 2022502876}
   timeToWait: 5
   trappedCreatures:
   - {fileID: 1213186894}
   - {fileID: 1314388643}
   - {fileID: 211128105}
+--- !u!225 &1077857320
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077857314}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1201444449
 GameObject:
   m_ObjectHideFlags: 0
