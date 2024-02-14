@@ -26,8 +26,13 @@ public class plantonBehavior : MonoBehaviour, IEnemy
 
     [Header("Planton Props")]
     public float floatingSpeed;
+    public float floatingMagnitude = 1f;
+
+    public float rotationSpeed;
 
     public float AliveTime = 10;
+    float randomRotation;
+    Vector3 randomDirection;
 
 
     // Start is called before the first frame update
@@ -37,6 +42,9 @@ public class plantonBehavior : MonoBehaviour, IEnemy
         if(!rigidbody2D){
             rigidbody2D = transform.GetComponent<Rigidbody2D>();
         }
+        //random rotation
+        randomRotation = Random.Range(0, 360);
+        this.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
 
         Invoke("DeactivateSelf", AliveTime);
     }
@@ -44,8 +52,29 @@ public class plantonBehavior : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
-        if(Detected) return;
+        //random rotation
+        randomRotation = Random.Range(0, 360);
+        if(Detected){
+            switchStatusCounter = Random.Range(switchStatusCounterMinTime, switchStatusCounterMaxTime);
+            return;
+        } 
 
+        moveToRandomLocation();
+        handleRotationTowardTarget();
+
+    }
+
+
+    public void handleRotationTowardTarget(){
+        // Rotate the object towards the target direction
+        float angleRadians = Mathf.Atan2(randomDirection.y, randomDirection.x);
+        float angleDegrees = angleRadians * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angleDegrees);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+
+    public void moveToRandomLocation(){
         switchStatusCounter -= Time.deltaTime;
         if(switchStatusCounter < 0f){
             MoveInRandomDirection();
@@ -55,16 +84,14 @@ public class plantonBehavior : MonoBehaviour, IEnemy
 
     public void MoveInRandomDirection(){
         // Generate a random direction
-        Vector3 randomDirection = Random.insideUnitSphere.normalized;
-        rigidbody2D.velocity = new Vector2(randomDirection.x, randomDirection.y) * floatingSpeed;
+        randomDirection = Random.insideUnitSphere.normalized;
+        randomDirection.z = 10;
+        rigidbody2D.velocity = new Vector2(randomDirection.x  * floatingMagnitude, randomDirection.y  * floatingMagnitude) * floatingSpeed;
     }
 
     public void DeactivateSelf(){
         this.gameObject.SetActive(false);
     }
-
-
-
 
     public void OnDrawGizmos()
     {
@@ -73,5 +100,7 @@ public class plantonBehavior : MonoBehaviour, IEnemy
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(collider2D.bounds.center, collider2D.bounds.size);
         }
+        //going diection
+        Gizmos.DrawLine(transform.position, transform.position + randomDirection);
     }
 }

@@ -135,6 +135,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planton
       objectReference: {fileID: 0}
+    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
+      propertyPath: AliveTime
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
+      propertyPath: rotationSpeed
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
+      propertyPath: switchStatusCounterMaxTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822758919657624260, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
+      propertyPath: switchStatusCounterMinTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8687502614418297253, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6579323
@@ -149,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8687502614418297253, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8687502614418297253, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
       propertyPath: m_LocalRotation.x
@@ -161,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8687502614418297253, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8687502614418297253, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -173,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8687502614418297253, guid: 2256c918bcd7add44ac813d0ace5e860, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -197,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &614539478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,8 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPool: {fileID: 1626293947}
   spawnObjectTag: planton1
-  spawnerCounterMinTime: 0.1
-  spawnerCounterMaxTime: 0.1
+  spawnerCounterMinTime: 1
+  spawnerCounterMaxTime: 1
   spawnAreaSize: {x: 5, y: 5, z: 0}
 --- !u!4 &614539479
 Transform:
