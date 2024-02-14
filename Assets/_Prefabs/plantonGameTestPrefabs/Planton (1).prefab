@@ -99,12 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01dff12b02b40d449af11ba87707ec1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detected: 0
   collider2D: {fileID: 6139483658255135636}
   rigidbody2D: {fileID: 0}
   switchStatusCounterMinTime: 5
   switchStatusCounterMaxTime: 20
   floatingSpeed: 4
+  floatingMagnitude: 1
+  rotationSpeed: 0
+  AliveTime: 10
 --- !u!61 &6139483658255135636
 BoxCollider2D:
   m_ObjectHideFlags: 0
