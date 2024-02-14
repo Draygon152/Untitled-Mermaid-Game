@@ -16,20 +16,19 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     [SerializeField] private SpriteRenderer _spriteRenderer = null;
     public SpriteRenderer spriteRenderer => _spriteRenderer;
 
+    [Space]
+    [Header("Movement Enforcement")]
     [SerializeField] private Vector2 movementDir = new Vector2(1, 0);
-    private Vector2 startingPos = new Vector2(0, 0);
-
     [SerializeField] private bool enforceDirection = false;
+    [SerializeField] private float dragSpeedModifier = 1f;
+    private Vector2 startingPos = new Vector2(0, 0);
+    
     private bool isDraggable = true;
     private bool isBeingDragged = false;
-    private bool isFocused = true;
+    private bool isFocused = true; // TODO: SET FALSE
 
 
 
-    private void Start()
-    {
-        startingPos = _rect.position;
-    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -41,50 +40,66 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (enforceDirection && movementDir.x == 0 && movementDir.y == 0)
+        {
+            Debug.LogError($"[DraggableObject Error]: Cannot enforce a drag direction of (0, 0)");
+        }
+
         if (isDraggable && isFocused && isBeingDragged)
         {
-            float distance = Vector2.Dot(eventData.delta, movementDir) / movementDir.magnitude;
+            float distance = Vector2.Dot(eventData.delta, movementDir) / (movementDir.magnitude * dragSpeedModifier);
             Vector3 projectedPos = new Vector3(_rect.localPosition.x + (movementDir.normalized.x * distance),
                                                _rect.localPosition.y + (movementDir.normalized.y * distance));
 
             // Enforce bounds so that object cannot be dragged past its starting position in the wrong direction
             if (enforceDirection)
             {
-                if (movementDir.x > 0)
+                if (movementDir.x > 0 && projectedPos.x > startingPos.x)
                 {
-                    if (movementDir.y > 0)
+                    if (movementDir.y > 0 && projectedPos.y > startingPos.y)
                     {
-                        if (projectedPos.x >= startingPos.x && projectedPos.y >= startingPos.y)
-                        {
-                            _rect.localPosition = projectedPos;
-                        }
+                        _rect.localPosition = projectedPos;
                     }
 
-                    else if (movementDir.y < 0)
+                    else if (movementDir.y < 0 && projectedPos.y < startingPos.y)
                     {
-                        if (projectedPos.x >= startingPos.x && projectedPos.y <= startingPos.y)
-                        {
-                            _rect.localPosition = projectedPos;
-                        }
+                        _rect.localPosition = projectedPos;
+                    }
+
+                    else if (movementDir.y == 0)
+                    {
+                        _rect.localPosition = projectedPos;
                     }
                 }
 
-                else if (movementDir.x < 0)
+                else if (movementDir.x < 0 && projectedPos.x < startingPos.x)
                 {
-                    if (movementDir.y > 0)
+                    if (movementDir.y > 0 && projectedPos.y > startingPos.y)
                     {
-                        if (projectedPos.x <= startingPos.x && projectedPos.y >= startingPos.y)
-                        {
-                            _rect.localPosition = projectedPos;
-                        }
+                        _rect.localPosition = projectedPos;
                     }
 
-                    else if (movementDir.y < 0)
+                    else if (movementDir.y < 0 && projectedPos.y < startingPos.y)
                     {
-                        if (projectedPos.x <= startingPos.x && projectedPos.y <= startingPos.y)
-                        {
-                            _rect.localPosition = projectedPos;
-                        }
+                        _rect.localPosition = projectedPos;
+                    }
+
+                    else if (movementDir.y == 0 && projectedPos.x < startingPos.x)
+                    {
+                        _rect.localPosition = projectedPos;
+                    }
+                }
+
+                else if (movementDir.x == 0)
+                {
+                    if (movementDir.y > 0 && projectedPos.y > startingPos.y)
+                    {
+                        _rect.localPosition = projectedPos;
+                    }
+
+                    else if (movementDir.y < 0 && projectedPos.y < startingPos.y)
+                    {
+                        _rect.localPosition = projectedPos;
                     }
                 }
             }
@@ -119,8 +134,17 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         isFocused = argValue;
     }
 
-    public void DisableDrag()
+    public void ToggleDrag(bool argValue)
     {
-        isDraggable = false;
+        isDraggable = argValue;
+    }
+
+    public void ResetObject()
+    {
+        isDraggable = true;
+        isBeingDragged = false;
+        isFocused = true; // TODO: SET FALSE
+
+        _rect.position = startingPos;
     }
 }

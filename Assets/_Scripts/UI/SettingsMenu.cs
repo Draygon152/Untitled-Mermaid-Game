@@ -21,7 +21,6 @@ public class SettingsMenu : MenuBase
     private bool audioSubMenuOpen = false;
 
 
-
     public override void Init()
     {
         base.Init();
@@ -29,10 +28,17 @@ public class SettingsMenu : MenuBase
         videoSubMenuCG.alpha = 0f;
         audioSubMenuCG.alpha = 0f;
 
-        audioButton.onClick.AddListener(() => { OpenAudioSubMenu(); });
-
-        returnButton.onClick.AddListener( () =>
+        audioButton.onClick.AddListener(() =>
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button1);
+            OpenAudioSubMenu();
+
+        });
+
+        returnButton.onClick.AddListener(() =>
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button2);
+
             // If audio submenu is open when return button is pressed, fade it out
             if (audioSubMenuCG.alpha > 0f)
             {
@@ -41,21 +47,37 @@ public class SettingsMenu : MenuBase
 
             FadeOut(mainCG, fadeDuration, fadeStartDelay, EaseType.linear, () =>
             {
-                StartCoroutine(AdditiveSceneManager.instance.UnloadSceneAsync((int)AdditiveSceneManager.SceneIndices.SettingsMenuScene));
-            } );
-        } );
+                StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.SettingsMenuScene) );
+            });
+        });
     }
 
     public void OpenAudioSubMenu()
     {
         if (audioSubMenuOpen)
         {
-            Debug.Log($"[SettingsMenu Error]: Audio SubMenu is already opened");
+            CloseAudioSubMenu();
             return;
         }
         audioSubMenuOpen = true;
 
         FadeIn(audioSubMenuCG, fadeDuration, fadeStartDelay, EaseType.linear);
+    }
+
+    public void CloseAudioSubMenu()
+    {
+        if (audioSubMenuOpen)
+        {
+            FadeOut(audioSubMenuCG, fadeDuration, fadeStartDelay, EaseType.linear);
+ 
+            audioSubMenuOpen = false;
+        }
+
+        else
+        {
+            Debug.Log($"[SettingsMenu Error]: Audio SubMenu is not opened");
+            return;
+        }
     }
 
     private void OnDestroy()
