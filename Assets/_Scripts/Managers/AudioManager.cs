@@ -7,21 +7,15 @@ using UnityEngine.Audio;
 ///     Handles Music & SFX
 ///     Centralized clips 
 /// </summary>
+///
 
 public class AudioManager : PersistentSingleton<AudioManager>
-{
-    [Header("Audio Mixers")]
-    [SerializeField] AudioMixer master = null;
-    [SerializeField] AudioMixerGroup music = null;
-    [SerializeField] AudioMixerGroup sfx = null;
-
-    [Space]
+{    
     [Header("AudioSource")]
     [SerializeField] public AudioSource _source;
     [SerializeField] public AudioSource _sourceMusic;
     [SerializeField] public AudioSource _sourceSFX;
 
-    [Space]
     [Header("Music Audio Clips")]
     // One time
     [SerializeField] public AudioClip storyMusic;
