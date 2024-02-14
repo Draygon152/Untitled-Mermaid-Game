@@ -24,6 +24,13 @@ public class Hook : MonoBehaviour
             collision.gameObject.GetComponent<FishMovement>().Hook = gameObject.GetComponent<Transform>();
             gameObject.GetComponentInParent<HookBehavior>().caughtFish = true;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        } 
+        if (collision.gameObject.CompareTag("Trash"))
+        {
+            collision.gameObject.GetComponent<TrashMovement>().caught = true;
+            collision.gameObject.GetComponent<TrashMovement>().Hook = gameObject.GetComponent<Transform>();
+            gameObject.GetComponentInParent<HookBehavior>().caughtFish = true;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }
