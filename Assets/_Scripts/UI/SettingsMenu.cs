@@ -47,7 +47,7 @@ public class SettingsMenu : MenuBase
 
             FadeOut(mainCG, fadeDuration, fadeStartDelay, EaseType.linear, () =>
             {
-                StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync((int)PersistentSceneManager.SceneIndices.SettingsMenuScene));
+                StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.SettingsMenuScene) );
             });
         });
     }

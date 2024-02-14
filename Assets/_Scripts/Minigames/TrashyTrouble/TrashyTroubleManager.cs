@@ -49,7 +49,7 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
         timer.SetTimerActive(false);
 
         EventManager.instance.Unsubscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
-        StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync((int)PersistentSceneManager.SceneIndices.TrashyTrouble));
+        StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.TrashyTrouble) );
     }
 
     private void OnCreatureFreed()
