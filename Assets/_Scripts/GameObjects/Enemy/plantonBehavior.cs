@@ -85,8 +85,8 @@ public class plantonBehavior : MonoBehaviour, IEnemy
     public void MoveInRandomDirection(){
         // Generate a random direction
         randomDirection = Random.insideUnitSphere.normalized;
-        randomDirection.z = 10;
-        rigidbody2D.velocity = new Vector2(randomDirection.x  * floatingMagnitude, randomDirection.y  * floatingMagnitude) * floatingSpeed;
+        randomDirection = new Vector2(randomDirection.x  * floatingMagnitude, randomDirection.y  * floatingMagnitude);
+        rigidbody2D.velocity = randomDirection * floatingSpeed;
     }
 
     public void DeactivateSelf(){
