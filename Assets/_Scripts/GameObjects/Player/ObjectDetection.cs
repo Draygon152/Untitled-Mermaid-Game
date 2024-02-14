@@ -18,7 +18,7 @@ public class ObjectDetection : MonoBehaviour
     [Tooltip("The detection start location")]
     public Transform detectionStartLocation;
 
-    [Tooltip("Attaching speed /Vacuunm power")]
+    [Tooltip("Attaching power")]
     public float AttachingPower;
 
     // Start is called before the first frame update
