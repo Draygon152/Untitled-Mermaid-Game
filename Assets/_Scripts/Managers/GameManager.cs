@@ -1,7 +1,9 @@
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-///     Main game management class
+///     Main game management class, responsible for starting minigames in the main game scene
+///     and keeping track of overall progress
 /// </summary>
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -12,25 +14,29 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public void StartMinigame(PersistentSceneManager.SceneIndices sceneIndex)
     {
-        if (sceneIndex == PersistentSceneManager.SceneIndices.TrashyTrouble)
+        switch(sceneIndex)
         {
-            AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.trashyTroubleMusic);
-            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync( (int)sceneIndex, LoadSceneMode.Additive ));
+            case PersistentSceneManager.SceneIndices.TrashyTrouble:
+                AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.trashyTroubleMusic);
+                break;
+
+            case PersistentSceneManager.SceneIndices.FishyFreedom:
+                AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.overFishingMusic);
+                break;
+
+            case PersistentSceneManager.SceneIndices.PlanktonPlatoon:
+                AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.planktonMusic);
+                break;
+
+            case PersistentSceneManager.SceneIndices.AlgaeAffliction:
+                AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.coralCleaningMusic);
+                break;
+
+            default:
+                Debug.LogError($"[GameManager Error]: Invalid scene index '{(int)sceneIndex}' provided");
+                break;
         }
 
-        else if (sceneIndex == PersistentSceneManager.SceneIndices.FishyFreedom)
-        {
-            AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.overFishingMusic);
-        }
-        
-        else if (sceneIndex == PersistentSceneManager.SceneIndices.PlanktonPlatoon)
-        {
-            AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.planktonMusic);
-        }
-        
-        else if (sceneIndex == PersistentSceneManager.SceneIndices.AlgaeAffliction)
-        {
-            AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.coralCleaningMusic);
-        }
+        StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync((int)sceneIndex, LoadSceneMode.Additive));
     }
 }

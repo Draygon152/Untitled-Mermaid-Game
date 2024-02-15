@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Minigame Scenes/2_Overfishing.unity
     guid: 2a414263f09791842ae3a488188fc32f
+  - enabled: 1
+    path: Assets/_Scenes/Testing Scenes/AndrewTestPlanton.unity
+    guid: fe4f1bfeaf38fe646804d61573855de4
+  - enabled: 1
+    path: Assets/_Scenes/Minigame Scenes/4_AlgaeAffliction.unity
+    guid: 6b484f356d9e8204fbec1326e03457da
   m_configObjects: {}
