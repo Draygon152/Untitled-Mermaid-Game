@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -17,6 +18,7 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
     [SerializeField] private Timer timer = null;
     [SerializeField] private float timeToWait = 5f; // Amount of time to wait after minigame fail before restarting
     [Space]
+    [SerializeField] private int numAlgaeToSpawn = 5;
     [SerializeField] private List<Scrubbable> algaeList = null;
 
     private int algaeScrubbed = 0;
@@ -25,20 +27,31 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
 
     private void Start()
     {
+        foreach (Scrubbable algae in algaeList)
+        {
+            algae.gameObject.SetActive(false);
+        }
+
         StartMinigame();
+    }
+
+    private void FixedUpdate()
+    {
+        timer.Tick();
     }
 
     private Coroutine StartMinigame()
     {
+        SelectAlgae();
         canvasGroup.alpha = 0f;
         timer.Init( () => { StartCoroutine(RestartMinigame()); } );
 
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
-            canvas.worldCamera = GameCameraManager.instance.gameCamera;
+            //canvas.worldCamera = GameCameraManager.instance.gameCamera;
 
-            EventManager.instance.Subscribe(EventManager.EventTypes.CreatureFreed, OnAlgaeScrubbed);
+            EventManager.instance.Subscribe(EventManager.EventTypes.AlgaeScrubbed, OnAlgaeScrubbed);
 
             canvasGroup.interactable = true;
             timer.SetTimerActive(true);
@@ -72,12 +85,30 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
     }
 
+    private void SelectAlgae()
+    {
+        if (numAlgaeToSpawn > algaeList.Count)
+        {
+            Debug.LogError($"[AlgaeAfflictionManager Error]: Selected number of algae to spawn '{numAlgaeToSpawn}' exceeds the number of algae in the list '{algaeList.Count}'");
+            return;
+        }
+
+        System.Random rand = new System.Random();
+        List<Scrubbable> activeAlgae = algaeList.OrderBy(index => rand.Next()).ToList();
+
+        for (int i = 0; i < numAlgaeToSpawn; i++)
+        {
+            activeAlgae[i].gameObject.SetActive(true);
+        }
+    }
+
     private void OnAlgaeScrubbed()
     {
         algaeScrubbed++;
 
-        if (algaeScrubbed == algaeList.Count)
+        if (algaeScrubbed == numAlgaeToSpawn)
         {
+            Debug.Log("ENDING");
             timer.SetTimerActive(false);
             EndMinigame();
         }

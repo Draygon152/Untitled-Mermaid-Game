@@ -15,8 +15,9 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     [SerializeField] private RectTransform scrubbableRect = null;
     [SerializeField] private SpriteRenderer scrubbableRenderer = null;
     [Space]
-    [Range(0.01f, 0.1f)]
-    [SerializeField] private float scrubSpeedModifier = 0.1f;
+    [Range(0.1f, 1f)]
+    [SerializeField] private float scrubSpeedModifier = 1f;
+    private const int SCRUB_SPEED_DIVISOR = 1000;
 
     private bool isScrubbable = true;
     private bool isBeingScrubbed = false;
@@ -71,7 +72,7 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         if (!isBeingReset && isScrubbable && isBeingScrubbed)
         {
-            float scrubAmount = Mathf.Abs(eventData.delta.magnitude) * scrubSpeedModifier;
+            float scrubAmount = Mathf.Abs(eventData.delta.magnitude) * (scrubSpeedModifier / SCRUB_SPEED_DIVISOR);
 
             ScrubObject(scrubAmount);
         }
