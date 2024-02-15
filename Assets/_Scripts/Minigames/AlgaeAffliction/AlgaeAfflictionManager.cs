@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-///     Management class responsible for handling minigame logic for Trashy Trouble
+///     Management class responsible for handling minigame logic for Algae Affliction
 /// </summary>
-public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
+public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
 {
     [SerializeField] private Canvas canvas = null;
     [SerializeField] private CanvasGroup canvasGroup = null;
+    [Space]
     [SerializeField] private float fadeStartDelay = 0f;
     [SerializeField] private float fadeDuration = 0.4f;
     [Space]
     [SerializeField] private Timer timer = null;
     [SerializeField] private float timeToWait = 5f; // Amount of time to wait after minigame fail before restarting
     [Space]
-    [SerializeField] private List<TrappedCreature> trappedCreatures = null;
-    
-    private int creaturesFreed = 0;
+    [SerializeField] private List<Scrubbable> algaeList = null;
+
+    private int algaeScrubbed = 0;
 
 
 
@@ -27,22 +28,17 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
         StartMinigame();
     }
 
-    private void FixedUpdate()
-    {
-        timer.Tick();
-    }
-
     private Coroutine StartMinigame()
     {
         canvasGroup.alpha = 0f;
-        timer.Init( () => { StartCoroutine(RestartMinigame()); });
+        timer.Init( () => { StartCoroutine(RestartMinigame()); } );
 
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
             canvas.worldCamera = GameCameraManager.instance.gameCamera;
 
-            EventManager.instance.Subscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
+            EventManager.instance.Subscribe(EventManager.EventTypes.CreatureFreed, OnAlgaeScrubbed);
 
             canvasGroup.interactable = true;
             timer.SetTimerActive(true);
@@ -57,10 +53,10 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
 
         yield return new WaitForSeconds(timeToWait);
 
-        StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync((int)PersistentSceneManager.SceneIndices.TrashyTrouble,
+        StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.AlgaeAffliction,
                                                                          () =>
                                                                          {
-                                                                             GameManager.instance.StartMinigame(PersistentSceneManager.SceneIndices.TrashyTrouble);
+                                                                             GameManager.instance.StartMinigame(PersistentSceneManager.SceneIndices.AlgaeAffliction);
                                                                          } ));
     }
 
@@ -69,19 +65,18 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(1f, 0f, lerp); };
         Action onCompleteCallback = () =>
         {
-            EventManager.instance.Unsubscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
-            StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.TrashyTrouble) );
+            EventManager.instance.Unsubscribe(EventManager.EventTypes.AlgaeScrubbed, OnAlgaeScrubbed);
+            StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.AlgaeAffliction) );
         };
 
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
     }
 
-    private void OnCreatureFreed()
+    private void OnAlgaeScrubbed()
     {
-        creaturesFreed++;
+        algaeScrubbed++;
 
-        // If all creatures freed, end minigame
-        if (creaturesFreed == trappedCreatures.Count)
+        if (algaeScrubbed == algaeList.Count)
         {
             timer.SetTimerActive(false);
             EndMinigame();
@@ -90,7 +85,7 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
 
     protected override void OnDestroy()
     {
-        EventManager.instance.Unsubscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.AlgaeScrubbed, OnAlgaeScrubbed);
 
         if (instance == this)
         {

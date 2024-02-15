@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(BoxCollider2D))]
 [DisallowMultipleComponent]
-public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private RectTransform _rect = null;
     public RectTransform rect => _rect;
@@ -26,7 +26,6 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private bool isDraggable = true;
     private bool isBeingDragged = false;
     private bool isFocused = true; // TODO: SET FALSE
-
 
 
 

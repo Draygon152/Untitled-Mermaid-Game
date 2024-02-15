@@ -33,7 +33,7 @@ public class MainMenu : MenuBase
 
             // Load into main game scene
             StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync( (int)PersistentSceneManager.SceneIndices.GameScene,
-                                                                         LoadSceneMode.Single));
+                                                                           LoadSceneMode.Single));
         } );
 
         settingsButton.onClick.AddListener( () =>
