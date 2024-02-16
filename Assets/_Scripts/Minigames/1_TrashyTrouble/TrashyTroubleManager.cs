@@ -69,6 +69,7 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(1f, 0f, lerp); };
         Action onCompleteCallback = () =>
         {
+            EventManager.instance.Notify(EventManager.EventTypes.MinigameEnd);
             EventManager.instance.Unsubscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
             StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.TrashyTrouble) );
         };

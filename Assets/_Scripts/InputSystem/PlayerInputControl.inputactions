@@ -2,7 +2,7 @@
     "name": "PlayerInputControl",
     "maps": [
         {
-            "name": "playerMouseControl",
+            "name": "PlayerControls",
             "id": "94ea6fab-84d5-4458-9fa0-a34260753e1c",
             "actions": [
                 {
@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "204f9acd-e5b1-4c59-9d87-926121f52df6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -24,6 +33,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MouseAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "197d11ba-556a-45ea-a716-990576dc4478",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
