@@ -19,6 +19,7 @@ public class FishMovement : MonoBehaviour
     public Transform Hook;
     private Vector2 moveDirection;
     private Quaternion initialRotation;
+    private Vector2 initialPosition;
 
     void Start()
     {
@@ -38,14 +39,18 @@ public class FishMovement : MonoBehaviour
             newScale.x = -newScale.x;
             transform.localScale = newScale;
         }
-        initialRotation = transform.rotation;    
+        initialRotation = transform.rotation;
+        initialPosition = transform.position;
     }
 
     void Update()
     {
-        if (transform.position.x < -12 || transform.position.x > 12)
+        if (transform.position.x < -12 || transform.position.x > 12 || transform.position.y > 6)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            transform.position = initialPosition;
+            caught = false;
+            mainCollider.enabled = true;
         }
         if (!caught && !isDragging)
         {
@@ -160,10 +165,6 @@ public class FishMovement : MonoBehaviour
     void DetachFromHook()
     {
         transform.SetParent(null);
-        if (Hook != null)
-        {
-            Hook.gameObject.GetComponent<Hook>().RecastHook();
-        }
     }
     
     private void OnMouseDown()

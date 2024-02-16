@@ -11,6 +11,8 @@ public class TrashMovement : MonoBehaviour
     private bool isDragging = false;
     private Collider2D mainCollider;
     private Collider2D triggerCollider;
+    private Vector2 initialPosition;
+
 
     void Start()
     {
@@ -30,13 +32,17 @@ public class TrashMovement : MonoBehaviour
             newScale.x = -newScale.x;
             transform.localScale = newScale;
         }
+        initialPosition = transform.position;
     }
 
     void Update()
     {
-        if (transform.position.x < -12 || transform.position.x > 12)
+        if (transform.position.x < -12 || transform.position.x > 12 || transform.position.y > 6)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            transform.position = initialPosition;
+            caught = false;
+            mainCollider.enabled = true;
         }
         if (!caught && !isDragging)
         {
