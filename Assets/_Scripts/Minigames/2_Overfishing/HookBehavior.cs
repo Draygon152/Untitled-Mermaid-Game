@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class HookBehavior : MonoBehaviour
 {
-    public float descentSpeed = 5f;
+    [SerializeField] private float descentSpeed = 5f;
     public bool caughtFish = false;
+    private bool hitBottom = false;
 
     void Update()
     {
-        if (caughtFish)
+        if (caughtFish || hitBottom)
         {
             transform.Translate(Vector2.up * descentSpeed * Time.deltaTime);
         }
@@ -21,18 +22,17 @@ public class HookBehavior : MonoBehaviour
         {
             RemoveHook();
         }
+        if (transform.position.y < 0)
+        {
+            hitBottom = true;
+        }
     }
 
     public void RemoveHook()
     {
-        Destroy(gameObject);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bound"))
-        {
-            RemoveHook();
-        }
+        gameObject.SetActive(false);
+        caughtFish = false;
+        hitBottom = false;
+        GetComponentInChildren<BoxCollider2D>().enabled = true;
     }
 }

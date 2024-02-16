@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class FishSpawner : MonoBehaviour
 {
-    public GameObject fishPrefab; 
-    public float minSpawnTime = 3f;
-    public float maxSpawnTime = 7f;
+    [SerializeField] float minSpawnTime = 3f;
+    [SerializeField] float maxSpawnTime = 7f;
+    [SerializeField] GameObject fishPrefab;
+    [SerializeField] int poolSize = 5;
+    [SerializeField] GameObject parent;
+    private List<GameObject> fishPool = new List<GameObject>();
     private float nextSpawnTime;
 
     void Start()
     {
+        InitializePool();
         SetNextSpawnTime();
     }
 
@@ -23,9 +27,41 @@ public class FishSpawner : MonoBehaviour
         }
     }
 
+    void InitializePool()
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject fish = Instantiate(fishPrefab);
+            fish.SetActive(false);
+            fishPool.Add(fish);
+            fish.transform.SetParent(parent.transform);
+        }
+    }
+
+    GameObject GetFishFromPool()
+    {
+        foreach (GameObject fish in fishPool)
+        {
+            if (!fish.activeInHierarchy)
+            {
+                return fish;
+            }
+        }
+
+        GameObject newFish = Instantiate(fishPrefab);
+        newFish.SetActive(false);
+        fishPool.Add(newFish);
+        return newFish;
+    }
+
     void SpawnFish()
     {
-        Instantiate(fishPrefab, transform.position, Quaternion.identity);
+        float randomY = Random.Range(-Camera.main.orthographicSize, 0);
+        Vector2 pos = new Vector2(transform.position.x, randomY);
+
+        GameObject fish = GetFishFromPool();
+        fish.transform.position = pos;
+        fish.SetActive(true);
     }
 
     void SetNextSpawnTime()
