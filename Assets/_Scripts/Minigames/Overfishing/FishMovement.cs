@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class FishMovement : MonoBehaviour
 {
-    public float speed = 0.3f;
-    public float visibilityRange = 5f;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float visibilityRange = 5f;
+    [SerializeField] private float snapSpeed = 5f;
+    [SerializeField] private float rotSpeed = 1f;
+    [SerializeField] float fieldOfView = 45f; 
     private GameObject nearestHook;
-    private float checkRate = 1f;
+    private float checkRate = 0.3f;
     private float nextCheckTime = 0f;
-    public bool caught = false;
-    public Transform Hook;
-    public float snapSpeed = 5f;
     private bool isDragging = false;
     private Collider2D mainCollider;
     private Collider2D triggerCollider; 
+    public bool caught = false;
+    public Transform Hook;
+    private Vector2 moveDirection;
+    private Quaternion initialRotation;
 
     void Start()
     {
@@ -26,18 +30,23 @@ public class FishMovement : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Required colliders not found on fish GameObject.");
+            Debug.LogError("Required colliders not found on Fish GameObject.");
         }
-        if (transform.position.x > 10)
+        if (transform.position.x < -10)
         {
             Vector3 newScale = transform.localScale;
             newScale.x = -newScale.x;
             transform.localScale = newScale;
         }
+        initialRotation = transform.rotation;    
     }
 
     void Update()
     {
+        if (transform.position.x < -12 || transform.position.x > 12)
+        {
+            Destroy(gameObject);
+        }
         if (!caught && !isDragging)
         {
             if (Time.time >= nextCheckTime)
@@ -45,18 +54,19 @@ public class FishMovement : MonoBehaviour
                 nearestHook = FindNearestHook();
                 nextCheckTime = Time.time + checkRate;
             }
+        if (nearestHook != null)
+        {
+            Vector2 toHook = (nearestHook.transform.position - transform.position).normalized;
+            Vector2 fishForward = transform.localScale.x < 0 ? transform.right.normalized : -transform.right.normalized;
+            float angleToHook = Vector2.Angle(fishForward, toHook);
 
-            if (nearestHook != null)
+            if (angleToHook <= fieldOfView && Vector2.Distance(transform.position, nearestHook.transform.position) < visibilityRange)
             {
-                Vector2 toHook = (nearestHook.transform.position - transform.position).normalized;
-                Vector2 fishForward = transform.localScale.x > 0 ? transform.right.normalized : -transform.right.normalized;
-
-                if (Vector2.Dot(fishForward, toHook) > 0 && Vector2.Distance(transform.position, nearestHook.transform.position) < visibilityRange)
-                {
-                    MoveTowardsHook();
-                    return;
-                }
+                MoveTowardsHook();
+                return;
             }
+        }
+            transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, Time.deltaTime * rotSpeed);   
             MoveOffScreen();
         }
         else if (caught) 
@@ -86,14 +96,28 @@ public class FishMovement : MonoBehaviour
     void MoveTowardsHook()
     {
         float step = speed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, nearestHook.transform.position, step);
+        Vector3 hookPosition = nearestHook.transform.position;
+        moveDirection = (hookPosition - transform.position).normalized;
+
+        transform.position = Vector2.MoveTowards(transform.position, hookPosition, step);
+
+        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+        angle += transform.localScale.x < 0 ? 0 : 180; 
+
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+        Quaternion smoothRotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+
+        if (Quaternion.Angle(transform.rotation, targetRotation) < 100) 
+        {
+            transform.rotation = smoothRotation;
+        }
     }
 
     void MoveOffScreen()
     {
-        float direction = transform.localScale.x > 0 ? 1 : -1;
+        float direction = transform.localScale.x > 0 ? -1 : 1;
 
-        Vector2 moveDirection = new Vector2(speed * direction, 0);
+        moveDirection = new Vector2(speed * direction, 0);
         transform.position += new Vector3(moveDirection.x, moveDirection.y, 0) * Time.deltaTime;
     }
 
@@ -117,7 +141,6 @@ public class FishMovement : MonoBehaviour
                 }
             }
         }
-
         return closestHook;
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -137,7 +160,12 @@ public class FishMovement : MonoBehaviour
     void DetachFromHook()
     {
         transform.SetParent(null);
+        if (Hook != null)
+        {
+            Hook.gameObject.GetComponent<Hook>().RecastHook();
+        }
     }
+    
     private void OnMouseDown()
     {
         StartDragging();

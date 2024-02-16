@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HookBehavior : MonoBehaviour
 {
-    public float descentSpeed = 5f;
+    [SerializeField] private float descentSpeed = 5f;
     public bool caughtFish = false;
 
     void Update()

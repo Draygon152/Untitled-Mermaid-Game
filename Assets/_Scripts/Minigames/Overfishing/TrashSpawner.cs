@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrashSpawner : MonoBehaviour
-{
-    public GameObject trashPrefab;
-    public float minSpawnTime = 5f;
-    public float maxSpawnTime = 10f;
+{    
+    [SerializeField] private float minSpawnTime = 5f;
+    [SerializeField] private float maxSpawnTime = 10f;
+    [SerializeField] private GameObject[] trashObjs;
     private float nextSpawnTime;
 
     void Start()
@@ -27,11 +27,22 @@ public class TrashSpawner : MonoBehaviour
     {
         float randomY = Random.Range(-Camera.main.orthographicSize, Camera.main.orthographicSize);
         Vector2 pos = new Vector2(transform.position.x, randomY);
-        Instantiate(trashPrefab, pos, Quaternion.identity);
+        GameObject trash = GetRandomObj();
+        Instantiate(trash, pos, Quaternion.identity);
     }
 
     void SetNextSpawnTime()
     {
         nextSpawnTime = Time.time + Random.Range(minSpawnTime, maxSpawnTime);
+    }
+
+    private GameObject GetRandomObj()
+    {
+        if (trashObjs.Length > 0)
+        {
+            int index = Random.Range(0, trashObjs.Length); 
+            return trashObjs[index];
+        }
+        else return null;
     }
 }

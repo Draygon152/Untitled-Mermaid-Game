@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class FishSpawner : MonoBehaviour
 {
+    [SerializeField] float minSpawnTime = 3f;
+    [SerializeField] float maxSpawnTime = 7f;
     public GameObject fishPrefab; 
-    public float minSpawnTime = 3f;
-    public float maxSpawnTime = 7f;
     private float nextSpawnTime;
+
 
     void Start()
     {
@@ -25,7 +26,9 @@ public class FishSpawner : MonoBehaviour
 
     void SpawnFish()
     {
-        Instantiate(fishPrefab, transform.position, Quaternion.identity);
+        float randomY = Random.Range(-Camera.main.orthographicSize, 0);
+        Vector2 pos = new Vector2(transform.position.x, randomY);
+        Instantiate(fishPrefab, pos, Quaternion.identity);
     }
 
     void SetNextSpawnTime()

@@ -33,4 +33,10 @@ public class Hook : MonoBehaviour
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
+
+    public void RecastHook()
+    {
+        gameObject.GetComponentInParent<HookBehavior>().caughtFish = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
 }
