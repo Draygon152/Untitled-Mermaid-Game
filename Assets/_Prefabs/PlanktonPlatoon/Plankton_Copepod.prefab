@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2171010867443694167}
   - component: {fileID: 5272735943602052788}
   m_Layer: 0
-  m_Name: Planton
+  m_Name: Plankton_Copepod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 5672322231071385229}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.39, y: -0.61, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4134461736785577674}
@@ -52,8 +52,8 @@ MonoBehaviour:
   switchStatusCounterMinTime: 1
   switchStatusCounterMaxTime: 4
   floatingSpeed: 1
-  floatingMagnitude: 2
-  rotationSpeed: 90
+  floatingMagnitude: 20
+  rotationSpeed: 360
   AliveTime: 15
 --- !u!61 &2171010867443694167
 BoxCollider2D:

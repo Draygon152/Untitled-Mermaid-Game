@@ -33,6 +33,7 @@ public class TrappedCreature : MonoBehaviour
     private Coroutine FreeCreature()
     {
         creature.ToggleDrag(false);
+        EventManager.instance.Notify(EventManager.EventTypes.CreatureFreed);
 
         Action<float> tweenAction = lerp =>
         {
@@ -44,7 +45,6 @@ public class TrappedCreature : MonoBehaviour
                             () =>
                             {
                                 gameObject.SetActive(false);
-                                EventManager.instance.Notify(EventManager.EventTypes.CreatureFreed);
                             },
                             fadeDuration,
                             fadeStartDelay,

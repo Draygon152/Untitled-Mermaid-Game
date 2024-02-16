@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class plantonBehavior : MonoBehaviour, IEnemy
+public class PlanktonBehavior : MonoBehaviour, IEnemy
 {
     public bool hasDetectedByPlayer { get => Detected; set => Detected = value; }
     public GameObject currentGameObject { get => this.gameObject;}
     public Rigidbody2D currentRigidbody2D { get => this.rigidbody2D; }
 
     private bool Detected = false;
-    [SerializeField] private BoxCollider2D collider2D;
-    [SerializeField] private Rigidbody2D rigidbody2D;
+    [SerializeField] private BoxCollider2D collider2D = null;
+    [SerializeField] private Rigidbody2D rigidbody2D = null;
 
     [Header("Spawn Timing")]
     [SerializeField]
@@ -24,7 +20,7 @@ public class plantonBehavior : MonoBehaviour, IEnemy
     protected float switchStatusCounterMaxTime = 20f;
     private float switchStatusCounter = 0f;
 
-    [Header("Planton Props")]
+    [Header("Plankton Props")]
     public float floatingSpeed;
     public float floatingMagnitude = 1f;
 
@@ -35,8 +31,8 @@ public class plantonBehavior : MonoBehaviour, IEnemy
     Vector3 randomDirection;
 
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         collider2D = transform.GetComponent<BoxCollider2D>();
         if(!rigidbody2D){
@@ -49,32 +45,29 @@ public class plantonBehavior : MonoBehaviour, IEnemy
         Invoke("DeactivateSelf", AliveTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         //random rotation
         randomRotation = Random.Range(0, 360);
-        if(Detected){
+        if (Detected){
             switchStatusCounter = Random.Range(switchStatusCounterMinTime, switchStatusCounterMaxTime);
             return;
         } 
 
-        moveToRandomLocation();
-        handleRotationTowardTarget();
-
+        MoveToRandomLocation();
     }
 
-
-    public void handleRotationTowardTarget(){
+    private void HandleRotationTowardTarget()
+    {
         // Rotate the object towards the target direction
         float angleRadians = Mathf.Atan2(randomDirection.y, randomDirection.x);
         float angleDegrees = angleRadians * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, angleDegrees);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
     }
 
-
-    public void moveToRandomLocation(){
+    private void MoveToRandomLocation()
+    {
         switchStatusCounter -= Time.deltaTime;
         if(switchStatusCounter < 0f){
             MoveInRandomDirection();
@@ -82,14 +75,19 @@ public class plantonBehavior : MonoBehaviour, IEnemy
         }
     }
 
-    public void MoveInRandomDirection(){
+    private void MoveInRandomDirection()
+    {
         // Generate a random direction
         randomDirection = Random.insideUnitSphere.normalized;
-        randomDirection = new Vector2(randomDirection.x  * floatingMagnitude, randomDirection.y  * floatingMagnitude);
+        randomDirection = new Vector2(randomDirection.x * floatingMagnitude, randomDirection.y * floatingMagnitude);
+
+        HandleRotationTowardTarget();
+
         rigidbody2D.velocity = randomDirection * floatingSpeed;
     }
 
-    public void DeactivateSelf(){
+    private void DeactivateSelf()
+    {
         this.gameObject.SetActive(false);
     }
 
