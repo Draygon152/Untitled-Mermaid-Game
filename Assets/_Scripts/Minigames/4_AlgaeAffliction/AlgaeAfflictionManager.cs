@@ -49,7 +49,7 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
-            canvas.worldCamera = GameCameraManager.instance.gameCamera;
+            //canvas.worldCamera = GameCameraManager.instance.gameCamera;
 
             EventManager.instance.Subscribe(EventManager.EventTypes.AlgaeScrubbed, OnAlgaeScrubbed);
 
