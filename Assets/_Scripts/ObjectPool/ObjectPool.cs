@@ -112,12 +112,14 @@ public class ObjectPool : MonoBehaviour
             spawnObj.transform.position = position;
             spawnObj.transform.rotation = rotation;
             spawnObj.SetActive(true);
+            PoolDictionary[target_tag].Enqueue(spawnObj);
+            return spawnObj;
         }
         
 
         //Instantiate a new prefab if not enough size
         else{
-            
+            PoolDictionary[target_tag].Enqueue(spawnObj);
             foreach (Pool pool in Pools)
             {
                 if(pool.new_tag == target_tag){
@@ -128,13 +130,15 @@ public class ObjectPool : MonoBehaviour
                     newSpawnObj.SetActive(true);
                     newSpawnObj.transform.SetParent(objectTagFolder);
                     PoolDictionary[target_tag].Enqueue(newSpawnObj);
+
+                    return newSpawnObj;
                 }
             }
         }
 
-        PoolDictionary[target_tag].Enqueue(spawnObj);
         
-        return spawnObj;
+        
+        return null;
     }
 }
 

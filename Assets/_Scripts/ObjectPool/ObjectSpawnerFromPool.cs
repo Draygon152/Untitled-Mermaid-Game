@@ -15,10 +15,10 @@ public abstract class ObjectSpawnerFromPool : MonoBehaviour
     [SerializeField]
     protected string spawnObjectTag;
     [SerializeField]
-    [Tooltip("Random Max Spawn Time")]
+    [Tooltip("Random Min Spawn Time")]
     protected float spawnerCounterMinTime = 5f;
 
-    [Tooltip("Random Min Spawn Time")]
+    [Tooltip("Random Max Spawn Time")]
     [SerializeField]
     protected float spawnerCounterMaxTime = 20f;
 

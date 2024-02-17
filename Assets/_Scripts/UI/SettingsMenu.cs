@@ -21,6 +21,7 @@ public class SettingsMenu : MenuBase
     private bool audioSubMenuOpen = false;
 
 
+
     public override void Init()
     {
         base.Init();
@@ -47,8 +48,9 @@ public class SettingsMenu : MenuBase
 
             FadeOut(mainCG, fadeDuration, fadeStartDelay, EaseType.linear, () =>
             {
+                EventManager.instance.Notify(EventManager.EventTypes.SettingsMenuClosed);
                 StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.SettingsMenuScene) );
-            });
+            } );
         });
     }
 

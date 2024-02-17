@@ -29,6 +29,7 @@ public class Timer : MonoBehaviour
     public void Init(Action argOnComplete = null)
     {
         timeLeft = timeAmount;
+        UpdateDisplayedTime();
         SetTimerActive(false);
         timerEndAction = argOnComplete;
     }
@@ -55,12 +56,14 @@ public class Timer : MonoBehaviour
     public void SetTimerActive(bool argValue)
     {
         timerText.color = argValue ? timerActiveColor : timerNotActiveColor;
+
         isRunning = argValue;
     }
 
     public void ResetTimer()
     {
         timeLeft = timeAmount;
+        UpdateDisplayedTime();
         SetTimerActive(false);
     }
 

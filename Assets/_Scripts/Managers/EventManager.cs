@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class EventManager : LLPersistentSingleton<EventManager>
 {
     public enum EventTypes
     {
+        SettingsMenuClosed,
         CreatureFreed,
+        PlanktonCollected,
+        AlgaeScrubbed,
         MinigameEnd
     }
 

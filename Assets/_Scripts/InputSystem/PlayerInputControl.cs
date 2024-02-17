@@ -24,7 +24,7 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
     ""name"": ""PlayerInputControl"",
     ""maps"": [
         {
-            ""name"": ""playerMouseControl"",
+            ""name"": ""PlayerControls"",
             ""id"": ""94ea6fab-84d5-4458-9fa0-a34260753e1c"",
             ""actions"": [
                 {
@@ -35,6 +35,15 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Esc"",
+                    ""type"": ""Button"",
+                    ""id"": ""204f9acd-e5b1-4c59-9d87-926121f52df6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,15 +57,27 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
                     ""action"": ""MouseAxis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""197d11ba-556a-45ea-a716-990576dc4478"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // playerMouseControl
-        m_playerMouseControl = asset.FindActionMap("playerMouseControl", throwIfNotFound: true);
-        m_playerMouseControl_MouseAxis = m_playerMouseControl.FindAction("MouseAxis", throwIfNotFound: true);
+        // PlayerControls
+        m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
+        m_PlayerControls_MouseAxis = m_PlayerControls.FindAction("MouseAxis", throwIfNotFound: true);
+        m_PlayerControls_Esc = m_PlayerControls.FindAction("Esc", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -115,53 +136,62 @@ public partial class @PlayerInputControl: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // playerMouseControl
-    private readonly InputActionMap m_playerMouseControl;
-    private List<IPlayerMouseControlActions> m_PlayerMouseControlActionsCallbackInterfaces = new List<IPlayerMouseControlActions>();
-    private readonly InputAction m_playerMouseControl_MouseAxis;
-    public struct PlayerMouseControlActions
+    // PlayerControls
+    private readonly InputActionMap m_PlayerControls;
+    private List<IPlayerControlsActions> m_PlayerControlsActionsCallbackInterfaces = new List<IPlayerControlsActions>();
+    private readonly InputAction m_PlayerControls_MouseAxis;
+    private readonly InputAction m_PlayerControls_Esc;
+    public struct PlayerControlsActions
     {
         private @PlayerInputControl m_Wrapper;
-        public PlayerMouseControlActions(@PlayerInputControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MouseAxis => m_Wrapper.m_playerMouseControl_MouseAxis;
-        public InputActionMap Get() { return m_Wrapper.m_playerMouseControl; }
+        public PlayerControlsActions(@PlayerInputControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseAxis => m_Wrapper.m_PlayerControls_MouseAxis;
+        public InputAction @Esc => m_Wrapper.m_PlayerControls_Esc;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerMouseControlActions set) { return set.Get(); }
-        public void AddCallbacks(IPlayerMouseControlActions instance)
+        public static implicit operator InputActionMap(PlayerControlsActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerControlsActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerMouseControlActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerMouseControlActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Add(instance);
             @MouseAxis.started += instance.OnMouseAxis;
             @MouseAxis.performed += instance.OnMouseAxis;
             @MouseAxis.canceled += instance.OnMouseAxis;
+            @Esc.started += instance.OnEsc;
+            @Esc.performed += instance.OnEsc;
+            @Esc.canceled += instance.OnEsc;
         }
 
-        private void UnregisterCallbacks(IPlayerMouseControlActions instance)
+        private void UnregisterCallbacks(IPlayerControlsActions instance)
         {
             @MouseAxis.started -= instance.OnMouseAxis;
             @MouseAxis.performed -= instance.OnMouseAxis;
             @MouseAxis.canceled -= instance.OnMouseAxis;
+            @Esc.started -= instance.OnEsc;
+            @Esc.performed -= instance.OnEsc;
+            @Esc.canceled -= instance.OnEsc;
         }
 
-        public void RemoveCallbacks(IPlayerMouseControlActions instance)
+        public void RemoveCallbacks(IPlayerControlsActions instance)
         {
-            if (m_Wrapper.m_PlayerMouseControlActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IPlayerMouseControlActions instance)
+        public void SetCallbacks(IPlayerControlsActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerMouseControlActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerControlsActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerMouseControlActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerControlsActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public PlayerMouseControlActions @playerMouseControl => new PlayerMouseControlActions(this);
-    public interface IPlayerMouseControlActions
+    public PlayerControlsActions @PlayerControls => new PlayerControlsActions(this);
+    public interface IPlayerControlsActions
     {
         void OnMouseAxis(InputAction.CallbackContext context);
+        void OnEsc(InputAction.CallbackContext context);
     }
 }

@@ -8,6 +8,8 @@ using UnityEngine;
 ///     SHOULD NOT BE INSTANTIATED ON ITS OWN, PRIMARILY A BASE CLASS
 /// </summary>
 /// <typeparam name="T"></typeparam>
+
+[DisallowMultipleComponent]
 public class SceneSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T instance { get; protected set; }
