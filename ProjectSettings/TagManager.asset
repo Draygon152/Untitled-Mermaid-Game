@@ -17,8 +17,8 @@ TagManager:
   - Water
   - UI
   - PostProcessing
-  - Trash Layer
-  - Animal Layer
+  - Background
+  - 
   - 
   - 
   - 
@@ -46,9 +46,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Trash on top
-    uniqueID: 428345337
-    locked: 0
   - name: Fish layer
     uniqueID: 3427795537
+    locked: 0
+  - name: Trash on top
+    uniqueID: 428345337
     locked: 0
