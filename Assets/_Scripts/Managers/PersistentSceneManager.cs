@@ -17,7 +17,8 @@ public class PersistentSceneManager : LLPersistentSingleton<PersistentSceneManag
         TrashyTrouble,
         FishyFreedom,
         PlanktonPlatoon,
-        AlgaeAffliction
+        AlgaeAffliction,
+        EndScene
     }
 
 

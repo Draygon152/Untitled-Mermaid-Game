@@ -38,7 +38,7 @@ public class FishyFreedomManager : SceneSingleton<FishyFreedomManager>
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
-            //_canvas.worldCamera = GameCameraManager.instance.gameCamera;
+            _canvas.worldCamera = GameCameraManager.instance.gameCamera;
 
             canvasGroup.interactable = true;
             timer.SetTimerActive(true);

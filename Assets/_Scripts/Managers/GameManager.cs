@@ -7,9 +7,16 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : PersistentSingleton<GameManager>
 {
+    private PersistentSceneManager.SceneIndices currentMinigame = PersistentSceneManager.SceneIndices.TrashyTrouble;
+    private bool reachedGameEnd = true;
+
+
+
     private void Start()
     {
-        StartMinigame(PersistentSceneManager.SceneIndices.TrashyTrouble);
+        ContinueToNextMinigame();
+
+        EventManager.instance.Subscribe(EventManager.EventTypes.MinigameEnd, ContinueToNextMinigame);
     }
 
     public void StartMinigame(PersistentSceneManager.SceneIndices sceneIndex)
@@ -32,11 +39,36 @@ public class GameManager : PersistentSingleton<GameManager>
                 AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.coralCleaningMusic);
                 break;
 
+            case PersistentSceneManager.SceneIndices.EndScene:
+                reachedGameEnd = true;
+                break;
+
             default:
                 Debug.LogError($"[GameManager Error]: Invalid scene index '{(int)sceneIndex}' provided");
                 break;
         }
 
-        StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync((int)sceneIndex, LoadSceneMode.Additive));
+        if (!reachedGameEnd)
+        {
+            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync((int)sceneIndex, LoadSceneMode.Additive));
+        }
+
+        else
+        {
+            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync((int)sceneIndex, LoadSceneMode.Single));
+        }
+    }
+
+    private void ContinueToNextMinigame()
+    {
+        currentMinigame++;
+        StartMinigame(currentMinigame);
+    }
+
+    protected override void OnDestroy()
+    {
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameEnd, ContinueToNextMinigame);
+
+        base.OnDestroy();
     }
 }

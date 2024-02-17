@@ -746,6 +746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerInputManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1283233947612066093, guid: 30f2e78bbdd76aa4eb36e902cbe21d46, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2729117330159915234, guid: 30f2e78bbdd76aa4eb36e902cbe21d46, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -863,7 +867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &2144351531
 AudioListener:
   m_ObjectHideFlags: 0

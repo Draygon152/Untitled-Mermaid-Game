@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Minigame Scenes/4_AlgaeAffliction.unity
     guid: 6b484f356d9e8204fbec1326e03457da
+  - enabled: 1
+    path: Assets/_Scenes/EndScene.unity
+    guid: 85366e35f90ced2488b51e05234740b3
   m_configObjects: {}
