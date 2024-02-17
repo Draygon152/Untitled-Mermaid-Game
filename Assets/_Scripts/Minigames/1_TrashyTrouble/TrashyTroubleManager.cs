@@ -57,7 +57,7 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
 
         yield return new WaitForSeconds(timeToWait);
 
-        StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync((int)PersistentSceneManager.SceneIndices.TrashyTrouble,
+        StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.TrashyTrouble,
                                                                          () =>
                                                                          {
                                                                              GameManager.instance.StartMinigame(PersistentSceneManager.SceneIndices.TrashyTrouble);

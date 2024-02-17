@@ -289,7 +289,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 1371374422}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 0.3
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -316,10 +316,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 331549539}
   canvasGroup: {fileID: 331549537}
+  timeToWait: 5
   fadeStartDelay: 0
   fadeDuration: 0.4
   timer: {fileID: 1246007654}
-  timeToWait: 5
   numAlgaeToSpawn: 3
   algaeList:
   - {fileID: 436859243}
@@ -474,7 +474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed58f87c61e1304aa1a452546d648c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrubbableRect: {fileID: 436859240}
   scrubbableRenderer: {fileID: 436859242}
   scrubSpeedModifier: 1
 --- !u!1 &589592515
@@ -624,7 +623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed58f87c61e1304aa1a452546d648c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrubbableRect: {fileID: 589592516}
   scrubbableRenderer: {fileID: 589592518}
   scrubSpeedModifier: 1
 --- !u!1 &1125466297
@@ -774,7 +772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed58f87c61e1304aa1a452546d648c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrubbableRect: {fileID: 1125466298}
   scrubbableRenderer: {fileID: 1125466300}
   scrubSpeedModifier: 1
 --- !u!1 &1180711194
@@ -924,7 +921,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed58f87c61e1304aa1a452546d648c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrubbableRect: {fileID: 1180711195}
   scrubbableRenderer: {fileID: 1180711197}
   scrubSpeedModifier: 1
 --- !u!1001 &1246007652
@@ -1345,7 +1341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed58f87c61e1304aa1a452546d648c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrubbableRect: {fileID: 2072116440}
   scrubbableRenderer: {fileID: 2072116442}
   scrubSpeedModifier: 1
 --- !u!1660057539 &9223372036854775807
