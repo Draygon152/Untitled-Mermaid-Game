@@ -590,7 +590,7 @@ MonoBehaviour:
   timeToWait: 5
   fadeStartDelay: 0
   fadeDuration: 0.4
-  _timer: {fileID: 688332233}
+  timer: {fileID: 688332233}
 --- !u!1 &1606230296
 GameObject:
   m_ObjectHideFlags: 0
