@@ -1,44 +1,56 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FishSpawner : MonoBehaviour
 {
-    [SerializeField] float minSpawnTime = 3f;
-    [SerializeField] float maxSpawnTime = 7f;
-    [SerializeField] GameObject fishPrefab;
-    [SerializeField] int poolSize = 5;
-    [SerializeField] GameObject parent;
+    [SerializeField] private GameObject fishPrefab = null;
+    [SerializeField] private int poolSize = 8;
+    [SerializeField] private GameObject parent = null;
+    [SerializeField] private bool facingLeft = true;
+    [Space]
+    [SerializeField] private float minSpawnTime = 3f;
+    [SerializeField] private float maxSpawnTime = 7f;
+    
     private List<GameObject> fishPool = new List<GameObject>();
-    private float nextSpawnTime;
+    private float nextSpawnTime = 0f;
 
-    void Start()
+
+
+    private void Start()
     {
         InitializePool();
         SetNextSpawnTime();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        if (Time.time >= nextSpawnTime)
+        if (Time.fixedTime >= nextSpawnTime)
         {
             SpawnFish();
             SetNextSpawnTime();
         }
     }
 
-    void InitializePool()
+    private void InitializePool()
     {
         for (int i = 0; i < poolSize; i++)
         {
             GameObject fish = Instantiate(fishPrefab);
+
+            if (!facingLeft)
+            {
+                Vector3 newScale = fish.transform.localScale;
+                newScale.x = -newScale.x;
+                fish.transform.localScale = newScale;
+            } 
+
             fish.SetActive(false);
             fishPool.Add(fish);
             fish.transform.SetParent(parent.transform);
         }
     }
 
-    GameObject GetFishFromPool()
+    private GameObject GetFishFromPool()
     {
         foreach (GameObject fish in fishPool)
         {
@@ -51,12 +63,14 @@ public class FishSpawner : MonoBehaviour
         GameObject newFish = Instantiate(fishPrefab);
         newFish.SetActive(false);
         fishPool.Add(newFish);
+
         return newFish;
     }
 
-    void SpawnFish()
+    private void SpawnFish()
     {
-        float randomY = Random.Range(-Camera.main.orthographicSize, 0);
+        Camera gameCamera = FishyFreedomManager.instance.canvas.worldCamera;
+        float randomY = Random.Range(-gameCamera.orthographicSize, 0);
         Vector2 pos = new Vector2(transform.position.x, randomY);
 
         GameObject fish = GetFishFromPool();
@@ -64,8 +78,8 @@ public class FishSpawner : MonoBehaviour
         fish.SetActive(true);
     }
 
-    void SetNextSpawnTime()
+    private void SetNextSpawnTime()
     {
-        nextSpawnTime = Time.time + Random.Range(minSpawnTime, maxSpawnTime);
+        nextSpawnTime = Time.fixedTime + Random.Range(minSpawnTime, maxSpawnTime);
     }
 }

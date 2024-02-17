@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/Minigame Scenes/1_TrashyTrouble.unity
     guid: 76e2502d9e3f76f419dd6f16bb07c9ce
   - enabled: 1
-    path: Assets/_Scenes/Minigame Scenes/2_Overfishing.unity
+    path: Assets/_Scenes/Minigame Scenes/2_FishyFreedom.unity
     guid: 2a414263f09791842ae3a488188fc32f
   - enabled: 1
     path: Assets/_Scenes/Minigame Scenes/3_PlanktonPlatoon.unity
