@@ -19,19 +19,14 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
     [SerializeField] private Timer timer = null;
     [Space]
     [SerializeField] private int numAlgaeToSpawn = 5;
-    [SerializeField] private List<Scrubbable> algaeList = null;
+    [SerializeField] private List<Coral> coralList = null;
 
-    private int algaeScrubbed = 0;
+    private int coralCleaned = 0;
 
 
 
     private void Start()
     {
-        foreach (Scrubbable algae in algaeList)
-        {
-            algae.gameObject.SetActive(false);
-        }
-
         StartMinigame();
     }
 
@@ -42,16 +37,23 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
 
     private Coroutine StartMinigame()
     {
-        SelectAlgae();
         canvasGroup.alpha = 0f;
-        timer.Init( () => { StartCoroutine(RestartMinigame()); } );
+        timer.Init( () =>
+        {
+            foreach (Coral coral in coralList)
+            {
+                coral.KillCoral();
+            }
+
+            StartCoroutine(RestartMinigame());
+        } );
 
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
             //canvas.worldCamera = GameCameraManager.instance.gameCamera;
 
-            EventManager.instance.Subscribe(EventManager.EventTypes.AlgaeScrubbed, OnAlgaeScrubbed);
+            EventManager.instance.Subscribe(EventManager.EventTypes.CoralCleaned, OnCoralCleaned);
 
             canvasGroup.interactable = true;
             timer.SetTimerActive(true);
@@ -79,37 +81,19 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
         Action onCompleteCallback = () =>
         {
             EventManager.instance.Notify(EventManager.EventTypes.MinigameEnd);
-            EventManager.instance.Unsubscribe(EventManager.EventTypes.AlgaeScrubbed, OnAlgaeScrubbed);
+            EventManager.instance.Unsubscribe(EventManager.EventTypes.CoralCleaned, OnCoralCleaned);
             StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.AlgaeAffliction) );
         };
 
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
     }
 
-    private void SelectAlgae()
+    private void OnCoralCleaned()
     {
-        if (numAlgaeToSpawn > algaeList.Count)
+        coralCleaned++;
+
+        if (coralCleaned == coralList.Count)
         {
-            Debug.LogError($"[AlgaeAfflictionManager Error]: Selected number of algae to spawn '{numAlgaeToSpawn}' exceeds the number of algae in the list '{algaeList.Count}'");
-            return;
-        }
-
-        System.Random rand = new System.Random();
-        List<Scrubbable> activeAlgae = algaeList.OrderBy(index => rand.Next()).ToList();
-
-        for (int i = 0; i < numAlgaeToSpawn; i++)
-        {
-            activeAlgae[i].gameObject.SetActive(true);
-        }
-    }
-
-    private void OnAlgaeScrubbed()
-    {
-        algaeScrubbed++;
-
-        if (algaeScrubbed == numAlgaeToSpawn)
-        {
-            Debug.Log("ENDING");
             timer.SetTimerActive(false);
             EndMinigame();
         }
@@ -117,7 +101,7 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
 
     protected override void OnDestroy()
     {
-        EventManager.instance.Unsubscribe(EventManager.EventTypes.AlgaeScrubbed, OnAlgaeScrubbed);
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.CoralCleaned, OnCoralCleaned);
 
         if (instance == this)
         {
