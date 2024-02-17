@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,7 +23,14 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     private bool scrubbedOut = false;
     private bool isBeingReset = false;
 
+    private Action onScrubbed = null;
 
+
+
+    public void Init(Action onScrubbedCallback)
+    {
+        onScrubbed += onScrubbedCallback;
+    }
 
     private void ScrubObject(float amount)
     {
@@ -34,7 +42,7 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                 scrubbableRenderer.color = new Color(1, 1, 1, 0);
                 isScrubbable = false;
                 scrubbedOut = true;
-                EventManager.instance.Notify(EventManager.EventTypes.AlgaeScrubbed);
+                onScrubbed.InvokeNullCheck();
                 gameObject.SetActive(false);
             }
 
