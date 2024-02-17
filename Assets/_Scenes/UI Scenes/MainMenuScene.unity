@@ -385,6 +385,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 91909154508c54a0f9cea449f90239e8, type: 3}
     - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
+      propertyPath: overFishingMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 5153d4eccf7184e74af0fa1b36b77c22, type: 3}
+    - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
       propertyPath: trashyTroubleMusic
       value: 
       objectReference: {fileID: 8300000, guid: 095fe1493e3614371a134b51c80bda88, type: 3}

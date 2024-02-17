@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 281125294}
   - component: {fileID: 281125293}
   - component: {fileID: 281125292}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestCreature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 129, y: 0}
   m_SizeDelta: {x: 120, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!82 &281125292
@@ -349,7 +349,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 120, y: 128}
+    oldSize: {x: 389, y: 358}
     newSize: {x: 120, y: 128}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -399,7 +399,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c8646c08368ceca40b1802a1d6b7a628, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82cb2d0d16e194e938ca21cf6d1de609, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -507,7 +507,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c8646c08368ceca40b1802a1d6b7a628, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93e6d1bb99ac54939a58156f7e55e511, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -571,7 +571,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 120, y: 128}
+    oldSize: {x: 594, y: 383}
     newSize: {x: 120, y: 128}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -841,7 +841,7 @@ GameObject:
   - component: {fileID: 881895142}
   - component: {fileID: 881895144}
   - component: {fileID: 881895143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +903,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 286.5, y: 506.5}
+    oldSize: {x: 322, y: 272}
     newSize: {x: 573, y: 1013}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -953,7 +953,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 16d4dcebbe5ae6947bcbee26182386bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1bf8e3d5122f44fb09f08ce8fd6bb679, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1339,7 +1339,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 120, y: 128}
+    oldSize: {x: 261.33334, y: 186}
     newSize: {x: 120, y: 128}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1389,7 +1389,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c8646c08368ceca40b1802a1d6b7a628, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dbefa82f947784ff5b9a47b6a1de404e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1672,7 +1672,7 @@ GameObject:
   - component: {fileID: 1700891568}
   - component: {fileID: 1700891570}
   - component: {fileID: 1700891569}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1689,7 +1689,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 211128104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1734,7 +1734,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 286.5, y: 506.5}
+    oldSize: {x: 462, y: 342}
     newSize: {x: 573, y: 1013}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1784,7 +1784,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 16d4dcebbe5ae6947bcbee26182386bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4647ad8b54d546af8671c5f93b6ff8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1935,7 +1935,7 @@ GameObject:
   - component: {fileID: 2146729738}
   - component: {fileID: 2146729739}
   - component: {fileID: 2146729740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2002,7 +2002,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 16d4dcebbe5ae6947bcbee26182386bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 631e8bb49ec4440788c99ad66b149c5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2049,7 +2049,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 286.5, y: 506.5}
+    oldSize: {x: 408, y: 346}
     newSize: {x: 573, y: 1013}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
