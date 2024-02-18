@@ -15,16 +15,16 @@ EditorBuildSettings:
     path: Assets/_Scenes/GameScene.unity
     guid: ca7a91f66bdba3947b6aa57a52cb2c6f
   - enabled: 1
-    path: Assets/_Scenes/Minigame Scenes/1_TrashyTrouble.unity
+    path: Assets/_Scenes/MinigameScenes/1_TrashyTrouble.unity
     guid: 76e2502d9e3f76f419dd6f16bb07c9ce
   - enabled: 1
-    path: Assets/_Scenes/Minigame Scenes/2_FishyFreedom.unity
+    path: Assets/_Scenes/MinigameScenes/2_FishyFreedom.unity
     guid: 2a414263f09791842ae3a488188fc32f
   - enabled: 1
-    path: Assets/_Scenes/Minigame Scenes/3_PlanktonPlatoon.unity
+    path: Assets/_Scenes/MinigameScenes/3_PlanktonPlatoon.unity
     guid: fe4f1bfeaf38fe646804d61573855de4
   - enabled: 1
-    path: Assets/_Scenes/Minigame Scenes/4_AlgaeAffliction.unity
+    path: Assets/_Scenes/MinigameScenes/4_AlgaeAffliction.unity
     guid: 6b484f356d9e8204fbec1326e03457da
   - enabled: 1
     path: Assets/_Scenes/EndScene.unity

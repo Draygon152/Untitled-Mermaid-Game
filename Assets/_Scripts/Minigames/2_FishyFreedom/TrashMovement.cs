@@ -93,6 +93,11 @@ public class TrashMovement : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        if (_caught)
+        {
+            EventManager.instance.Notify(EventManager.EventTypes.TrashPulledUp);
+        }
+
         gameObject.SetActive(false);
         transform.position = initialPosition;
         _caught = false;

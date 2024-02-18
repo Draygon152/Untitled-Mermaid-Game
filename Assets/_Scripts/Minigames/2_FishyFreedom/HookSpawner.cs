@@ -16,6 +16,8 @@ public class HookSpawner : SceneSingleton<HookSpawner>
     private float lastHookX = 0f;
     private bool validSpawn = false;
 
+    private bool minigameOver = false;
+
 
 
     protected override void Awake()
@@ -27,16 +29,22 @@ public class HookSpawner : SceneSingleton<HookSpawner>
 
     private void Start()
     {
+        EventManager.instance.Subscribe(EventManager.EventTypes.MinigameFail, OnMinigameEndScreen);
+        EventManager.instance.Subscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
+
         InitializePool();
         nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 
     private void FixedUpdate()
     {
-        nextSpawnTime -= Time.fixedDeltaTime;
-        if (nextSpawnTime <= 0f)
+        if (!minigameOver)
         {
-            SpawnHook();
+            nextSpawnTime -= Time.fixedDeltaTime;
+            if (nextSpawnTime <= 0f)
+            {
+                SpawnHook();
+            }
         }
     }
 
@@ -91,5 +99,23 @@ public class HookSpawner : SceneSingleton<HookSpawner>
         hooksPool.Add(newHook);
 
         return newHook;
+    }
+
+    private void OnMinigameEndScreen()
+    {
+        minigameOver = true;
+
+        foreach (GameObject hook in hooksPool)
+        {
+            Destroy(hook);
+        }
+    }
+
+    protected override void OnDestroy()
+    {
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, OnMinigameEndScreen);
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
+
+        base.OnDestroy();
     }
 }

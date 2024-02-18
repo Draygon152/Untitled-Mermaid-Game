@@ -10,10 +10,13 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
 {
     [SerializeField] private Canvas canvas = null;
     [SerializeField] private CanvasGroup canvasGroup = null;
-    [SerializeField] private float timeToWait = 5f; // Amount of time to wait after minigame fail before restarting
+    [SerializeField] private FailScreen failScreen = null;
+    [SerializeField] private SuccessScreen successScreen = null;
     [Space]
     [SerializeField] private float fadeStartDelay = 0f;
     [SerializeField] private float fadeDuration = 0.4f;
+    [Space]
+    [SerializeField] private ObjectCudeSpawner spawner = null;
     [Space]
     [SerializeField] private Timer timer = null;
     [SerializeField] private TMP_Text collectedDisplay = null;
@@ -26,10 +29,25 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
     [SerializeField] private int targetPlanktonToCollect = 30;
     private int planktonCollected = 0;
 
+    private Action onMinigameFail = null;
+
 
 
     private void Start()
     {
+        onMinigameFail += () =>
+        {
+            timer.SetTimerActive(false);
+            ShowFailScreen();
+        };
+        EventManager.instance.Subscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
+
+        failScreen.Init(RestartMinigame);
+        successScreen.Init(RestartMinigame, () => { EndMinigame(); });
+
+        failScreen.gameObject.SetActive(false);
+        successScreen.gameObject.SetActive(false);
+
         StartMinigame();
     }
 
@@ -45,26 +63,26 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
     private Coroutine StartMinigame()
     {
         canvasGroup.alpha = 0f;
-        collectedDisplay.text = $"PLANKTON COLLECTED: {planktonCollected}";
+        collectedDisplay.text = $"PLANKTON COLLECTED: {planktonCollected}/{targetPlanktonToCollect}";
 
         timer.Init( () =>
         {
             if (planktonCollected < targetPlanktonToCollect)
             {
                 dragNetDetector.viewDistance = 0f;
-                StartCoroutine(RestartMinigame());
+                ShowFailScreen();
             }
 
             else
             {
-                EndMinigame();
+                ShowSuccessScreen();
             }
         } );
 
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
-            //canvas.worldCamera = GameCameraManager.instance.gameCamera;
+            canvas.worldCamera = GameCameraManager.instance.gameCamera;
 
             EventManager.instance.Subscribe(EventManager.EventTypes.PlanktonCollected, OnPlanktonCollected);
 
@@ -75,11 +93,12 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
     }
 
-    private IEnumerator RestartMinigame()
+    private void RestartMinigame()
     {
         canvasGroup.interactable = false;
 
-        yield return new WaitForSeconds(timeToWait);
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.PlanktonCollected, OnPlanktonCollected);
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
 
         StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.PlanktonPlatoon,
                                                                          () =>
@@ -95,7 +114,47 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
         {
             EventManager.instance.Notify(EventManager.EventTypes.MinigameEnd);
             EventManager.instance.Unsubscribe(EventManager.EventTypes.PlanktonCollected, OnPlanktonCollected);
+            EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
+
+            GameManager.instance.IncrementScore(planktonCollected);
+
             StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.PlanktonPlatoon) );
+        };
+
+        return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
+    }
+
+    private Coroutine ShowFailScreen()
+    {
+        failScreen.gameObject.SetActive(true);
+        dragNet.gameObject.SetActive(false);
+        spawner.gameObject.SetActive(false);
+
+        Action<float> tweenAction = lerp =>
+        {
+            failScreen.canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp);
+        };
+        Action onCompleteCallback = () =>
+        {
+            failScreen.canvasGroup.interactable = true;
+        };
+
+        return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
+    }
+
+    private Coroutine ShowSuccessScreen()
+    {
+        successScreen.gameObject.SetActive(true);
+        dragNet.gameObject.SetActive(false);
+        spawner.gameObject.SetActive(false);
+
+        Action<float> tweenAction = lerp =>
+        {
+            successScreen.canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp);
+        };
+        Action onCompleteCallback = () =>
+        {
+            successScreen.canvasGroup.interactable = true;
         };
 
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
@@ -121,13 +180,14 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
     private void OnPlanktonCollected()
     {
         planktonCollected++;
-        collectedDisplay.text = $"PLANKTON COLLECTED: {planktonCollected}";
+        collectedDisplay.text = $"PLANKTON COLLECTED: {planktonCollected}/{targetPlanktonToCollect}";
     }
 
     protected override void OnDestroy()
     {
-        base.OnDestroy();
-
         EventManager.instance.Unsubscribe(EventManager.EventTypes.PlanktonCollected, OnPlanktonCollected);
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
+
+        base.OnDestroy();
     }
 }

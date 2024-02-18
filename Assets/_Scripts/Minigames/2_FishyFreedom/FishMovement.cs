@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FishMovement : MonoBehaviour
@@ -151,7 +152,6 @@ public class FishMovement : MonoBehaviour
     {
         _caught = true;
         _hook = hookTransform;
-        mainCollider.enabled = false;
     }
 
     private void OnMouseDown()
@@ -167,6 +167,11 @@ public class FishMovement : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        if (_caught)
+        {
+            EventManager.instance.Notify(EventManager.EventTypes.MinigameFail);
+        }
+
         gameObject.SetActive(false);
         transform.position = initialPosition;
         _caught = false;

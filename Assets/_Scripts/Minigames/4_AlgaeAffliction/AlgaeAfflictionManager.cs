@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -10,8 +8,10 @@ using UnityEngine;
 public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
 {
     [SerializeField] private Canvas canvas = null;
+    [SerializeField] private Canvas bgCanvas = null;
     [SerializeField] private CanvasGroup canvasGroup = null;
-    [SerializeField] private float timeToWait = 5f; // Amount of time to wait after minigame fail before restarting
+    [SerializeField] private FailScreen failScreen = null;
+    [SerializeField] private SuccessScreen successScreen = null;
     [Space]
     [SerializeField] private float fadeStartDelay = 0f;
     [SerializeField] private float fadeDuration = 0.4f;
@@ -22,11 +22,25 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
     [SerializeField] private List<Coral> coralList = null;
 
     private int coralCleaned = 0;
+    private Action onMinigameFail = null;
 
 
 
     private void Start()
     {
+        onMinigameFail += () =>
+        {
+            timer.SetTimerActive(false);
+            ShowFailScreen();
+        };
+        EventManager.instance.Subscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
+
+        failScreen.Init(RestartMinigame);
+        successScreen.Init(RestartMinigame, () => { EndMinigame(); });
+
+        failScreen.gameObject.SetActive(false);
+        successScreen.gameObject.SetActive(false);
+
         StartMinigame();
     }
 
@@ -45,13 +59,14 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
                 coral.KillCoral();
             }
 
-            StartCoroutine(RestartMinigame());
+            ShowFailScreen();
         } );
 
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
             canvas.worldCamera = GameCameraManager.instance.gameCamera;
+            bgCanvas.worldCamera = GameCameraManager.instance.gameCamera;
 
             EventManager.instance.Subscribe(EventManager.EventTypes.CoralCleaned, OnCoralCleaned);
 
@@ -62,11 +77,11 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
     }
 
-    private IEnumerator RestartMinigame()
+    private void RestartMinigame()
     {
         canvasGroup.interactable = false;
 
-        yield return new WaitForSeconds(timeToWait);
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
 
         StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.AlgaeAffliction,
                                                                          () =>
@@ -82,7 +97,43 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
         {
             EventManager.instance.Notify(EventManager.EventTypes.MinigameEnd);
             EventManager.instance.Unsubscribe(EventManager.EventTypes.CoralCleaned, OnCoralCleaned);
+            EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
+
+            GameManager.instance.IncrementScore(coralCleaned);
+
             StartCoroutine(PersistentSceneManager.instance.UnloadSceneAsync( (int)PersistentSceneManager.SceneIndices.AlgaeAffliction) );
+        };
+
+        return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
+    }
+
+    private Coroutine ShowFailScreen()
+    {
+        failScreen.gameObject.SetActive(true);
+
+        Action<float> tweenAction = lerp =>
+        {
+            failScreen.canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp);
+        };
+        Action onCompleteCallback = () =>
+        {
+            failScreen.canvasGroup.interactable = true;
+        };
+
+        return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
+    }
+
+    private Coroutine ShowSuccessScreen()
+    {
+        successScreen.gameObject.SetActive(true);
+
+        Action<float> tweenAction = lerp =>
+        {
+            successScreen.canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp);
+        };
+        Action onCompleteCallback = () =>
+        {
+            successScreen.canvasGroup.interactable = true;
         };
 
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);
@@ -95,13 +146,14 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
         if (coralCleaned == coralList.Count)
         {
             timer.SetTimerActive(false);
-            EndMinigame();
+            ShowSuccessScreen();
         }
     }
 
     protected override void OnDestroy()
     {
         EventManager.instance.Unsubscribe(EventManager.EventTypes.CoralCleaned, OnCoralCleaned);
+        EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
 
         if (instance == this)
         {

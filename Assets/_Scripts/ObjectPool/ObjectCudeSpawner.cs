@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectCudeSpawner : ObjectSpawnerFromPool
@@ -25,4 +23,8 @@ public class ObjectCudeSpawner : ObjectSpawnerFromPool
         Gizmos.DrawWireCube(transform.position, spawnAreaSize);
     }
 
+    private void OnDisable()
+    {
+        gameObject.SetActive(false);
+    }
 }

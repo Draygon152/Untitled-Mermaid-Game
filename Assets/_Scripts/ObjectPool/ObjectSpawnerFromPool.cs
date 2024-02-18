@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
@@ -24,8 +22,10 @@ public abstract class ObjectSpawnerFromPool : MonoBehaviour
 
     [Tooltip("how many object will be spawn at once")]
     private float spawnerCounter = 0f;
-    // Start is called before the first frame update
-    void Start()
+
+
+
+    private void Start()
     {
         if (!objectPool)
         {
@@ -33,11 +33,11 @@ public abstract class ObjectSpawnerFromPool : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         spawnerCounter -= Time.deltaTime;
-        if(spawnerCounter < 0f){
+        if (spawnerCounter < 0f)
+        {
             SpawnObject();
             spawnerCounter = Random.Range(spawnerCounterMinTime, spawnerCounterMaxTime);
         }

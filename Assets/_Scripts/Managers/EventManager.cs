@@ -7,8 +7,11 @@ public class EventManager : LLPersistentSingleton<EventManager>
     {
         SettingsMenuClosed,
         CreatureFreed,
+        TrashPulledUp,
         PlanktonCollected,
         CoralCleaned,
+        MinigameFail,
+        MinigameSuccess,
         MinigameEnd
     }
 

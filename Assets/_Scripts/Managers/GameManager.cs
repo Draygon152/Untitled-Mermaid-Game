@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : PersistentSingleton<GameManager>
 {
     private PersistentSceneManager.SceneIndices currentMinigame = PersistentSceneManager.SceneIndices.TrashyTrouble;
+
+    private int score = 0;
     private bool reachedGameEnd = false;
 
 
@@ -62,6 +64,12 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         currentMinigame++;
         StartMinigame(currentMinigame);
+    }
+
+    public void IncrementScore(int scoreIncrease)
+    {
+        score += scoreIncrease;
+        Debug.Log($"New Score: {score}");
     }
 
     protected override void OnDestroy()
