@@ -13,7 +13,7 @@ public class Coral : MonoBehaviour
     [SerializeField] private Sprite coralHappy = null;
     [SerializeField] private Sprite coralDead = null;
     [Space]
-    [SerializeField] private AudioSource source = null;
+    private AudioSource source = null;
     [SerializeField] private AudioClip happyClip = null;
     [SerializeField] private AudioClip sadClip = null;
 
@@ -21,6 +21,7 @@ public class Coral : MonoBehaviour
 
     private void Start()
     {
+        source = AudioManager.instance._sourceSFX;
         coralSpriteRenderer.sprite = coralNeutral;
 
         foreach (Scrubbable algae in algaeList)
