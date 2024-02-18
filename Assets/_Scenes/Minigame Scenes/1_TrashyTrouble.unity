@@ -1534,7 +1534,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1225742206}
   movementDir: {x: 1, y: -0.5}
   enforceDirection: 1
-  dragSpeedModifier: 1
+  dragSpeedModifier: 0.5
 --- !u!1 &1502961071
 GameObject:
   m_ObjectHideFlags: 0

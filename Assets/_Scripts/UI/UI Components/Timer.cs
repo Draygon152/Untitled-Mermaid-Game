@@ -19,7 +19,8 @@ public class Timer : MonoBehaviour
 
     [Tooltip("Boolean value to control the format of the displayed time (MM:SS or S only)")]
     [SerializeField] private bool useMinutes = false;
-    private bool isRunning = false;
+    private bool _isRunning = false;
+    public bool isRunning => _isRunning;
 
     // Action to be invoked upon timer reaching 0
     private Action timerEndAction = null;
@@ -36,7 +37,7 @@ public class Timer : MonoBehaviour
 
     public void Tick()
     {
-        if (isRunning)
+        if (_isRunning)
         {
             if (timeLeft > 0f)
             {
@@ -57,7 +58,7 @@ public class Timer : MonoBehaviour
     {
         timerText.color = argValue ? timerActiveColor : timerNotActiveColor;
 
-        isRunning = argValue;
+        _isRunning = argValue;
     }
 
     public void ResetTimer()

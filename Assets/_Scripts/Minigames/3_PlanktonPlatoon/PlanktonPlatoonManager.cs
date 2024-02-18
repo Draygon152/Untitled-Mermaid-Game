@@ -35,8 +35,11 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
 
     private void FixedUpdate()
     {
-        timer.Tick();
-        MoveDragNet();
+        if (timer.isRunning)
+        {
+            timer.Tick();
+            MoveDragNet();
+        }
     }
 
     private Coroutine StartMinigame()
