@@ -52,10 +52,10 @@ MonoBehaviour:
   childSpriteObject: {fileID: 8857654830378933033}
   switchStatusCounterMinTime: 1
   switchStatusCounterMaxTime: 4
-  floatingSpeed: 30
-  floatingMagnitude: 30
+  floatingSpeed: 60
+  floatingMagnitude: 60
   rotationSpeed: 360
-  AliveTime: 45
+  aliveTime: 20
 --- !u!61 &2171010867443694167
 BoxCollider2D:
   m_ObjectHideFlags: 0
