@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class HookSpawner : SceneSingleton<HookSpawner>
 {
-    [SerializeField] private GameObject hookPrefab = null;
+    [SerializeField] private List<GameObject> hookPrefabs = null;
     [SerializeField] private int poolSize = 6;
     [Space]
     [SerializeField] private float minSpawnInterval = 4f;
     [SerializeField] private float maxSpawnInterval = 8f;
+    [Range(60f, 150f)]
     [SerializeField] private float minHookSpawnDistance = 60f;
 
     private List<GameObject> hooksPool = null;
@@ -43,7 +44,7 @@ public class HookSpawner : SceneSingleton<HookSpawner>
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(hookPrefab);
+            GameObject obj = Instantiate(hookPrefabs[Random.Range(0, hookPrefabs.Count - 1)]);
             obj.SetActive(false);
             hooksPool.Add(obj);
             obj.transform.SetParent(transform);
@@ -85,7 +86,7 @@ public class HookSpawner : SceneSingleton<HookSpawner>
             }
         }
 
-        GameObject newHook = Instantiate(hookPrefab);
+        GameObject newHook = Instantiate(hookPrefabs[Random.Range(0, hookPrefabs.Count - 1)]);
         newHook.SetActive(false);
         hooksPool.Add(newHook);
 

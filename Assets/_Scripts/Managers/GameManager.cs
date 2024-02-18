@@ -8,15 +8,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : PersistentSingleton<GameManager>
 {
     private PersistentSceneManager.SceneIndices currentMinigame = PersistentSceneManager.SceneIndices.TrashyTrouble;
-    private bool reachedGameEnd = true;
+    private bool reachedGameEnd = false;
 
 
 
     private void Start()
     {
-        ContinueToNextMinigame();
-
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameEnd, ContinueToNextMinigame);
+        StartMinigame(currentMinigame);
     }
 
     public void StartMinigame(PersistentSceneManager.SceneIndices sceneIndex)

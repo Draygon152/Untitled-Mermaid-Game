@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  snapSpeed: 40
+  snapSpeed: 300
   mainCollider: {fileID: 6746217344232217493}
 --- !u!212 &4489767435901829721
 SpriteRenderer:

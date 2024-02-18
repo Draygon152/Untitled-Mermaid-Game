@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
-  visibilityRange: 50
-  snapSpeed: 40
-  rotSpeed: 15
+  visibilityRange: 60
+  snapSpeed: 300
+  rotSpeed: 20
   fieldOfView: 45
   mainCollider: {fileID: 3388430410193949265}
 --- !u!212 &339840118982268173
