@@ -12,6 +12,10 @@ public class Coral : MonoBehaviour
     [SerializeField] private Sprite coralNeutral = null;
     [SerializeField] private Sprite coralHappy = null;
     [SerializeField] private Sprite coralDead = null;
+    [Space]
+    [SerializeField] private AudioSource source = null;
+    [SerializeField] private AudioClip happyClip = null;
+    [SerializeField] private AudioClip sadClip = null;
 
 
 
@@ -33,12 +37,14 @@ public class Coral : MonoBehaviour
         {
             EventManager.instance.Notify(EventManager.EventTypes.CoralCleaned);
             coralSpriteRenderer.sprite = coralHappy;
+            AudioManager.instance.PlaySFX(source, happyClip);
         }
     }
 
     public void KillCoral()
     {
         coralSpriteRenderer.sprite = coralDead;
+        AudioManager.instance.PlaySFX(source, sadClip);
         foreach (Scrubbable algae in algaeList)
         {
             algae.gameObject.SetActive(false);

@@ -216,8 +216,8 @@ MonoBehaviour:
   poolSize: 8
   parent: {fileID: 1606230296}
   flipHorizontal: 1
-  minSpawnTime: 7
-  maxSpawnTime: 10
+  minSpawnTime: 10
+  maxSpawnTime: 15
 --- !u!224 &296818618
 RectTransform:
   m_ObjectHideFlags: 0
@@ -606,8 +606,8 @@ MonoBehaviour:
   poolSize: 8
   parent: {fileID: 1606230296}
   flipHorizontal: 0
-  minSpawnTime: 7
-  maxSpawnTime: 10
+  minSpawnTime: 10
+  maxSpawnTime: 15
 --- !u!224 &448612637
 RectTransform:
   m_ObjectHideFlags: 0
