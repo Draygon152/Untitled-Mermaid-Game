@@ -24,7 +24,7 @@ public class FishSpawner : MonoBehaviour
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
 
         InitializePool();
-        SetNextSpawnTime();
+        //SetNextSpawnTime();
     }
 
     private void FixedUpdate()

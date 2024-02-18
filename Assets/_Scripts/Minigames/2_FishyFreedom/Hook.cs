@@ -19,30 +19,26 @@ public class Hook : MonoBehaviour
         {
             FishMovement fish = collision.gameObject.GetComponent<FishMovement>();
 
-            if (fish.caught)
+            if (!fish.caught)
             {
-                return;
+                fish.OnCaught(transform);
+
+                _rod.CatchFish();
+                boxCollider.enabled = false;
             }
-
-            fish.OnCaught(transform);
-
-            _rod.CatchFish();
-            boxCollider.enabled = false;
         } 
 
         else if (collision.gameObject.CompareTag("Trash"))
         {
             TrashMovement trash = collision.gameObject.GetComponent<TrashMovement>();
 
-            if (trash.caught)
+            if (!trash.caught)
             {
-                return;
+                trash.OnCaught(transform);
+
+                _rod.CatchFish();
+                boxCollider.enabled = false;
             }
-
-            trash.OnCaught(transform);
-
-            _rod.CatchFish();
-            boxCollider.enabled = false;
         }
 
         else if (collision.gameObject.CompareTag("Wall"))

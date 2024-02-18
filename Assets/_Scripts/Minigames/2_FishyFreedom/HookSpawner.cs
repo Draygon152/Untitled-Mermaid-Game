@@ -33,7 +33,7 @@ public class HookSpawner : SceneSingleton<HookSpawner>
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
 
         InitializePool();
-        nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
+        //nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 
     private void FixedUpdate()

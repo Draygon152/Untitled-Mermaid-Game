@@ -156,8 +156,8 @@ MonoBehaviour:
   poolSize: 8
   parent: {fileID: 1613439290}
   facingLeft: 1
-  minSpawnTime: 2
-  maxSpawnTime: 5
+  minSpawnTime: 1
+  maxSpawnTime: 4
 --- !u!224 &240327850
 RectTransform:
   m_ObjectHideFlags: 0
@@ -687,8 +687,8 @@ MonoBehaviour:
   - {fileID: 8661799412549760468, guid: 1e3f20171d1fa664ba6932a87772db26, type: 3}
   - {fileID: 8661799412549760468, guid: 707923b950471e5499f4cc0881846885, type: 3}
   poolSize: 8
-  minSpawnInterval: 3
-  maxSpawnInterval: 5
+  minSpawnInterval: 2
+  maxSpawnInterval: 3
   minHookSpawnDistance: 150
 --- !u!224 &558489635
 RectTransform:
@@ -1761,8 +1761,8 @@ MonoBehaviour:
   poolSize: 8
   parent: {fileID: 1613439290}
   facingLeft: 0
-  minSpawnTime: 2
-  maxSpawnTime: 5
+  minSpawnTime: 1
+  maxSpawnTime: 4
 --- !u!1 &2144351530
 GameObject:
   m_ObjectHideFlags: 0

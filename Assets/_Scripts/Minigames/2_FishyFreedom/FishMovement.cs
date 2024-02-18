@@ -25,11 +25,17 @@ public class FishMovement : MonoBehaviour
     private Vector2 moveDirection;
     private Vector2 initialPosition;
     private Quaternion initialRotation;
+
+    private int defaultLayer = -1;
+    private int caughtLayer = -1;
     
 
 
     private void Start()
     {
+        defaultLayer = LayerMask.NameToLayer("Default");
+        caughtLayer = LayerMask.NameToLayer("CaughtFish");
+
         initialRotation = transform.rotation;
         initialPosition = transform.position;
     }
@@ -146,12 +152,16 @@ public class FishMovement : MonoBehaviour
     {
         isDragging = true;
         _caught = false;
+
+        gameObject.layer = defaultLayer;
     }
 
     public void OnCaught(Transform hookTransform)
     {
         _caught = true;
         _hook = hookTransform;
+
+        gameObject.layer = caughtLayer;
     }
 
     private void OnMouseDown()

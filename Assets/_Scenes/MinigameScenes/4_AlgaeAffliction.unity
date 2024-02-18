@@ -1127,7 +1127,7 @@ MonoBehaviour:
   coralHappy: {fileID: 21300000, guid: 462e3548c4370410286171f48ccec73d, type: 3}
   coralDead: {fileID: 21300000, guid: 9b4ce24f1da54402ca67f21ec2c7d7f3, type: 3}
   happyClip: {fileID: 8300000, guid: 3f62e19b5c66345b28e04bbf094307c8, type: 3}
-  sadClip: {fileID: 8300000, guid: 6c570d7e1eb69433bb9f965f47f50e65, type: 3}
+  sadClip: {fileID: 8300000, guid: 77d5e998a13b14efd93d43c646240e9d, type: 3}
 --- !u!1 &900102118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3366,7 +3366,7 @@ MonoBehaviour:
   coralHappy: {fileID: 21300000, guid: 29443e2cee69d4ae28963413886f89ca, type: 3}
   coralDead: {fileID: 21300000, guid: e80b377f4af364312b0b5aa1349fd7c3, type: 3}
   happyClip: {fileID: 8300000, guid: 05eedd17b69824869b3b0adce6441e15, type: 3}
-  sadClip: {fileID: 8300000, guid: bb3103d6f90a74e498278f4c37cc929d, type: 3}
+  sadClip: {fileID: 8300000, guid: 77d5e998a13b14efd93d43c646240e9d, type: 3}
 --- !u!1 &1952205075
 GameObject:
   m_ObjectHideFlags: 0
