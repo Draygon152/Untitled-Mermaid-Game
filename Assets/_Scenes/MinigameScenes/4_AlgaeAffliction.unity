@@ -531,6 +531,7 @@ MonoBehaviour:
   coralList:
   - {fileID: 1858112124}
   - {fileID: 246756010}
+  - {fileID: 804064451}
 --- !u!114 &331549541
 MonoBehaviour:
   m_ObjectHideFlags: 0
