@@ -34,6 +34,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [Header("SFX Audio Clips")]
     [SerializeField] public AudioClip button1;
     [SerializeField] public AudioClip button2;
+    [SerializeField] public AudioClip buttonDialogue; 
 
     [Space]
     [Header("Default Fade Values")]
