@@ -450,6 +450,123 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8813452be277cc84b8a76a47a2cb33cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1098639493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1098639496}
+  - component: {fileID: 1098639495}
+  - component: {fileID: 1098639494}
+  m_Layer: 0
+  m_Name: PlanktonSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1098639494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098639493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e26ab1472503b44b30530d897e45ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPool: {fileID: 1893998034}
+  target_tag: Plankton_1
+  size: 5
+  prefab: {fileID: 5672322231071385229, guid: 7318441add5214343b29e0e0aa3124d3, type: 3}
+--- !u!114 &1098639495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098639493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4751fe3d3c885ec4190977e213240ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPool: {fileID: 1893998034}
+  spawnObjectTag: Plankton_1
+  spawnerCounterMinTime: 1
+  spawnerCounterMaxTime: 1
+  spawnAreaSize: {x: 5, y: 10, z: 0}
+--- !u!4 &1098639496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098639493}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.34, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1893998035}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1893998033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1893998035}
+  - component: {fileID: 1893998034}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1893998034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893998033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfae9f3283b95f4d9f8f497c885cba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aboutObjectPool: "Object pooling to Instantiate the object before the game start
+    for better performance \nusage:\n1. add the prefab and tag(for dictionary) to
+    the Pool in editor.\n2. decide how many perfabs will be spawned to the pool.\n3.
+    ObjectPool.Instance.SpawnFromPool(string target_tag, Vector3 position, Quaternion
+    rotation).\n4. CreateNewObjectToPool(string tag, int size, GameObject prefab)\n"
+  Pools: []
+--- !u!4 &1893998035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893998033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1098639496}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1917781402
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,3 +896,4 @@ SceneRoots:
   - {fileID: 471622874}
   - {fileID: 647838800}
   - {fileID: 278584143}
+  - {fileID: 1098639496}
