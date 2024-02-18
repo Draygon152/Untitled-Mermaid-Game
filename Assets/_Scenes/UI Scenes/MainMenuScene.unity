@@ -829,6 +829,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: ae38a10f6b69e4be3bc6b254f1156d88, type: 3}
     - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
+      propertyPath: endMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: c8fe79ba83ad04f98b9e32c81ed3276a, type: 3}
+    - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
+      propertyPath: menuMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: bea2f1f8dea924808b6f1d7e258aacb6, type: 3}
+    - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
+      propertyPath: storyMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: bea2f1f8dea924808b6f1d7e258aacb6, type: 3}
+    - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
+      propertyPath: planktonMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: cce0c285dbbc74f62ac76a3cbe47df81, type: 3}
+    - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
       propertyPath: buttonDialogue
       value: 
       objectReference: {fileID: 8300000, guid: e554d508693644524a3fce6b9642cb46, type: 3}
