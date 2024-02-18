@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 [DisallowMultipleComponent]
 public class Coral : MonoBehaviour
 {

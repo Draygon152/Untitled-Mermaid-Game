@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrubbableRenderer: {fileID: 8326770714275131128}
-  scrubSpeedModifier: 0.2
+  scrubSpeedModifier: 0.3
 --- !u!212 &8326770714275131128
 SpriteRenderer:
   m_ObjectHideFlags: 0
