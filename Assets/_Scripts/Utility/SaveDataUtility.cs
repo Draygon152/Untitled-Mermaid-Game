@@ -14,25 +14,41 @@ public static class SaveDataUtility
     public static void SaveInt(string key, int value)
     {
         PlayerPrefs.SetInt(key, value);
-        MarkDataSaved();
+
+        if (!HasSaveData())
+        {
+            MarkDataSaved();
+        }
     }
 
     public static void SaveFloat(string key, float value)
     {
         PlayerPrefs.SetFloat(key, value);
-        MarkDataSaved();
+
+        if (!HasSaveData())
+        {
+            MarkDataSaved();
+        }
     }
 
     public static void SaveString(string key, string value)
     {
         PlayerPrefs.SetString(key, value);
-        MarkDataSaved();
+
+        if (!HasSaveData())
+        {
+            MarkDataSaved();
+        }
     }
 
     public static void SaveBool(string key, bool value)
     {
         PlayerPrefs.SetInt(key, value ? 1 : 0);
-        MarkDataSaved();
+
+        if (!HasSaveData())
+        {
+            MarkDataSaved();
+        }
     }
 
     // Saves generic data to PlayerPrefs in json format
@@ -40,7 +56,11 @@ public static class SaveDataUtility
     {
         string jsonDataString = JsonUtility.ToJson(value);
         SaveString(key, jsonDataString);
-        MarkDataSaved();
+
+        if (!HasSaveData())
+        {
+            MarkDataSaved();
+        }
     }
 #endregion
 

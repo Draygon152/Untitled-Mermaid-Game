@@ -10,7 +10,13 @@ using UnityEngine.Audio;
 ///
 
 public class AudioManager : PersistentSingleton<AudioManager>
-{    
+{
+    [Header("Mixer References")]
+    [SerializeField] private AudioMixer master = null;
+    private const string MASTER_VOL = "masterVol";
+    private const string MUSIC_VOL = "musicVol";
+    private const string SFX_VOL = "sfxVol";
+
     [Header("AudioSource")]
     [SerializeField] public AudioSource _source;
     [SerializeField] public AudioSource _sourceMusic;
@@ -34,6 +40,12 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] float fadeTime = 1f;
 
 
+
+
+    private void Start()
+    {
+        LoadAudioSettings();
+    }
 
     public void PlaySFX(AudioSource _source, AudioClip audioClip)
     {
@@ -71,5 +83,27 @@ public class AudioManager : PersistentSingleton<AudioManager>
     public void FadeMusic(AudioSource _source, AudioClip audioClip)
     {
         
+    }
+
+    private void LoadAudioSettings()
+    {
+        LoadMasterVolume();
+        LoadSFXVolume();
+        LoadMusicVolume();
+    }
+
+    public void LoadMasterVolume()
+    {
+        master.SetFloat(MASTER_VOL, Mathf.Log(SaveDataUtility.LoadFloat(SaveDataUtility.MASTER_VOLUME)) * 20);
+    }
+
+    public void LoadSFXVolume()
+    {
+        master.SetFloat(SFX_VOL, Mathf.Log(SaveDataUtility.LoadFloat(SaveDataUtility.SFX_VOLUME)) * 20);
+    }
+
+    public void LoadMusicVolume()
+    {
+        master.SetFloat(MUSIC_VOL, Mathf.Log(SaveDataUtility.LoadFloat(SaveDataUtility.MUSIC_VOLUME)) * 20);
     }
 }
