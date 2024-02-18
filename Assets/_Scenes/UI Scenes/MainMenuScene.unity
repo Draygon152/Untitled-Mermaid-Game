@@ -413,12 +413,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421177164}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 161, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12, y: 161, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1457512364}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &430377710
 PrefabInstance:
@@ -824,6 +824,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
+      propertyPath: button1
+      value: 
+      objectReference: {fileID: 8300000, guid: ae38a10f6b69e4be3bc6b254f1156d88, type: 3}
+    - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
+      propertyPath: buttonDialogue
+      value: 
+      objectReference: {fileID: 8300000, guid: e554d508693644524a3fce6b9642cb46, type: 3}
     - target: {fileID: 8165661631208646918, guid: f90aa9857e94923448c646a9403ef49d, type: 3}
       propertyPath: overFishingMusic
       value: 
@@ -1380,6 +1388,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7953382172899310462, guid: 08d239318f9d7c94ba8dd223d098cf89, type: 3}
       insertIndex: 1
       addedObject: {fileID: 430377711}
+    - targetCorrespondingSourceObject: {fileID: 7953382172899310462, guid: 08d239318f9d7c94ba8dd223d098cf89, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 421177166}
     - targetCorrespondingSourceObject: {fileID: 2569494481702121392, guid: 08d239318f9d7c94ba8dd223d098cf89, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1808885724}
@@ -1398,4 +1409,3 @@ SceneRoots:
   - {fileID: 7633973137994412706}
   - {fileID: 354002366}
   - {fileID: 1043483233805823281}
-  - {fileID: 421177166}
