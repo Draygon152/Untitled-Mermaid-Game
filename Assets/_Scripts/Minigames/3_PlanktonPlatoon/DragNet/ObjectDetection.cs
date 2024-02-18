@@ -30,7 +30,7 @@ public class ObjectDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LineOfSight();
+        // LineOfSight();
     }
 
     void LineOfSight(){
