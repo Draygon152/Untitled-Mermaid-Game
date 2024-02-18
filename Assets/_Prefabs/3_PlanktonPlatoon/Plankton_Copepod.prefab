@@ -49,13 +49,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider2D: {fileID: 2171010867443694167}
   rigidbody2D: {fileID: 5272735943602052788}
-  childSpriteObject: {fileID: 0}
+  childSpriteObject: {fileID: 8857654830378933033}
   switchStatusCounterMinTime: 1
   switchStatusCounterMaxTime: 4
-  floatingSpeed: 1
-  floatingMagnitude: 20
+  floatingSpeed: 30
+  floatingMagnitude: 30
   rotationSpeed: 360
-  AliveTime: 15
+  AliveTime: 45
 --- !u!61 &2171010867443694167
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -198,8 +198,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -867171759
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d53ac1e27d6b84070a73db076120c049, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

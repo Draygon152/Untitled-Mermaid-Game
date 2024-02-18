@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlanktonBehavior : MonoBehaviour, IEnemy
 {
-    public bool hasDetectedByPlayer { get => Detected; set => Detected = value; }
+    public bool hasDetectedByPlayer { get => detected; set => detected = value; }
     public GameObject currentGameObject { get => this.gameObject;}
     public Rigidbody2D currentRigidbody2D { get => this.rigidbody2D; }
+    private bool detected = false;
 
-    private bool Detected = false;
     [SerializeField] private BoxCollider2D collider2D = null;
     [SerializeField] private Rigidbody2D rigidbody2D = null;
     [SerializeField] private GameObject childSpriteObject = null;
@@ -22,31 +22,33 @@ public class PlanktonBehavior : MonoBehaviour, IEnemy
     private float switchStatusCounter = 0f;
 
     [Header("Plankton Props")]
-    public float floatingSpeed;
-    public float floatingMagnitude = 1f;
+    [SerializeField] private float floatingSpeed = 1f;
+    [SerializeField] private float floatingMagnitude = 1f;
 
-    public float rotationSpeed;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float aliveTime = 10;
 
-    public float AliveTime = 10;
-    float randomRotation;
-    Vector3 randomDirection;
+    private float randomRotation;
+    private Vector3 randomDirection;
 
 
 
     private void Start()
     {
         collider2D = transform.GetComponent<BoxCollider2D>();
-        if(!rigidbody2D){
+        if (!rigidbody2D)
+        {
             rigidbody2D = transform.GetComponent<Rigidbody2D>();
         }
         //random rotation
         randomRotation = Random.Range(0, 360);
         childSpriteObject.transform.rotation = Quaternion.Euler(0f, 0f, randomRotation);
 
-        Invoke("DeactivateSelf", AliveTime);
+        Invoke("DeactivateSelf", aliveTime);
     }
 
-    private void Update(){
+    private void Update()
+    {
         transform.Translate(Vector2.left * floatingSpeed * Time.deltaTime);
     }
 
@@ -60,8 +62,6 @@ public class PlanktonBehavior : MonoBehaviour, IEnemy
         // } 
 
         // MoveToRandomLocation();
-
-        
     }
 
     private void HandleRotationTowardTarget()
@@ -76,7 +76,7 @@ public class PlanktonBehavior : MonoBehaviour, IEnemy
     private void MoveToRandomLocation()
     {
         switchStatusCounter -= Time.deltaTime;
-        if(switchStatusCounter < 0f){
+        if (switchStatusCounter < 0f){
             MoveInRandomDirection();
             switchStatusCounter = Random.Range(switchStatusCounterMinTime, switchStatusCounterMaxTime);
         }
@@ -101,7 +101,7 @@ public class PlanktonBehavior : MonoBehaviour, IEnemy
     public void OnDrawGizmos()
     {
         //got detected
-        if(Detected){
+        if (detected){
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(collider2D.bounds.center, collider2D.bounds.size);
         }
