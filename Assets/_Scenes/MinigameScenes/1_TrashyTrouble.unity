@@ -178,6 +178,7 @@ MonoBehaviour:
   _trapSR: {fileID: 1981873767}
   fadeStartDelay: 0
   fadeDuration: 1
+  fishHappy: {fileID: 8300000, guid: 8dad9078f1bab480e9b1f5bcd7d2dfbf, type: 3}
 --- !u!1 &170599964
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +520,7 @@ MonoBehaviour:
   _trapSR: {fileID: 205687892}
   fadeStartDelay: 0
   fadeDuration: 1
+  fishHappy: {fileID: 8300000, guid: 8dad9078f1bab480e9b1f5bcd7d2dfbf, type: 3}
 --- !u!1 &226865545
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +819,7 @@ MonoBehaviour:
   _trapSR: {fileID: 246588040}
   fadeStartDelay: 0
   fadeDuration: 1
+  fishHappy: {fileID: 8300000, guid: 8dad9078f1bab480e9b1f5bcd7d2dfbf, type: 3}
 --- !u!1 &345289134
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +875,7 @@ MonoBehaviour:
   _trapSR: {fileID: 1758012029}
   fadeStartDelay: 0
   fadeDuration: 1
+  fishHappy: {fileID: 8300000, guid: 8dad9078f1bab480e9b1f5bcd7d2dfbf, type: 3}
 --- !u!1 &546544275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,6 +1103,7 @@ MonoBehaviour:
   movementDir: {x: 1, y: -1.5}
   enforceDirection: 1
   dragSpeedModifier: 2
+  onGrab: {fileID: 8300000, guid: db898af51df074cfebf7ebd8fb910bf0, type: 3}
 --- !u!1 &800213396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,6 +1256,7 @@ MonoBehaviour:
   movementDir: {x: -0.5, y: 1}
   enforceDirection: 1
   dragSpeedModifier: 2
+  onGrab: {fileID: 8300000, guid: db898af51df074cfebf7ebd8fb910bf0, type: 3}
 --- !u!1001 &807094480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1442,6 +1448,7 @@ MonoBehaviour:
   _trapSR: {fileID: 1125049661}
   fadeStartDelay: 0
   fadeDuration: 1
+  fishHappy: {fileID: 8300000, guid: 8dad9078f1bab480e9b1f5bcd7d2dfbf, type: 3}
 --- !u!1 &849335050
 GameObject:
   m_ObjectHideFlags: 0
@@ -1639,14 +1646,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8813452be277cc84b8a76a47a2cb33cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 0}
   TitleText: {fileID: 849335052}
   GuideText: {fileID: 0}
   GuideImage: {fileID: 0}
-  canvasGroup: {fileID: 0}
+  startButton: {fileID: 0}
   newTitleText: 
   newGuideText: 
   newGuideImage: {fileID: 0}
-  startButton: {fileID: 0}
 --- !u!1 &874869703
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,6 +2014,7 @@ MonoBehaviour:
   _trapSR: {fileID: 1502961073}
   fadeStartDelay: 0
   fadeDuration: 1
+  fishHappy: {fileID: 8300000, guid: 8dad9078f1bab480e9b1f5bcd7d2dfbf, type: 3}
 --- !u!224 &1072937423 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5952899755661221452, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
@@ -2406,6 +2414,7 @@ MonoBehaviour:
   movementDir: {x: 1, y: -0.5}
   enforceDirection: 1
   dragSpeedModifier: 2
+  onGrab: {fileID: 8300000, guid: db898af51df074cfebf7ebd8fb910bf0, type: 3}
 --- !u!1 &1227732652
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,6 +2759,7 @@ MonoBehaviour:
   movementDir: {x: 1, y: -0.4}
   enforceDirection: 1
   dragSpeedModifier: 2
+  onGrab: {fileID: 8300000, guid: db898af51df074cfebf7ebd8fb910bf0, type: 3}
 --- !u!114 &1640862787 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2948868623301054608, guid: 315bf1db2242a0347bfcc3f2f6deb249, type: 3}
@@ -3390,6 +3400,7 @@ MonoBehaviour:
   movementDir: {x: 0, y: 1}
   enforceDirection: 1
   dragSpeedModifier: 2
+  onGrab: {fileID: 8300000, guid: db898af51df074cfebf7ebd8fb910bf0, type: 3}
 --- !u!1 &1832540765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3542,6 +3553,7 @@ MonoBehaviour:
   movementDir: {x: -1, y: 0.3}
   enforceDirection: 1
   dragSpeedModifier: 2
+  onGrab: {fileID: 8300000, guid: db898af51df074cfebf7ebd8fb910bf0, type: 3}
 --- !u!114 &1845311068 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5693209978864321718, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}

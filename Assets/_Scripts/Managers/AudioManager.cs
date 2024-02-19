@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 /// <summary>
 ///     Handles Music & SFX
-///     Centralized clips 
+///     Centralized UI clips 
 /// </summary>
 ///
 
@@ -25,7 +25,8 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [Header("Music Audio Clips")]
     
     [SerializeField] public AudioClip menuMusic;
-    [SerializeField] public AudioClip endMusic; 
+    [SerializeField] public AudioClip endMusic;
+
     // Loops
     [SerializeField] public AudioClip planktonMusic;
     [SerializeField] public AudioClip trashyTroubleMusic;
@@ -35,13 +36,13 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [Header("SFX Audio Clips")]
     [SerializeField] public AudioClip button1;
     [SerializeField] public AudioClip button2;
-    [SerializeField] public AudioClip buttonDialogue; 
+    [SerializeField] public AudioClip buttonMiniGame; 
+    [SerializeField] public AudioClip buttonDialogue;
+    [SerializeField] public AudioClip buttonHover; 
 
     [Space]
     [Header("Default Fade Values")]
     [SerializeField] float fadeTime = 1f;
-
-
 
 
     private void Start()
@@ -67,11 +68,13 @@ public class AudioManager : PersistentSingleton<AudioManager>
     public void StopSFXLoop(AudioSource _source, AudioClip audioClip)
     {
         _source.clip = audioClip;
+        _source.volume = 0.7f; 
         _source.Stop(); 
     }
 
     public void PlayRandomPitchSFX(AudioSource _source, AudioClip audioClip, float low = 0.75f, float high = 1.25f)
     {
+        // Only for the dialogue clicks 
         _source.clip = audioClip;
         _source.pitch = Random.Range(0.7f, 1.25f);
         _source.Play(); 
