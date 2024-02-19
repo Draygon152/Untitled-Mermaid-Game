@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -24,7 +23,6 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
     [SerializeField] private TMP_Text collectedDisplay = null;
     [Space]
     [SerializeField] private Transform dragNet = null;
-    [SerializeField] private ObjectDetection dragNetDetector = null;
     [SerializeField] private float moveSpeed = 5f;
     private static int MOVESPEED_MULTIPLIER = 10;
     [Space]
@@ -35,6 +33,8 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
 
     private AudioSource source = null;
     [SerializeField] AudioClip planktonCaught; 
+
+
 
     private void Start()
     {
@@ -87,7 +87,6 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
         {
             if (planktonCollected < targetPlanktonToCollect)
             {
-                dragNetDetector.viewDistance = 0f;
                 ShowFailScreen();
             }
 
