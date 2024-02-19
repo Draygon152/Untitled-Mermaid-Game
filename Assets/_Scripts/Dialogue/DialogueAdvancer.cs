@@ -7,6 +7,8 @@ public class DialogueAdvancer : SceneSingleton<DialogueAdvancer>
 {
     [SerializeField] List<Sprite> panels = null;
     [SerializeField] Image displayPanel = null;
+    [Space]
+    [SerializeField] private bool intro = true;
     private int curPanel = 0;
 
 
@@ -20,9 +22,15 @@ public class DialogueAdvancer : SceneSingleton<DialogueAdvancer>
     {
         curPanel++;
 
-        if (curPanel == panels.Count)
+        if (curPanel == panels.Count && intro)
         {
             StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync( (int)PersistentSceneManager.SceneIndices.GameScene,
+                                                                           LoadSceneMode.Single));
+        }
+
+        else if (curPanel == panels.Count && !intro)
+        {
+            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync( (int)PersistentSceneManager.SceneIndices.MainMenuScene,
                                                                            LoadSceneMode.Single));
         }
 

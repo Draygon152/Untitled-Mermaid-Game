@@ -338,8 +338,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f6f2f8d1e11d8429225997510b1d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panels: []
+  panels:
+  - {fileID: 21300000, guid: 4c9fed13fe4208542b754afb40f55fce, type: 3}
+  - {fileID: 21300000, guid: b8fb127093eb6ef4c80d40113209b74c, type: 3}
+  - {fileID: 21300000, guid: df45d3b56dc48af48818ec4c5c85cbfd, type: 3}
+  - {fileID: 21300000, guid: 5d1f38cba3238f34dbc3a472450fcc8e, type: 3}
+  - {fileID: 21300000, guid: 2d7aab43249eff44f9092fc9ccc15a68, type: 3}
+  - {fileID: 21300000, guid: 43ad9e38f59e71a4dbd8c9aa37cec322, type: 3}
+  - {fileID: 21300000, guid: 4b3bea772bdff564ca8af9d9f2b74d62, type: 3}
+  - {fileID: 21300000, guid: 3ab47a3eca1f21e44aa66c8bfd88164f, type: 3}
+  - {fileID: 21300000, guid: 02baa1910b91c884cbb04d3b9373bae9, type: 3}
+  - {fileID: 21300000, guid: ba74283332e67e84abe6a5b4ebd51035, type: 3}
+  - {fileID: 21300000, guid: 74f14c16ed45f334098538561cabd5c9, type: 3}
+  - {fileID: 21300000, guid: 157dd329dc1030d41ae2dc908a233c45, type: 3}
+  - {fileID: 21300000, guid: 089ac6f6d6a4b5546af82f613bc5afc6, type: 3}
+  - {fileID: 21300000, guid: 041c154f6d7c8a446b190be2fea5d31a, type: 3}
+  - {fileID: 21300000, guid: e1c2b438b50c16e4c8eb47c089c204a0, type: 3}
+  - {fileID: 21300000, guid: 307d15b2f259fe74c9cc7b55ecf783ca, type: 3}
+  - {fileID: 21300000, guid: 4600e5327983a6c419f512816ff3c29b, type: 3}
+  - {fileID: 21300000, guid: 843105d5e3ae6c14b90982a7c7deb2cf, type: 3}
+  - {fileID: 21300000, guid: d99c52b451c2b504cae0d788d9c6d21a, type: 3}
+  - {fileID: 21300000, guid: 3dd70d52f3d78034fa63240092dceee5, type: 3}
+  - {fileID: 21300000, guid: 5822e281bc6a9de41a67a7cf6fc7a1a0, type: 3}
+  - {fileID: 21300000, guid: d000c9e0d3bb27048a39ecd3e7891d56, type: 3}
   displayPanel: {fileID: 1681252363}
+  intro: 1
 --- !u!222 &1681252366
 CanvasRenderer:
   m_ObjectHideFlags: 0
