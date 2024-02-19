@@ -367,6 +367,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7449334068791311548, guid: 1ff4ebe9c586f6c4a9c95d3b01456ce1, type: 3}
+      propertyPath: HandCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 5d9697ef4b80346db84ca7d88ceb8581, type: 3}
+    - target: {fileID: 7449334068791311548, guid: 1ff4ebe9c586f6c4a9c95d3b01456ce1, type: 3}
+      propertyPath: defaultCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 3ae8608c3fc4443e3b2c0dbf872b72a1, type: 3}
+    - target: {fileID: 7449334068791311548, guid: 1ff4ebe9c586f6c4a9c95d3b01456ce1, type: 3}
+      propertyPath: HandGrabCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: a01990606358345439204b3c5f8338db, type: 3}
+    - target: {fileID: 7449334068791311548, guid: 1ff4ebe9c586f6c4a9c95d3b01456ce1, type: 3}
+      propertyPath: ScrubberCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: d9b9a57795ee344a48ce26d2397c8efb, type: 3}
+    - target: {fileID: 7449334068791311548, guid: 1ff4ebe9c586f6c4a9c95d3b01456ce1, type: 3}
+      propertyPath: ScrubbingCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: f87b1ba36c62640149019417756616e1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

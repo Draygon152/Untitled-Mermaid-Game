@@ -12,10 +12,19 @@ public class GameManager : PersistentSingleton<GameManager>
     private int score = 0;
     private bool reachedGameEnd = false;
 
+    [SerializeField] public Texture2D defaultCursor;
+    [SerializeField] public Texture2D HandCursor;
+    [SerializeField] public Texture2D HandGrabCursor;
+    [SerializeField] public Texture2D ScrubberCursor;
+    [SerializeField] public Texture2D ScrubbingCursor;
 
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero; 
 
     private void Start()
     {
+        Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
+
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameEnd, ContinueToNextMinigame);
         StartMinigame(currentMinigame);
     }
