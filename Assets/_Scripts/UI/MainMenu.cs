@@ -20,7 +20,7 @@ public class MainMenu : MenuBase
     {
         base.Start();
 
-        AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.storyMusic);
+        AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.menuMusic);
     }
 
     public override void Init()

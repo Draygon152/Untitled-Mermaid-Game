@@ -23,8 +23,9 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [SerializeField] public AudioSource _sourceSFX;
 
     [Header("Music Audio Clips")]
-    // One time
-    [SerializeField] public AudioClip storyMusic;
+    
+    [SerializeField] public AudioClip menuMusic;
+    [SerializeField] public AudioClip endMusic; 
     // Loops
     [SerializeField] public AudioClip planktonMusic;
     [SerializeField] public AudioClip trashyTroubleMusic;
@@ -34,6 +35,7 @@ public class AudioManager : PersistentSingleton<AudioManager>
     [Header("SFX Audio Clips")]
     [SerializeField] public AudioClip button1;
     [SerializeField] public AudioClip button2;
+    [SerializeField] public AudioClip buttonDialogue; 
 
     [Space]
     [Header("Default Fade Values")]
