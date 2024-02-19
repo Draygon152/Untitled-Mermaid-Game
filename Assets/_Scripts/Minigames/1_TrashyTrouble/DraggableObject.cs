@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(BoxCollider2D))]
 [DisallowMultipleComponent]
-public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private RectTransform _rect = null;
     public RectTransform rect => _rect;
@@ -38,12 +38,10 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        AudioManager.instance.PlayRandomPitchSFX(source, onGrab);
-        Cursor.SetCursor(GameManager.instance.HandGrabCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
-
-
         if (isDraggable && eventData.button == PointerEventData.InputButton.Left)
         {
+            AudioManager.instance.PlayRandomPitchSFX(source, onGrab);
+
             isBeingDragged = true;
         }
     }
@@ -128,16 +126,16 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             isBeingDragged = false;
         }
     }
-
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnMouseDown()
     {
-        
+        Cursor.SetCursor(GameManager.instance.HandGrabCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnMouseUp()
     {
-        
+        Cursor.SetCursor(GameManager.instance.HandCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
     }
+
 
     public void ToggleFocus(bool argValue)
     {

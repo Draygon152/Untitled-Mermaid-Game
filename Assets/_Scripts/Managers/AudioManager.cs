@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -8,7 +6,6 @@ using UnityEngine.Audio;
 ///     Centralized UI clips 
 /// </summary>
 ///
-
 public class AudioManager : PersistentSingleton<AudioManager>
 {
     [Header("Mixer References")]

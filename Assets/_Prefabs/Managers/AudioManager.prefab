@@ -51,13 +51,17 @@ MonoBehaviour:
   _source: {fileID: 6051191647448820980}
   _sourceMusic: {fileID: 1510057773324916758}
   _sourceSFX: {fileID: 5986492633350014223}
-  storyMusic: {fileID: 8300000, guid: 6f25ce22b02fd4c5fa3d6f617b6587a1, type: 3}
-  planktonMusic: {fileID: 8300000, guid: 91909154508c54a0f9cea449f90239e8, type: 3}
+  menuMusic: {fileID: 8300000, guid: bea2f1f8dea924808b6f1d7e258aacb6, type: 3}
+  endMusic: {fileID: 8300000, guid: c8fe79ba83ad04f98b9e32c81ed3276a, type: 3}
+  planktonMusic: {fileID: 8300000, guid: cce0c285dbbc74f62ac76a3cbe47df81, type: 3}
   trashyTroubleMusic: {fileID: 8300000, guid: 5d8cd0a4e897d404fb71ef571125f5f0, type: 3}
-  overFishingMusic: {fileID: 8300000, guid: 5153d4eccf7184e74af0fa1b36b77c22, type: 3}
+  overFishingMusic: {fileID: 8300000, guid: a5a0870895315425bb37228cddc5cac0, type: 3}
   coralCleaningMusic: {fileID: 8300000, guid: a64ef4d8a10014c2eb567c4f47042349, type: 3}
-  button1: {fileID: 8300000, guid: 2eaceb812610e4a89bdcf805b8c9468f, type: 3}
+  button1: {fileID: 8300000, guid: ae38a10f6b69e4be3bc6b254f1156d88, type: 3}
   button2: {fileID: 8300000, guid: 7bd8400d6271d4e339f8c05114b2a5fd, type: 3}
+  buttonMiniGame: {fileID: 8300000, guid: 93b54dfd952f544ee8a3429290497743, type: 3}
+  buttonDialogue: {fileID: 8300000, guid: e554d508693644524a3fce6b9642cb46, type: 3}
+  buttonHover: {fileID: 8300000, guid: 6794225e74c594fbcbeb37024f7eef73, type: 3}
   fadeTime: 1
 --- !u!82 &6051191647448820980
 AudioSource:

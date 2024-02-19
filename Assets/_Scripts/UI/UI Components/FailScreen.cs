@@ -12,7 +12,11 @@ public class FailScreen : MonoBehaviour
 
     public void Init(Action tryAgainAction)
     {
-        tryAgain.onClick.AddListener( () => { tryAgainAction.InvokeNullCheck();} );
+        tryAgain.onClick.AddListener( () =>
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.buttonMiniGame);
+            tryAgainAction.InvokeNullCheck();
+        } );
     }
 
     private void OnDestroy()

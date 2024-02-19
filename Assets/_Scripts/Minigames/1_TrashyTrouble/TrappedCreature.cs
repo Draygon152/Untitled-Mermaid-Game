@@ -34,7 +34,8 @@ public class TrappedCreature : MonoBehaviour
         if (!isBeingReset && !creatureFreed && !_creature.rect.Overlaps(trapRect))
         {
             creatureFreed = true;
-            AudioManager.instance.PlaySFX(source, fishHappy); 
+            AudioManager.instance.PlaySFX(source, fishHappy);
+            Cursor.SetCursor(GameManager.instance.HandCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
             FreeCreature();
         }
     }

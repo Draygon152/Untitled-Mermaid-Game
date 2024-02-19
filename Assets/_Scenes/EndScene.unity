@@ -362,7 +362,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5822e281bc6a9de41a67a7cf6fc7a1a0, type: 3}
   - {fileID: 21300000, guid: d000c9e0d3bb27048a39ecd3e7891d56, type: 3}
   displayPanel: {fileID: 1681252363}
-  intro: 1
+  panelButton: {fileID: 0}
+  intro: 0
 --- !u!222 &1681252366
 CanvasRenderer:
   m_ObjectHideFlags: 0

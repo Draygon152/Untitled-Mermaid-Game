@@ -25,7 +25,7 @@ public class TutorialUIManager : MonoBehaviour
     {
         startButton.onClick.AddListener( () =>
         {
-            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button1);
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.buttonMiniGame);
 
             buttonCallback.InvokeNullCheck();
             FadeOutTutorialMenu();

@@ -15,11 +15,13 @@ public class SuccessScreen : MonoBehaviour
     {
         tryAgain.onClick.AddListener( () =>
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.buttonMiniGame);
             tryAgainAction.InvokeNullCheck();
         } );
 
         next.onClick.AddListener(() =>
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.buttonMiniGame);
             nextAction.InvokeNullCheck();
         });
     }
