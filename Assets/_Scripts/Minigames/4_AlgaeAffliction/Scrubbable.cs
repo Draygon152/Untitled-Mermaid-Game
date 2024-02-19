@@ -75,8 +75,9 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
         AudioManager.instance.PlaySFXLoop(source, scrubbingClip);
+
+        Cursor.SetCursor(GameManager.instance.ScrubbingCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
 
         if (!isBeingReset && isScrubbable && eventData.button == PointerEventData.InputButton.Left)
         {

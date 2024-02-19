@@ -9,13 +9,16 @@ public class DialogueAdvancer : SceneSingleton<DialogueAdvancer>
     [SerializeField] Image displayPanel = null;
     private int curPanel = 0;
 
-
+    //private AudioSource source = null; 
 
     private void Start()
     {
+        //source = AudioManager.instance._sourceSFX; 
         displayPanel.sprite = panels[curPanel];
     }
 
+
+    
     public void AdvanceDialogue()
     {
         curPanel++;

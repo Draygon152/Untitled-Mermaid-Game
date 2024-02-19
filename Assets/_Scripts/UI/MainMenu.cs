@@ -29,7 +29,6 @@ public class MainMenu : MenuBase
     {
         base.Start();
 
-        //Cursor.visible = false; 
         Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
         AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.menuMusic);
 

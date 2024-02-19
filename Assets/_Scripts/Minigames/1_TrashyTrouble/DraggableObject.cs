@@ -39,6 +39,8 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnBeginDrag(PointerEventData eventData)
     {
         AudioManager.instance.PlayRandomPitchSFX(source, onGrab);
+        Cursor.SetCursor(GameManager.instance.HandGrabCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
+
 
         if (isDraggable && eventData.button == PointerEventData.InputButton.Left)
         {
