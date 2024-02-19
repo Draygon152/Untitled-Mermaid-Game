@@ -10,6 +10,7 @@ public class TrashMovement : MonoBehaviour
     private Transform _hook = null;
     public Transform hook => _hook;
 
+    private bool minigameOver = false;
     private bool isDragging = false;
     private bool _caught = false;
     public bool caught => _caught;
@@ -28,38 +29,41 @@ public class TrashMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_caught && !isDragging)
+        if (!minigameOver)
         {
-            MoveOffScreen();
-        }
-
-        else if (_caught)
-        {
-            if (!_hook.gameObject.activeInHierarchy)
+            if (!_caught && !isDragging)
             {
-                gameObject.SetActive(false);
-                transform.position = initialPosition;
-                _caught = false;
-                mainCollider.enabled = true;
-
-                return;
+                MoveOffScreen();
             }
 
-            if (Mathf.Abs(transform.position.y - _hook.transform.position.y) < 0.1f)
+            else if (_caught)
             {
-                transform.position = new Vector2(_hook.position.x, _hook.position.y);
+                if (!_hook.gameObject.activeInHierarchy)
+                {
+                    gameObject.SetActive(false);
+                    transform.position = initialPosition;
+                    _caught = false;
+                    mainCollider.enabled = true;
+
+                    return;
+                }
+
+                if (Mathf.Abs(transform.position.y - _hook.transform.position.y) < 0.1f)
+                {
+                    transform.position = new Vector2(_hook.position.x, _hook.position.y);
+                }
+
+                else
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, _hook.position, snapSpeed * Time.fixedDeltaTime);
+                }
             }
 
-            else
+            else if (isDragging)
             {
-                transform.position = Vector2.MoveTowards(transform.position, _hook.position, snapSpeed * Time.fixedDeltaTime);
+                Vector3 mousePosition = FishyFreedomManager.instance.canvas.worldCamera.ScreenToWorldPoint(PlayerInputManager.instance.GetMouseAxisVector());
+                transform.position = new Vector2(mousePosition.x, mousePosition.y);
             }
-        }
-
-        else if (isDragging)
-        {
-            Vector3 mousePosition = FishyFreedomManager.instance.canvas.worldCamera.ScreenToWorldPoint(PlayerInputManager.instance.GetMouseAxisVector());
-            transform.position = new Vector2(mousePosition.x, mousePosition.y);
         }
     }
 
@@ -84,6 +88,12 @@ public class TrashMovement : MonoBehaviour
         AudioManager.instance.PlaySFX(source, trashCaught);
 
         _hook = hookTransform;
+        mainCollider.enabled = false;
+    }
+
+    public void OnMinigameOver()
+    {
+        minigameOver = true;
     }
 
     private void OnMouseDown()

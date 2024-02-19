@@ -8,10 +8,11 @@ using UnityEngine;
 public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
 {
     [SerializeField] private Canvas canvas = null;
-    [SerializeField] private Canvas bgCanvas = null;
     [SerializeField] private CanvasGroup canvasGroup = null;
+    [SerializeField] private Canvas bgCanvas = null;
     [SerializeField] private FailScreen failScreen = null;
     [SerializeField] private SuccessScreen successScreen = null;
+    [SerializeField] private TutorialUIManager tutorialManager = null;
     [Space]
     [SerializeField] private float fadeStartDelay = 0f;
     [SerializeField] private float fadeDuration = 0.4f;
@@ -34,12 +35,26 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
             ShowFailScreen();
         };
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
+        EventManager.instance.Subscribe(EventManager.EventTypes.CoralCleaned, OnCoralCleaned);
 
         failScreen.Init(RestartMinigame);
         successScreen.Init(RestartMinigame, () => { EndMinigame(); });
 
         failScreen.gameObject.SetActive(false);
         successScreen.gameObject.SetActive(false);
+
+        tutorialManager.Init(() =>
+        {
+            foreach (Coral coral in coralList)
+            {
+                coral.Init();
+            }
+
+            timer.SetTimerActive(true);
+        });
+
+        canvas.worldCamera = GameCameraManager.instance.gameCamera;
+        bgCanvas.worldCamera = GameCameraManager.instance.gameCamera;
 
         StartMinigame();
     }
@@ -65,13 +80,7 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
-            canvas.worldCamera = GameCameraManager.instance.gameCamera;
-            bgCanvas.worldCamera = GameCameraManager.instance.gameCamera;
-
-            EventManager.instance.Subscribe(EventManager.EventTypes.CoralCleaned, OnCoralCleaned);
-
             canvasGroup.interactable = true;
-            timer.SetTimerActive(true);
         };
 
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);

@@ -10,12 +10,15 @@ public class HookSpawner : SceneSingleton<HookSpawner>
     [SerializeField] private float maxSpawnInterval = 8f;
     [Range(60f, 150f)]
     [SerializeField] private float minHookSpawnDistance = 60f;
+    private float leftBound = 10f;
+    private float rightBound = 10f;
 
     private List<GameObject> hooksPool = null;
     private float nextSpawnTime = 0f;
     private float lastHookX = 0f;
     private bool validSpawn = false;
 
+    private bool minigameStarted = false;
     private bool minigameOver = false;
 
 
@@ -33,12 +36,11 @@ public class HookSpawner : SceneSingleton<HookSpawner>
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
 
         InitializePool();
-        //nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 
     private void FixedUpdate()
     {
-        if (!minigameOver)
+        if (minigameStarted && !minigameOver)
         {
             nextSpawnTime -= Time.fixedDeltaTime;
             if (nextSpawnTime <= 0f)
@@ -46,6 +48,11 @@ public class HookSpawner : SceneSingleton<HookSpawner>
                 SpawnHook();
             }
         }
+    }
+
+    public void OnMinigameStart()
+    {
+        minigameStarted = true;
     }
 
     private void InitializePool()
@@ -65,8 +72,9 @@ public class HookSpawner : SceneSingleton<HookSpawner>
         validSpawn = false;
         while (!validSpawn)
         {
-            Camera gameCamera = FishyFreedomManager.instance.canvas.worldCamera;
-            randomX = Random.Range(-gameCamera.orthographicSize * gameCamera.aspect, gameCamera.orthographicSize * gameCamera.aspect);
+            Camera gameCamera = GameCameraManager.instance.gameCamera;
+            //Camera gameCamera = FishyFreedomManager.instance.canvas.worldCamera;
+            randomX = Random.Range((-gameCamera.orthographicSize * gameCamera.aspect) + leftBound, (gameCamera.orthographicSize * gameCamera.aspect) - rightBound);
 
             if (Mathf.Abs(randomX - lastHookX) >= minHookSpawnDistance)
             {
@@ -107,7 +115,7 @@ public class HookSpawner : SceneSingleton<HookSpawner>
 
         foreach (GameObject hook in hooksPool)
         {
-            Destroy(hook);
+            hook.GetComponent<HookBehavior>().OnMinigameEnd();
         }
     }
 

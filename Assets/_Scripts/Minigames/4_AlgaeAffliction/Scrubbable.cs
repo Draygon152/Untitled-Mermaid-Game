@@ -17,7 +17,7 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     [SerializeField] private float scrubSpeedModifier = 1f;
     private const int SCRUB_SPEED_DIVISOR = 1000;
 
-    private bool isScrubbable = true;
+    private bool isScrubbable = false;
     private bool isBeingScrubbed = false;
 
     private bool scrubbedOut = false;
@@ -37,6 +37,7 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void Init(Action onScrubbedCallback)
     {
         onScrubbed += onScrubbedCallback;
+        isScrubbable = true;
     }
 
     private void ScrubObject(float amount)

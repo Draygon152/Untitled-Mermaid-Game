@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class FishMovement : MonoBehaviour
@@ -18,6 +17,7 @@ public class FishMovement : MonoBehaviour
     private float checkRate = 0.3f;
     private float nextCheckTime = 0f;
 
+    private bool minigameOver = false;
     private bool isDragging = false;
     private bool _caught = false;
     public bool caught => _caught;
@@ -46,58 +46,61 @@ public class FishMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_caught && !isDragging)
+        if (!minigameOver)
         {
-            if (Time.fixedTime >= nextCheckTime)
+            if (!_caught && !isDragging)
             {
-                nearestHook = FindNearestHook();
-                nextCheckTime = Time.fixedTime + checkRate;
+                if (Time.fixedTime >= nextCheckTime)
+                {
+                    nearestHook = FindNearestHook();
+                    nextCheckTime = Time.fixedTime + checkRate;
+                }
+
+                if (nearestHook != null)
+                {
+                    Vector2 toHook = (nearestHook.transform.position - transform.position).normalized;
+                    Vector2 fishForward = transform.localScale.x < 0 ? transform.right.normalized : -transform.right.normalized;
+                    float angleToHook = Vector2.Angle(fishForward, toHook);
+
+                    if (angleToHook <= fieldOfView && Vector2.Distance(transform.position, nearestHook.transform.position) < visibilityRange)
+                    {
+                        MoveTowardsHook();
+                        return;
+                    }
+                }
+
+                transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, Time.fixedDeltaTime * rotSpeed);
+                MoveOffScreen();
             }
 
-            if (nearestHook != null)
+            else if (_caught)
             {
-                Vector2 toHook = (nearestHook.transform.position - transform.position).normalized;
-                Vector2 fishForward = transform.localScale.x < 0 ? transform.right.normalized : -transform.right.normalized;
-                float angleToHook = Vector2.Angle(fishForward, toHook);
-
-                if (angleToHook <= fieldOfView && Vector2.Distance(transform.position, nearestHook.transform.position) < visibilityRange)
+                if (!_hook.gameObject.activeInHierarchy)
                 {
-                    MoveTowardsHook();
+                    gameObject.SetActive(false);
+                    transform.position = initialPosition;
+                    _caught = false;
+                    mainCollider.enabled = true;
+
                     return;
+                }
+
+                if (Mathf.Abs(transform.position.y - _hook.transform.position.y) < 0.1f)
+                {
+                    transform.position = new Vector2(_hook.position.x, _hook.position.y);
+                }
+
+                else
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, _hook.position, snapSpeed * Time.fixedDeltaTime);
                 }
             }
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, Time.fixedDeltaTime * rotSpeed);   
-            MoveOffScreen();
-        }
-
-        else if (_caught) 
-        {
-            if (!_hook.gameObject.activeInHierarchy) 
+            else if (isDragging)
             {
-                gameObject.SetActive(false);
-                transform.position = initialPosition;
-                _caught = false;
-                mainCollider.enabled = true;
-
-                return;
+                Vector3 mousePosition = FishyFreedomManager.instance.canvas.worldCamera.ScreenToWorldPoint(PlayerInputManager.instance.GetMouseAxisVector());
+                transform.position = new Vector2(transform.position.x, mousePosition.y);
             }
-
-            if (Mathf.Abs(transform.position.y - _hook.transform.position.y) < 0.1f)
-            {
-                transform.position = new Vector2(_hook.position.x, _hook.position.y);
-            }
-
-            else
-            {
-                transform.position = Vector2.MoveTowards(transform.position, _hook.position, snapSpeed * Time.fixedDeltaTime);
-            }
-        }
-
-        else if (isDragging)
-        {
-            Vector3 mousePosition = FishyFreedomManager.instance.canvas.worldCamera.ScreenToWorldPoint(PlayerInputManager.instance.GetMouseAxisVector());
-            transform.position = new Vector2(transform.position.x, mousePosition.y);
         }
     }
 
@@ -168,6 +171,11 @@ public class FishMovement : MonoBehaviour
         AudioManager.instance.PlaySFX(source, fishCaught);
 
         gameObject.layer = caughtLayer;
+    }
+
+    public void OnMinigameOver()
+    {
+        minigameOver = true;
     }
 
     private void OnMouseDown()

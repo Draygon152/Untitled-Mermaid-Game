@@ -7,6 +7,7 @@ public class HookBehavior : MonoBehaviour
     private bool _caughtFish = false;
     public bool caughtFish => _caughtFish;
     private bool hitBottom = false;
+    private bool minigameOver = false;
 
 
 
@@ -17,14 +18,17 @@ public class HookBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_caughtFish || hitBottom)
+        if (!minigameOver)
         {
-            transform.Translate(Vector2.up * descentSpeed * Time.fixedDeltaTime);
-        }
+            if (_caughtFish || hitBottom)
+            {
+                transform.Translate(Vector2.up * descentSpeed * Time.fixedDeltaTime);
+            }
 
-        else
-        {
-            transform.Translate(Vector2.down * descentSpeed * Time.fixedDeltaTime);
+            else
+            {
+                transform.Translate(Vector2.down * descentSpeed * Time.fixedDeltaTime);
+            }
         }
     }
 
@@ -44,5 +48,10 @@ public class HookBehavior : MonoBehaviour
         _caughtFish = false;
         hitBottom = false;
         hook.ResetHook();
+    }
+
+    public void OnMinigameEnd()
+    {
+        minigameOver = true;
     }
 }
