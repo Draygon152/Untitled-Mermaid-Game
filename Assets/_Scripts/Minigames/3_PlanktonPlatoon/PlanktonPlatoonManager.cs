@@ -38,6 +38,8 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
 
     private void Start()
     {
+        Cursor.SetCursor(GameManager.instance.HandCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
+
         source = AudioManager.instance._sourceSFX;
 
         onMinigameFail += () =>

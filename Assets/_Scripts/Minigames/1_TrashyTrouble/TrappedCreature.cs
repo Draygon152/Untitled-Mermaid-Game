@@ -18,7 +18,7 @@ public class TrappedCreature : MonoBehaviour
 
     private bool creatureFreed = false;
     private bool isBeingReset = false;
-
+    
 
     private AudioSource source = null;
     [SerializeField] AudioClip fishHappy;

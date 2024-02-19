@@ -32,6 +32,8 @@ public class FishyFreedomManager : SceneSingleton<FishyFreedomManager>
 
     private void Start()
     {
+        Cursor.SetCursor(GameManager.instance.HandCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
+
         onMinigameFail += () =>
         {
             timer.SetTimerActive(false);

@@ -53,6 +53,8 @@ MonoBehaviour:
   rotSpeed: 20
   fieldOfView: 45
   mainCollider: {fileID: 3388430410193949265}
+  fishCaught: {fileID: 8300000, guid: 7f65b16c8aef846e188dbd79f541c67c, type: 3}
+  fishRelease: {fileID: 8300000, guid: 942446e4a5589439e9d8dd431d597e5d, type: 3}
 --- !u!212 &339840118982268173
 SpriteRenderer:
   m_ObjectHideFlags: 0

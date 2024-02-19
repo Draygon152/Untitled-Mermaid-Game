@@ -29,6 +29,8 @@ public class TrashyTroubleManager : SceneSingleton<TrashyTroubleManager>
     {
         EventManager.instance.Subscribe(EventManager.EventTypes.CreatureFreed, OnCreatureFreed);
 
+        Cursor.SetCursor(GameManager.instance.HandCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
+
         failScreen.Init(RestartMinigame);
         successScreen.Init(RestartMinigame, () =>
         {
