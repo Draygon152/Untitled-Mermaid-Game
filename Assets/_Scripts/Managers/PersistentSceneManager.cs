@@ -13,6 +13,7 @@ public class PersistentSceneManager : LLPersistentSingleton<PersistentSceneManag
     {
         MainMenuScene,
         SettingsMenuScene,
+        IntroScene,
         GameScene,
         TrashyTrouble,
         FishyFreedom,

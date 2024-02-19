@@ -32,7 +32,10 @@ public class MainMenu : MenuBase
             AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.button1);
 
             // Load into main game scene
-            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync( (int)PersistentSceneManager.SceneIndices.GameScene,
+            //StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync( (int)PersistentSceneManager.SceneIndices.GameScene,
+            //                                                               LoadSceneMode.Single));
+
+            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync( (int)PersistentSceneManager.SceneIndices.IntroScene,
                                                                            LoadSceneMode.Single));
         } );
 
