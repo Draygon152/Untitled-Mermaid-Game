@@ -14,6 +14,7 @@ public class TrashSpawner : MonoBehaviour
     private Dictionary<GameObject, List<GameObject>> trashPools = null;
     private float nextSpawnTime = 0f;
 
+    private bool minigameStarted = false;
     private bool minigameOver = false;
 
 
@@ -24,16 +25,20 @@ public class TrashSpawner : MonoBehaviour
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
 
         InitializePools();
-        SetNextSpawnTime();
     }
 
     private void FixedUpdate()
     {
-        if (!minigameOver && Time.fixedTime >= nextSpawnTime)
+        if (minigameStarted && !minigameOver && Time.fixedTime >= nextSpawnTime)
         {
             SpawnTrash();
             SetNextSpawnTime();
         }
+    }
+
+    public void OnMinigameStart()
+    {
+        minigameStarted = true;
     }
 
     private void InitializePools()

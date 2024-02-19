@@ -78,6 +78,7 @@ public class TrashMovement : MonoBehaviour
     {
         _caught = true;
         _hook = hookTransform;
+        mainCollider.enabled = false;
     }
 
     private void OnMouseDown()

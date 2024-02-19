@@ -23,7 +23,10 @@ public class Coral : MonoBehaviour
     {
         source = AudioManager.instance._sourceSFX;
         coralSpriteRenderer.sprite = coralNeutral;
+    }
 
+    public void Init()
+    {
         foreach (Scrubbable algae in algaeList)
         {
             algae.Init(OnAlgaeScrubbed);

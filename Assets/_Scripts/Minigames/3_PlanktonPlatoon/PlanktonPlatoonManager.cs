@@ -10,8 +10,10 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
 {
     [SerializeField] private Canvas canvas = null;
     [SerializeField] private CanvasGroup canvasGroup = null;
+    [SerializeField] private Canvas backgroundCanvas = null;
     [SerializeField] private FailScreen failScreen = null;
     [SerializeField] private SuccessScreen successScreen = null;
+    [SerializeField] private TutorialUIManager tutorialManager = null;
     [Space]
     [SerializeField] private float fadeStartDelay = 0f;
     [SerializeField] private float fadeDuration = 0.4f;
@@ -41,12 +43,23 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
             ShowFailScreen();
         };
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameFail, onMinigameFail);
+        EventManager.instance.Subscribe(EventManager.EventTypes.PlanktonCollected, OnPlanktonCollected);
 
         failScreen.Init(RestartMinigame);
         successScreen.Init(RestartMinigame, () => { EndMinigame(); });
 
+        spawner.gameObject.SetActive(false);
         failScreen.gameObject.SetActive(false);
         successScreen.gameObject.SetActive(false);
+
+        tutorialManager.Init( () =>
+        {
+            timer.SetTimerActive(true);
+            spawner.gameObject.SetActive(true);
+        } );
+
+        canvas.worldCamera = GameCameraManager.instance.gameCamera;
+        backgroundCanvas.worldCamera = GameCameraManager.instance.gameCamera;
 
         StartMinigame();
     }
@@ -82,12 +95,7 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
         Action<float> tweenAction = lerp => { canvasGroup.alpha = Mathf.Lerp(0f, 1f, lerp); };
         Action onCompleteCallback = () =>
         {
-            canvas.worldCamera = GameCameraManager.instance.gameCamera;
-
-            EventManager.instance.Subscribe(EventManager.EventTypes.PlanktonCollected, OnPlanktonCollected);
-
             canvasGroup.interactable = true;
-            timer.SetTimerActive(true);
         };
 
         return this.DoTween(tweenAction, onCompleteCallback, fadeDuration, fadeStartDelay, EaseType.linear, true);

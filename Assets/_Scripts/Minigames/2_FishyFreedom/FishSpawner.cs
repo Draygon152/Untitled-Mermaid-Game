@@ -14,6 +14,7 @@ public class FishSpawner : MonoBehaviour
     private List<GameObject> fishPool = new List<GameObject>();
     private float nextSpawnTime = 0f;
 
+    private bool minigameStarted = false;
     private bool minigameOver = false;
 
 
@@ -24,16 +25,20 @@ public class FishSpawner : MonoBehaviour
         EventManager.instance.Subscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
 
         InitializePool();
-        //SetNextSpawnTime();
     }
 
     private void FixedUpdate()
     {
-        if (!minigameOver && Time.fixedTime >= nextSpawnTime)
+        if (minigameStarted && !minigameOver && Time.fixedTime >= nextSpawnTime)
         {
             SpawnFish();
             SetNextSpawnTime();
         }
+    }
+
+    public void OnMinigameStart()
+    {
+        minigameStarted = true;
     }
 
     private void InitializePool()

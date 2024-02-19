@@ -55,7 +55,7 @@ MonoBehaviour:
   floatingSpeed: 60
   floatingMagnitude: 60
   rotationSpeed: 360
-  aliveTime: 20
+  aliveTime: 30
 --- !u!61 &2171010867443694167
 BoxCollider2D:
   m_ObjectHideFlags: 0
