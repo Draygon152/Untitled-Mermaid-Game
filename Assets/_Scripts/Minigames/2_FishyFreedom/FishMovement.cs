@@ -163,6 +163,8 @@ public class FishMovement : MonoBehaviour
         _caught = false;
 
         gameObject.layer = defaultLayer;
+
+        Cursor.SetCursor(GameManager.instance.HandGrabCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
     }
 
     public void OnCaught(Transform hookTransform)
@@ -196,6 +198,8 @@ public class FishMovement : MonoBehaviour
         
         isDragging = false;
         mainCollider.enabled = true;
+
+        Cursor.SetCursor(GameManager.instance.HandCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
     }
 
     private void OnBecameInvisible()

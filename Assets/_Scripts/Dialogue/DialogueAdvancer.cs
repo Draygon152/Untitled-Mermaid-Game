@@ -23,11 +23,6 @@ public class DialogueAdvancer : SceneSingleton<DialogueAdvancer>
         displayPanel.sprite = panels[curPanel];
 
         Cursor.SetCursor(GameManager.instance.defaultCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
-
-        panelButton.onClick.AddListener( () =>
-        {
-            AudioManager.instance.PlaySFX(source, AudioManager.instance.buttonDialogue);
-        } );
     }
 
     public void AdvanceDialogue()

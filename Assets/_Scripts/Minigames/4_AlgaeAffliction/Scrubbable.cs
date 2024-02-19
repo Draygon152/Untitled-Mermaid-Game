@@ -52,6 +52,7 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                 isScrubbable = false;
                 scrubbedOut = true;
                 AudioManager.instance.StopSFXLoop(source);
+                Cursor.SetCursor(GameManager.instance.ScrubberCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
                 onScrubbed.InvokeNullCheck();
                 gameObject.SetActive(false);
             }
@@ -75,11 +76,21 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         isBeingReset = true;
     }
 
+    public void OnMouseDown()
+    {
+        Cursor.SetCursor(GameManager.instance.ScrubbingCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
+    }
+
+    public void OnMouseUp()
+    {
+        AudioManager.instance.StopSFXLoop(source);
+        Cursor.SetCursor(GameManager.instance.ScrubberCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
+    }
+
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         AudioManager.instance.PlaySFXLoop(source, scrubbingClip);
-
-        Cursor.SetCursor(GameManager.instance.ScrubbingCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
 
         if (!isBeingReset && isScrubbable && eventData.button == PointerEventData.InputButton.Left)
         {

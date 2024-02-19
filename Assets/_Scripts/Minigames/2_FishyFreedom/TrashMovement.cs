@@ -20,6 +20,8 @@ public class TrashMovement : MonoBehaviour
     private AudioSource source = null;
     [SerializeField] AudioClip trashCaught;
 
+
+
     private void Start()
     {
         source = AudioManager.instance._sourceSFX;
@@ -79,6 +81,8 @@ public class TrashMovement : MonoBehaviour
     private void StartDragging()
     {
         isDragging = true;
+
+        Cursor.SetCursor(GameManager.instance.HandGrabCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
     }
 
     public void OnCaught(Transform hookTransform)
@@ -105,6 +109,8 @@ public class TrashMovement : MonoBehaviour
     {
         isDragging = false;
         mainCollider.enabled = true;
+
+        Cursor.SetCursor(GameManager.instance.HandCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
     }
 
     private void OnBecameInvisible()
