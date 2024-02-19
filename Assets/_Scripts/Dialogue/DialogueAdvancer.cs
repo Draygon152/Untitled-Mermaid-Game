@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +10,7 @@ public class DialogueAdvancer : SceneSingleton<DialogueAdvancer>
     [SerializeField] Button panelButton = null;
     [Space]
     [SerializeField] private bool intro = true;
+
     private int curPanel = 0;
 
     private AudioSource source = null;
@@ -21,7 +21,13 @@ public class DialogueAdvancer : SceneSingleton<DialogueAdvancer>
     {
         source = AudioManager.instance._sourceSFX;
         displayPanel.sprite = panels[curPanel];
-        panelButton.onClick.AddListener( () => { AudioManager.instance.PlaySFX(AudioManager.instance._sourceSFX, AudioManager.instance.buttonDialogue); } );
+
+        Cursor.SetCursor(GameManager.instance.defaultCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
+
+        panelButton.onClick.AddListener( () =>
+        {
+            AudioManager.instance.PlaySFX(source, AudioManager.instance.buttonDialogue);
+        } );
     }
 
     public void AdvanceDialogue()

@@ -66,7 +66,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         else
         {
-            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync((int)sceneIndex, LoadSceneMode.Single));
+            StartCoroutine(PersistentSceneManager.instance.LoadSceneAsync((int)sceneIndex, LoadSceneMode.Single, () => { GameCameraManager.instance.DisableCamera(); }));
         }
     }
 
