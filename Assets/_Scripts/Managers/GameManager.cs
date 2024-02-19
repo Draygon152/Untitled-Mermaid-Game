@@ -50,6 +50,7 @@ public class GameManager : PersistentSingleton<GameManager>
                 break;
 
             case PersistentSceneManager.SceneIndices.EndScene:
+                AudioManager.instance.PlayMusic(AudioManager.instance._sourceMusic, AudioManager.instance.endMusic);
                 reachedGameEnd = true;
                 break;
 
