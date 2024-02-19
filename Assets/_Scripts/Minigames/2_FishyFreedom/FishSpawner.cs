@@ -99,7 +99,7 @@ public class FishSpawner : MonoBehaviour
 
         foreach (GameObject fish in fishPool)
         {
-            Destroy(fish);
+            fish.GetComponent<FishMovement>().OnMinigameOver();
         }
     }
 

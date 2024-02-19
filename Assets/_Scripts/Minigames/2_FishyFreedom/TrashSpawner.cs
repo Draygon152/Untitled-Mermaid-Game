@@ -128,13 +128,11 @@ public class TrashSpawner : MonoBehaviour
     {
         minigameOver = true;
 
-        foreach (GameObject trashObj in trashObjs)
+        foreach (GameObject trashType in trashObjs)
         {
-            List<GameObject> curPool = trashPools[trashObj];
-
-            foreach (GameObject obj in curPool)
+            foreach (GameObject trash in trashPools[trashType])
             {
-                Destroy(obj);
+                trash.GetComponent<TrashMovement>().OnMinigameOver();
             }
         }
     }

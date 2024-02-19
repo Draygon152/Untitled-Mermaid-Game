@@ -10,8 +10,8 @@ public class HookSpawner : SceneSingleton<HookSpawner>
     [SerializeField] private float maxSpawnInterval = 8f;
     [Range(60f, 150f)]
     [SerializeField] private float minHookSpawnDistance = 60f;
-    private float leftBound = 60f;
-    private float rightBound = 60f;
+    private float leftBound = 10f;
+    private float rightBound = 10f;
 
     private List<GameObject> hooksPool = null;
     private float nextSpawnTime = 0f;
@@ -72,8 +72,9 @@ public class HookSpawner : SceneSingleton<HookSpawner>
         validSpawn = false;
         while (!validSpawn)
         {
-            Camera gameCamera = FishyFreedomManager.instance.canvas.worldCamera;
-            randomX = Random.Range((-gameCamera.orthographicSize * gameCamera.aspect) + leftBound, (gameCamera.orthographicSize * gameCamera.aspect) + rightBound);
+            Camera gameCamera = GameCameraManager.instance.gameCamera;
+            //Camera gameCamera = FishyFreedomManager.instance.canvas.worldCamera;
+            randomX = Random.Range((-gameCamera.orthographicSize * gameCamera.aspect) + leftBound, (gameCamera.orthographicSize * gameCamera.aspect) - rightBound);
 
             if (Mathf.Abs(randomX - lastHookX) >= minHookSpawnDistance)
             {
@@ -114,7 +115,7 @@ public class HookSpawner : SceneSingleton<HookSpawner>
 
         foreach (GameObject hook in hooksPool)
         {
-            Destroy(hook);
+            hook.GetComponent<HookBehavior>().OnMinigameEnd();
         }
     }
 
