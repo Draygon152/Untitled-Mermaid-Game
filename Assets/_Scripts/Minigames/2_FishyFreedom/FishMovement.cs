@@ -19,6 +19,7 @@ public class FishMovement : MonoBehaviour
 
     private bool minigameOver = false;
     private bool isDragging = false;
+    private bool wasOnHook = false;
     private bool _caught = false;
     public bool caught => _caught;
     
@@ -32,6 +33,7 @@ public class FishMovement : MonoBehaviour
     private AudioSource source = null;
     [SerializeField] AudioClip fishCaught;
     [SerializeField] AudioClip fishRelease;
+
 
 
     private void Start()
@@ -167,6 +169,7 @@ public class FishMovement : MonoBehaviour
     {
         _caught = true;
         _hook = hookTransform;
+        wasOnHook = true;
 
         AudioManager.instance.PlaySFX(source, fishCaught);
 
@@ -185,8 +188,12 @@ public class FishMovement : MonoBehaviour
 
     private void OnMouseUp()
     {
-        AudioManager.instance.PlaySFX(source, fishRelease);
-
+        if (wasOnHook)
+        {
+            AudioManager.instance.PlaySFX(source, fishRelease);
+            wasOnHook = false;
+        }
+        
         isDragging = false;
         mainCollider.enabled = true;
     }

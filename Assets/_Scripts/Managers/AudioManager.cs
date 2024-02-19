@@ -62,10 +62,9 @@ public class AudioManager : PersistentSingleton<AudioManager>
         _source.Play(); 
     }
 
-    public void StopSFXLoop(AudioSource _source, AudioClip audioClip)
+    public void StopSFXLoop(AudioSource _source)
     {
-        _source.clip = audioClip;
-        _source.volume = 0.7f; 
+        _source.loop = false;
         _source.Stop(); 
     }
 

@@ -29,7 +29,7 @@ public class AlgaeAfflictionManager : SceneSingleton<AlgaeAfflictionManager>
 
     private void Start()
     {
-        Cursor.SetCursor(GameManager.instance.ScrubberCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode); 
+        Cursor.SetCursor(GameManager.instance.ScrubberCursor, GameManager.instance.hotSpot, GameManager.instance.cursorMode);
         onMinigameFail += () =>
         {
             timer.SetTimerActive(false);

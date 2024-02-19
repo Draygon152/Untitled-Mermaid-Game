@@ -29,6 +29,7 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     [SerializeField] private AudioClip scrubbingClip = null;
 
 
+
     private void Start()
     {
         source = AudioManager.instance._sourceSFX;
@@ -50,6 +51,7 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                 scrubbableRenderer.color = new Color(1, 1, 1, 0);
                 isScrubbable = false;
                 scrubbedOut = true;
+                AudioManager.instance.StopSFXLoop(source);
                 onScrubbed.InvokeNullCheck();
                 gameObject.SetActive(false);
             }
@@ -97,8 +99,6 @@ public class Scrubbable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        AudioManager.instance.StopSFXLoop(source, scrubbingClip);
-
         if (!isBeingReset && isScrubbable && eventData.button == PointerEventData.InputButton.Left)
         {
             isBeingScrubbed = false;
