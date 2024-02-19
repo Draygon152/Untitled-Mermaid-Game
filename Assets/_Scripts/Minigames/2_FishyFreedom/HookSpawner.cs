@@ -124,6 +124,11 @@ public class HookSpawner : SceneSingleton<HookSpawner>
         EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, OnMinigameEndScreen);
         EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
 
+        foreach (GameObject hook in hooksPool)
+        {
+            Destroy(hook.gameObject);
+        }
+
         base.OnDestroy();
     }
 }

@@ -107,5 +107,10 @@ public class FishSpawner : MonoBehaviour
     {
         EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, OnMinigameEndScreen);
         EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
+
+        foreach (GameObject fish in fishPool)
+        {
+            Destroy(fish.gameObject);
+        }
     }
 }

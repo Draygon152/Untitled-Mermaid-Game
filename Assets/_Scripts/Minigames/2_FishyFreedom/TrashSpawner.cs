@@ -141,5 +141,13 @@ public class TrashSpawner : MonoBehaviour
     {
         EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameFail, OnMinigameEndScreen);
         EventManager.instance.Unsubscribe(EventManager.EventTypes.MinigameSuccess, OnMinigameEndScreen);
+
+        foreach (GameObject trashType in trashObjs)
+        {
+            foreach (GameObject trash in trashPools[trashType])
+            {
+                Destroy(trash.gameObject);
+            }
+        }
     }
 }

@@ -1280,6 +1280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialUIController
       objectReference: {fileID: 0}
+    - target: {fileID: 3235048374336049129, guid: 315bf1db2242a0347bfcc3f2f6deb249, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7646447749475790193, guid: 315bf1db2242a0347bfcc3f2f6deb249, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1639,14 +1643,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8813452be277cc84b8a76a47a2cb33cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 0}
   TitleText: {fileID: 849335052}
   GuideText: {fileID: 0}
   GuideImage: {fileID: 0}
-  canvasGroup: {fileID: 0}
+  startButton: {fileID: 0}
   newTitleText: 
   newGuideText: 
   newGuideImage: {fileID: 0}
-  startButton: {fileID: 0}
 --- !u!1 &874869703
 GameObject:
   m_ObjectHideFlags: 0
@@ -2791,7 +2795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 856500572148269900, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 681
+      value: 594.1917
       objectReference: {fileID: 0}
     - target: {fileID: 856500572148269900, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2799,7 +2803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 856500572148269900, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -350.5
+      value: -307.09586
       objectReference: {fileID: 0}
     - target: {fileID: 1360750551605913992, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2815,7 +2819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1360750551605913992, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 77.51
+      value: 164.3183
       objectReference: {fileID: 0}
     - target: {fileID: 1360750551605913992, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2823,7 +2827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1360750551605913992, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -749.755
+      value: -706.3508
       objectReference: {fileID: 0}
     - target: {fileID: 2522655616118661679, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2855,11 +2859,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2980493632972428512, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_text
-      value: Some fish are still trapped in plastic...
+      value: Oh no! The current pulled some of your trapped friends away!
       objectReference: {fileID: 0}
     - target: {fileID: 2980493632972428512, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_fontSize
-      value: 34.25
+      value: 41.4
       objectReference: {fileID: 0}
     - target: {fileID: 2980493632972428512, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_fontAsset
@@ -2911,7 +2915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4232293922958119427, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 701
+      value: 614.1917
       objectReference: {fileID: 0}
     - target: {fileID: 4232293922958119427, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2919,7 +2923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4232293922958119427, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -360.5
+      value: -317.09586
       objectReference: {fileID: 0}
     - target: {fileID: 5373423247811776801, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2943,7 +2947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5373423247811776801, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -350.5
+      value: -307.09586
       objectReference: {fileID: 0}
     - target: {fileID: 5952899755661221452, guid: 9ae8d6384a249dd488a1b81c0d7eac3d, type: 3}
       propertyPath: m_Pivot.x
@@ -3687,7 +3691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 856500572148269900, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 681
+      value: 594.1917
       objectReference: {fileID: 0}
     - target: {fileID: 856500572148269900, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3695,7 +3699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 856500572148269900, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -350.5
+      value: -307.09586
       objectReference: {fileID: 0}
     - target: {fileID: 1360750551605913992, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3711,7 +3715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1360750551605913992, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 77.51
+      value: 164.3183
       objectReference: {fileID: 0}
     - target: {fileID: 1360750551605913992, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3719,7 +3723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1360750551605913992, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -749.755
+      value: -706.3508
       objectReference: {fileID: 0}
     - target: {fileID: 2522655616118661679, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3751,11 +3755,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2980493632972428512, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_text
-      value: You saved all the fish!
+      value: You freed all your fishy friends! But oh no...what are those boats doing
+        so close?
       objectReference: {fileID: 0}
     - target: {fileID: 2980493632972428512, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_fontSize
-      value: 53.9
+      value: 39.2
       objectReference: {fileID: 0}
     - target: {fileID: 2980493632972428512, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_fontAsset
@@ -3807,7 +3812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4232293922958119427, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 701
+      value: 614.1917
       objectReference: {fileID: 0}
     - target: {fileID: 4232293922958119427, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3815,7 +3820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4232293922958119427, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -360.5
+      value: -317.09586
       objectReference: {fileID: 0}
     - target: {fileID: 4825655793548921541, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3879,7 +3884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5373423247811776801, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -350.5
+      value: -307.09586
       objectReference: {fileID: 0}
     - target: {fileID: 5952899755661221452, guid: 6ee1043b7e07ea449baae59c6c154e02, type: 3}
       propertyPath: m_Pivot.x
