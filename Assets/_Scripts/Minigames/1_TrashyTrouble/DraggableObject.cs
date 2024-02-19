@@ -28,9 +28,18 @@ public class DraggableObject : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private bool isFocused = true; // TODO: SET FALSE
 
 
+    private AudioSource source = null;
+    [SerializeField] AudioClip onGrab;
+
+    private void Start()
+    {
+        source = AudioManager.instance._sourceSFX; 
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        AudioManager.instance.PlaySFX(source, onGrab);
+
         if (isDraggable && eventData.button == PointerEventData.InputButton.Left)
         {
             isBeingDragged = true;

@@ -28,11 +28,15 @@ public class FishMovement : MonoBehaviour
 
     private int defaultLayer = -1;
     private int caughtLayer = -1;
-    
+
+    private AudioSource source = null;
+    [SerializeField] AudioClip fishCaught;
+    [SerializeField] AudioClip fishRelease;
 
 
     private void Start()
     {
+        source = AudioManager.instance._sourceSFX;
         defaultLayer = LayerMask.NameToLayer("Default");
         caughtLayer = LayerMask.NameToLayer("CaughtFish");
 
@@ -161,6 +165,8 @@ public class FishMovement : MonoBehaviour
         _caught = true;
         _hook = hookTransform;
 
+        AudioManager.instance.PlaySFX(source, fishCaught);
+
         gameObject.layer = caughtLayer;
     }
 
@@ -171,6 +177,8 @@ public class FishMovement : MonoBehaviour
 
     private void OnMouseUp()
     {
+        AudioManager.instance.PlaySFX(source, fishRelease);
+
         isDragging = false;
         mainCollider.enabled = true;
     }

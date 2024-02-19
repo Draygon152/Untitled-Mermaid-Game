@@ -16,10 +16,13 @@ public class TrashMovement : MonoBehaviour
 
     private Vector2 initialPosition;
 
-
+    private AudioSource source = null;
+    [SerializeField] AudioClip trashCaught;
 
     private void Start()
     {
+        source = AudioManager.instance._sourceSFX;
+
         initialPosition = transform.position;
     }
 
@@ -77,6 +80,9 @@ public class TrashMovement : MonoBehaviour
     public void OnCaught(Transform hookTransform)
     {
         _caught = true;
+
+        AudioManager.instance.PlaySFX(source, trashCaught);
+
         _hook = hookTransform;
     }
 

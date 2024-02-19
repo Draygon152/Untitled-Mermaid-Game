@@ -3,7 +3,10 @@ guid: 10f467cf70f1216499221df26b06587e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mainCollider: {instanceID: 0}
+  - fishCaught: {fileID: 8300000, guid: 7f65b16c8aef846e188dbd79f541c67c, type: 3}
+  - fishRelease: {fileID: 8300000, guid: 942446e4a5589439e9d8dd431d597e5d, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

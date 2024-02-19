@@ -49,6 +49,7 @@ MonoBehaviour:
   speed: 20
   snapSpeed: 300
   mainCollider: {fileID: 2187800533154047689}
+  trashCaught: {fileID: 8300000, guid: 60f572280cd88433ea16a715ada9a07d, type: 3}
 --- !u!212 &8727724047251173779
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -20,6 +20,13 @@ public class TrappedCreature : MonoBehaviour
     private bool isBeingReset = false;
 
 
+    private AudioSource source = null;
+    [SerializeField] AudioClip fishHappy;
+
+    private void Start()
+    {
+        source = AudioManager.instance._sourceSFX;
+    }
 
     private void FixedUpdate()
     {
@@ -27,6 +34,7 @@ public class TrappedCreature : MonoBehaviour
         if (!isBeingReset && !creatureFreed && !_creature.rect.Overlaps(trapRect))
         {
             creatureFreed = true;
+            AudioManager.instance.PlaySFX(source, fishHappy); 
             FreeCreature();
         }
     }

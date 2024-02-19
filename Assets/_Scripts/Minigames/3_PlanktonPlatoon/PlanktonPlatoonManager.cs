@@ -31,10 +31,13 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
 
     private Action onMinigameFail = null;
 
-
+    private AudioSource source = null;
+    [SerializeField] AudioClip planktonCaught; 
 
     private void Start()
     {
+        source = AudioManager.instance._sourceSFX;
+
         onMinigameFail += () =>
         {
             timer.SetTimerActive(false);
@@ -180,6 +183,7 @@ public class PlanktonPlatoonManager : SceneSingleton<PlanktonPlatoonManager>
     private void OnPlanktonCollected()
     {
         planktonCollected++;
+        AudioManager.instance.PlaySFX(source, planktonCaught); 
         collectedDisplay.text = $"PLANKTON COLLECTED: {planktonCollected}/{targetPlanktonToCollect}";
     }
 

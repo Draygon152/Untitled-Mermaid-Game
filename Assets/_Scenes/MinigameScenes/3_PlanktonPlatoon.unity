@@ -1671,6 +1671,7 @@ MonoBehaviour:
   dragNetDetector: {fileID: 1822548411}
   moveSpeed: 5
   targetPlanktonToCollect: 20
+  planktonCaught: {fileID: 8300000, guid: caeb88c962f91439ba3294bb797b2416, type: 3}
 --- !u!114 &1722334271
 MonoBehaviour:
   m_ObjectHideFlags: 0

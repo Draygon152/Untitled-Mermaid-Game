@@ -56,6 +56,20 @@ public class AudioManager : PersistentSingleton<AudioManager>
         _source.Play();
     }
 
+    public void PlaySFXLoop(AudioSource _source, AudioClip audioClip)
+    {
+        _source.clip = audioClip;
+        _source.volume = 1.0f;
+        _source.loop = true;
+        _source.Play(); 
+    }
+
+    public void StopSFXLoop(AudioSource _source, AudioClip audioClip)
+    {
+        _source.clip = audioClip;
+        _source.Stop(); 
+    }
+
     public void PlayRandomPitchSFX(AudioSource _source, AudioClip audioClip, float low = 0.75f, float high = 1.25f)
     {
         _source.clip = audioClip;
