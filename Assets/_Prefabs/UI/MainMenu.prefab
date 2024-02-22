@@ -125,6 +125,14 @@ MonoBehaviour:
   fadeDuration: 0.4
   playButton: {fileID: 8035092372245478871}
   settingsButton: {fileID: 1687564300651183156}
+  creditButton: {fileID: 0}
+  backButton: {fileID: 0}
+  defaultCursor: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
+  Panel: {fileID: 0}
+  MainMenuRoot: {fileID: 0}
+  ButtonBack: {fileID: 0}
 --- !u!223 &4554811022726887143
 Canvas:
   m_ObjectHideFlags: 0
@@ -134,7 +142,7 @@ Canvas:
   m_GameObject: {fileID: 1329965273010326763}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -165,7 +173,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -871,6 +879,10 @@ PrefabInstance:
     - target: {fileID: 1289980607979447810, guid: d407b90f5645eec46ba03e0684594e73, type: 3}
       propertyPath: playOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411472721998322067, guid: d407b90f5645eec46ba03e0684594e73, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2885035981033257373, guid: d407b90f5645eec46ba03e0684594e73, type: 3}
       propertyPath: lengthInSec
